@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://yak5oxpc2kif"]
+
+[ext_resource type="Texture2D" uid="uid://30t105trua7e" path="res://resource/tile/0.png" id="1_sge14"]
+
+[sub_resource type="GDScript" id="GDScript_m11tv"]
+script/source = "
+extends Node2D
+
+@onready var tile_map = $TileMap
+
+func _ready():
+	tile_map.clear()
+	for x in range(16):
+		for y in range(16):
+			tile_map.set_cell(0, Vector2(x,y), 0, Vector2.ZERO, 0)
+"
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fhswt"]
+texture = ExtResource("1_sge14")
+0:0/0 = 0
+0:1/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_p7872"]
+tile_shape = 2
+sources/0 = SubResource("TileSetAtlasSource_fhswt")
+
+[node name="TileMap" type="Node2D"]
+script = SubResource("GDScript_m11tv")
+
+[node name="TileMap" type="TileMap" parent="."]
+texture_filter = 1
+scale = Vector2(9, 9)
+tile_set = SubResource("TileSet_p7872")
+format = 2
