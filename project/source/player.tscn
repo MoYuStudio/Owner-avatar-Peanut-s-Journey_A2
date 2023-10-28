@@ -1,0 +1,50 @@
+[gd_scene load_steps=4 format=3 uid="uid://bnjtvkuydvi41"]
+
+[ext_resource type="Texture2D" uid="uid://cg0fx7wgpbmss" path="res://resource/steam/成就.png" id="1_634q4"]
+
+[sub_resource type="GDScript" id="GDScript_4r2uh"]
+script/source = "extends CharacterBody2D
+
+const max_speed = 300
+const accel = 800
+const friction = 600
+
+var input = Vector2.ZERO
+
+func _physics_process(delta):
+	player_movement(delta)
+	
+	
+
+func get_intput():
+	input.x = int(Input.is_action_pressed('ui_right')) - int(Input.is_action_pressed('ui_left'))
+	input.y = int(Input.is_action_pressed('ui_down')) - int(Input.is_action_pressed('ui_up'))
+	return input.normalized()
+
+func player_movement(delta):
+	input = get_intput()
+	
+	if input == Vector2.ZERO:
+		if velocity.length() > (friction * delta):
+			velocity -= velocity.normalized() * (friction * delta)
+		else:
+			velocity = Vector2.ZERO
+	else:
+		velocity += (input * accel * delta)
+		velocity = velocity.limit_length(max_speed)
+				
+	move_and_slide()
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tuh0o"]
+size = Vector2(80, 80)
+
+[node name="player" type="CharacterBody2D"]
+script = SubResource("GDScript_4r2uh")
+
+[node name="成就" type="Sprite2D" parent="."]
+scale = Vector2(5, 5)
+texture = ExtResource("1_634q4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_tuh0o")
