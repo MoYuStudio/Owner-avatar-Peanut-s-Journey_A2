@@ -10,12 +10,12 @@ extends Node2D
 
 @onready var tilemap = $TileMap
 
-var board = 128
+var board = 256
 
 var noise
 var noise_seed = 0
 var octaves = 2 # 4
-var period = 12 # 20.0
+var period = 6 # 20.0
 var persistence = 3 # 0.8
 
 var land_0_cells = []
