@@ -1,20 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://bnjtvkuydvi41"]
-
-[ext_resource type="Texture2D" uid="uid://cg0fx7wgpbmss" path="res://resource/steam/成就.png" id="1_634q4"]
+[gd_scene load_steps=3 format=3 uid="uid://w8ck34jfqcqf"]
 
 [sub_resource type="GDScript" id="GDScript_4r2uh"]
 script/source = "extends CharacterBody2D
 
-const max_speed = 300
-const accel = 800
-const friction = 600
+const max_speed = 300 # 300
+const accel = 800 # 800
+const friction = 900 # 600
 
 var input = Vector2.ZERO
 
 func _physics_process(delta):
 	player_movement(delta)
-	
-	
 
 func get_intput():
 	input.x = int(Input.is_action_pressed('ui_right')) - int(Input.is_action_pressed('ui_left'))
@@ -39,12 +35,28 @@ func player_movement(delta):
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tuh0o"]
 size = Vector2(80, 80)
 
-[node name="player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D"]
 script = SubResource("GDScript_4r2uh")
-
-[node name="成就" type="Sprite2D" parent="."]
-scale = Vector2(5, 5)
-texture = ExtResource("1_634q4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_tuh0o")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color(0.984314, 0.72549, 0.329412, 1)
+polygon = PackedVector2Array(-6, -9, -6, 9, 6, 9, 6, -9)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(9, 9)
+process_callback = 0
+position_smoothing_enabled = true
+position_smoothing_speed = 6.0
+rotation_smoothing_enabled = true
+rotation_smoothing_speed = 6.0
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = -1
+offset_left = -413.0
+offset_top = -234.0
+offset_right = 417.0
+offset_bottom = 253.0
+color = Color(0.301961, 0.607843, 0.901961, 1)
