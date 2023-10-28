@@ -1,11 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://w8ck34jfqcqf"]
-
-[ext_resource type="Material" uid="uid://hmvj3s8d6v3p" path="res://resource/shader/water.tres" id="1_yeo2c"]
+[gd_scene load_steps=3 format=3 uid="uid://w8ck34jfqcqf"]
 
 [sub_resource type="GDScript" id="GDScript_4r2uh"]
 script/source = "extends CharacterBody2D
 
-const max_speed = 100 # 300
+const max_speed = 80 # 300
 const accel = 300 # 800
 const friction = 200 # 600
 
@@ -57,7 +55,6 @@ rotation_smoothing_speed = 6.0
 
 [node name="ColorRect" type="ColorRect" parent="."]
 z_index = -1
-material = ExtResource("1_yeo2c")
 offset_left = -413.0
 offset_top = -234.0
 offset_right = 417.0
