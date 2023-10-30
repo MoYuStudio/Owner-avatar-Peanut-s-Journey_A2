@@ -376,15 +376,15 @@ func generate_chunk(position):
 			if land_tile_data.x == 6 or land_tile_data.x == 7 or land_tile_data.x == 8:
 				set_cell(1, Vector2(real_x, real_y), 1, Vector2.ZERO, 0)
 				
-			for biome in biome_list:
-				for tile_data in biome_list[biome]:
-					if land_tile_data.x == tile_data[0] and land_tile_data.y == tile_data[1]:
-						for obj in biome_data[biome]:
-							var tile_probability = randf()
-							if tile_probability <= biome_data[biome][obj]:
-								var object_instantiate = object_tiles[obj].instantiate()
-								object_instantiate.position = Vector2(real_x, real_y)
-								get_parent().add_child(object_instantiate)
+			#for biome in biome_list:
+			#	for tile_data in biome_list[biome]:
+			#		if land_tile_data.x == tile_data[0] and land_tile_data.y == tile_data[1]:
+			#			for obj in biome_data[biome]:
+			#				var tile_probability = randf()
+			#				if tile_probability <= biome_data[biome][obj]:
+			#					var object_instantiate = object_tiles[obj].instantiate()
+			#					object_instantiate.position = Vector2(real_x, real_y)
+			#					get_parent().add_child(object_instantiate)
 			
 			#if select_x == 3 or select_x == 4:
 			#	var tree_instantiate = tree.instantiate()
