@@ -276,6 +276,8 @@ texture = ExtResource("1_k6lqe")
 texture = ExtResource("2_h8xd2")
 0:0/animation_frame_0/duration = 0.6
 0:0/animation_frame_1/duration = 0.6
+0:0/animation_frame_2/duration = 0.6
+0:0/animation_frame_3/duration = 1.0
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:0/0/physics_layer_0/angular_velocity = 0.0
@@ -307,8 +309,8 @@ var moisture = FastNoiseLite.new()      # 湿度
 var temperature = FastNoiseLite.new()   # 温度
 var altitude = FastNoiseLite.new()      # 海拔
 
-var chunk_width = 48
-var chunk_height = 48
+var chunk_width = 32
+var chunk_height = 16
 
 var biome_list = {
 	\"deep_ocean\":{}, # 深海群系
@@ -340,7 +342,8 @@ var biome_data = {
 	\"mountain\":{}, # 山脉群系
 }
 
-var generated_chunks = {}
+var real_x
+var real_y
 
 func _ready():
 	moisture.seed = randi()
@@ -389,24 +392,12 @@ func generate_chunk(position):
 			
 			if land_tile_data.x == 3 or land_tile_data.x == 4:
 				var tile_probability = randf()
-				if tile_probability <= 0.0003:
-					set_cell(1, Vector2(real_x, real_y), 2, Vector2.ZERO, 0)
+				if tile_probability <= 0.0001:
+					var tree_instantiate = object_tiles[\"tree\"].instantiate()
+					tree_instantiate.position = map_to_local(Vector2(real_x, real_y))
+					add_child(tree_instantiate)
+				# set_cell(1, Vector2(real_x, real_y), 2, Vector2.ZERO, 0)
 			
-			#for biome in biome_list:
-			#	for tile_data in biome_list[biome]:
-			#		if land_tile_data.x == tile_data[0] and land_tile_data.y == tile_data[1]:
-			#			for obj in biome_data[biome]:
-			#				var tile_probability = randf()
-			#				if tile_probability <= biome_data[biome][obj]:
-			#					var object_instantiate = object_tiles[obj].instantiate()
-			#					object_instantiate.position = Vector2(real_x, real_y)
-			#					get_parent().add_child(object_instantiate)
-			
-			#if select_x == 3 or select_x == 4:
-			#	var tree_instantiate = tree.instantiate()
-			#	tree_instantiate.position = Vector2(real_x, real_y)
-			#	tree_list.add_child(tree_instantiate)
-	
 "
 
 [node name="World" type="Node2D"]
