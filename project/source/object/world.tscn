@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://yak5oxpc2kif"]
+[gd_scene load_steps=9 format=3 uid="uid://yak5oxpc2kif"]
 
 [ext_resource type="Texture2D" uid="uid://ro033xokip6a" path="res://resource/tile/land_tiles.png" id="1_k6lqe"]
 [ext_resource type="Texture2D" uid="uid://b2g06mnlrskcg" path="res://resource/tile/water.png" id="2_h8xd2"]
+[ext_resource type="Texture2D" uid="uid://bc6id70qqb7sl" path="res://resource/tile/tree.png" id="3_47ppp"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_l63db"]
 texture = ExtResource("1_k6lqe")
@@ -279,10 +280,18 @@ texture = ExtResource("2_h8xd2")
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:0/0/physics_layer_0/angular_velocity = 0.0
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5v3u4"]
+texture = ExtResource("3_47ppp")
+texture_region_size = Vector2i(16, 32)
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+
 [sub_resource type="TileSet" id="TileSet_yrxqs"]
 physics_layer_0/collision_layer = 1
 sources/1 = SubResource("TileSetAtlasSource_lyy1v")
 sources/0 = SubResource("TileSetAtlasSource_l63db")
+sources/2 = SubResource("TileSetAtlasSource_5v3u4")
 
 [sub_resource type="GDScript" id="GDScript_lthvx"]
 script/source = "
@@ -331,6 +340,8 @@ var biome_data = {
 	\"mountain\":{}, # 山脉群系
 }
 
+var generated_chunks = {}
+
 func _ready():
 	moisture.seed = randi()
 	temperature.seed = randi()
@@ -375,7 +386,12 @@ func generate_chunk(position):
 			# 水纹动画效果
 			if land_tile_data.x == 6 or land_tile_data.x == 7 or land_tile_data.x == 8:
 				set_cell(1, Vector2(real_x, real_y), 1, Vector2.ZERO, 0)
-				
+			
+			if land_tile_data.x == 3 or land_tile_data.x == 4:
+				var tile_probability = randf()
+				if tile_probability <= 0.0003:
+					set_cell(1, Vector2(real_x, real_y), 2, Vector2.ZERO, 0)
+			
 			#for biome in biome_list:
 			#	for tile_data in biome_list[biome]:
 			#		if land_tile_data.x == tile_data[0] and land_tile_data.y == tile_data[1]:
