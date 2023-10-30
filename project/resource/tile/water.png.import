@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://kw3qobh1bhha"
-path="res://.godot/imported/land_tiles_pro.png-3a689081304792ae96f16b09d127aa8a.ctex"
+uid="uid://b2g06mnlrskcg"
+path="res://.godot/imported/water.png-47ccf996e9c774a61b32cd86affe1243.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resource/tile/land_tiles_pro.png"
-dest_files=["res://.godot/imported/land_tiles_pro.png-3a689081304792ae96f16b09d127aa8a.ctex"]
+source_file="res://resource/tile/water.png"
+dest_files=["res://.godot/imported/water.png-47ccf996e9c774a61b32cd86affe1243.ctex"]
 
 [params]
 
