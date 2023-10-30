@@ -129,7 +129,9 @@ func generate_chunk(position):
 			var select_x = round(moisture_noise+45)/10
 			var select_y = round(temperature_noise+45)/10
 			
-			if altitude_noise <= 6:
+			if altitude_noise <= 7:
+				set_cell(0,Vector2(real_x, real_y),0,Vector2(6, select_y),0)
+			elif altitude_noise <= 6:
 				set_cell(0,Vector2(real_x, real_y),0,Vector2(7, select_y),0)
 			elif altitude_noise <= 5:
 				set_cell(0,Vector2(real_x, real_y),0,Vector2(8, select_y),0)
