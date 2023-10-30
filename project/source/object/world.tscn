@@ -126,38 +126,17 @@ func generate_chunk(position):
 			var temperature_noise = temperature.get_noise_2d(real_x, real_y)*45
 			var altitude_noise = altitude.get_noise_2d(real_x, real_y)*45
 			
+			var select_x = round(moisture_noise+45)/10
+			var select_y = round(temperature_noise+45)/10
+			
 			if altitude_noise <= 6:
-				set_cell(
-				0,
-				Vector2(real_x, real_y),
-				0,
-				Vector2(7, round(temperature_noise+45)/10),
-				0
-				)
+				set_cell(0,Vector2(real_x, real_y),0,Vector2(7, select_y),0)
 			elif altitude_noise <= 5:
-				set_cell(
-				0,
-				Vector2(real_x, real_y),
-				0,
-				Vector2(8, round(temperature_noise+45)/10),
-				0
-				)
+				set_cell(0,Vector2(real_x, real_y),0,Vector2(8, select_y),0)
 			elif altitude_noise <= 4:
-				set_cell(
-				0,
-				Vector2(real_x, real_y),
-				0,
-				Vector2(9, round(temperature_noise+45)/10),
-				0
-				)
+				set_cell(0,Vector2(real_x, real_y),0,Vector2(9, select_y),0)
 			else:
-				set_cell(
-				0,
-				Vector2(real_x, real_y),
-				0,
-				Vector2(round(moisture_noise+45)/10, round(temperature_noise+45)/10),
-				0
-				)
+				set_cell(0,Vector2(real_x, real_y),0,Vector2(select_x, select_y),0)
 "
 
 [node name="World" type="Node2D"]
