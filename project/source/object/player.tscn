@@ -49,7 +49,7 @@ color = Color(0.984314, 0.72549, 0.329412, 1)
 polygon = PackedVector2Array(-3, -6, -3, 6, 3, 6, 3, -6)
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(6, 6)
+zoom = Vector2(3, 3)
 process_callback = 0
 position_smoothing_enabled = true
 position_smoothing_speed = 6.0
