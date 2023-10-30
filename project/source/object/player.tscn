@@ -1,8 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://w8ck34jfqcqf"]
+[gd_scene load_steps=8 format=3 uid="uid://w8ck34jfqcqf"]
+
+[ext_resource type="PackedScene" uid="uid://cc8tff42tx3e" path="res://source/object/pack.tscn" id="1_fkk60"]
+[ext_resource type="Texture2D" uid="uid://cg0fx7wgpbmss" path="res://resource/steam/成就.png" id="1_sk8k7"]
 
 [sub_resource type="GDScript" id="GDScript_4r2uh"]
 script/source = "
 extends CharacterBody2D
+
+@onready var animation = $AnimationPlayer
 
 const max_speed = 80   # 极速
 const accel = 300      # 加速
@@ -12,6 +17,7 @@ var input = Vector2.ZERO
 
 func _physics_process(delta):
 	player_movement(delta)
+	hit(delta)
 
 func get_intput():
 	input.x = int(Input.is_action_pressed('ui_right')) - int(Input.is_action_pressed('ui_left'))
@@ -31,10 +37,62 @@ func player_movement(delta):
 		velocity = velocity.limit_length(max_speed)
 				
 	move_and_slide()
+
+func hit(delta):
+	if Input.is_action_just_pressed(\"hit\"):
+		animation.play(\"animation\")
 "
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tuh0o"]
 size = Vector2(6, 12)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_avqqb"]
+radius = 5.0
+
+[sub_resource type="Animation" id="Animation_fen1l"]
+resource_name = "animation"
+length = 0.30001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -16), Vector2(16, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0001, 0.1, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [true, false, true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../CollisionShape2D:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kxdmr"]
+_data = {
+"animation": SubResource("Animation_fen1l")
+}
 
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 0
@@ -55,3 +113,28 @@ position_smoothing_enabled = true
 position_smoothing_speed = 6.0
 rotation_smoothing_enabled = true
 rotation_smoothing_speed = 6.0
+
+[node name="pack" parent="." instance=ExtResource("1_fkk60")]
+visible = false
+offset_left = -205.0
+offset_top = -97.0
+offset_right = -205.0
+offset_bottom = -97.0
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="锄头" type="Sprite2D" parent="Area2D"]
+position = Vector2(0, -16)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_sk8k7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+visible = false
+position = Vector2(16, 0)
+shape = SubResource("CircleShape2D_avqqb")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Area2D/锄头")
+libraries = {
+"": SubResource("AnimationLibrary_kxdmr")
+}
