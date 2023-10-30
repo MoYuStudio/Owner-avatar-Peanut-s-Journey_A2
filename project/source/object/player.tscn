@@ -15,6 +15,7 @@ var input = Vector2.ZERO
 func _physics_process(delta):
 	player_movement(delta)
 
+
 func get_intput():
 	input.x = int(Input.is_action_pressed('ui_right')) - int(Input.is_action_pressed('ui_left'))
 	input.y = int(Input.is_action_pressed('ui_down')) - int(Input.is_action_pressed('ui_up'))
@@ -57,7 +58,8 @@ rotation_smoothing_enabled = true
 rotation_smoothing_speed = 6.0
 
 [node name="pack" parent="." instance=ExtResource("1_fkk60")]
-offset_left = -208.0
-offset_top = -121.0
-offset_right = -208.0
-offset_bottom = -121.0
+visible = false
+offset_left = -205.0
+offset_top = -97.0
+offset_right = -205.0
+offset_bottom = -97.0
