@@ -1,4 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://w8ck34jfqcqf"]
+[gd_scene load_steps=4 format=3 uid="uid://w8ck34jfqcqf"]
+
+[ext_resource type="Texture2D" uid="uid://dagex3dc06tsw" path="res://resource/light/light.png" id="1_dv0wj"]
 
 [sub_resource type="GDScript" id="GDScript_4r2uh"]
 script/source = "
@@ -49,9 +51,16 @@ color = Color(0.984314, 0.72549, 0.329412, 1)
 polygon = PackedVector2Array(-3, -6, -3, 6, 3, 6, 3, -6)
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(3, 3)
+zoom = Vector2(6, 6)
 process_callback = 0
 position_smoothing_enabled = true
 position_smoothing_speed = 6.0
 rotation_smoothing_enabled = true
 rotation_smoothing_speed = 6.0
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(-688, -574)
+energy = 0.1
+shadow_enabled = true
+texture = ExtResource("1_dv0wj")
+texture_scale = 9.0
