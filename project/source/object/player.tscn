@@ -4,7 +4,7 @@
 script/source = "
 extends CharacterBody2D
 
-const max_speed = 80   # 极速
+const max_speed = 280   # 极速
 const accel = 300      # 加速
 const friction = 200   # 摩擦
 
