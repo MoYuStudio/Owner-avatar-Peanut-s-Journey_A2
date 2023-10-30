@@ -1,0 +1,70 @@
+[gd_scene load_steps=3 format=3 uid="uid://cc8tff42tx3e"]
+
+[ext_resource type="PackedScene" uid="uid://dg6yse3xthfen" path="res://source/object/slot.tscn" id="1_35ppj"]
+
+[sub_resource type="GDScript" id="GDScript_enrll"]
+script/source = "extends Control
+
+var is_open = false
+
+
+func _ready():
+	close()
+
+
+func _process(delta):
+	if Input.is_action_just_pressed(\"ui_focus_next\"):
+		if is_open:
+			close()
+		else:
+			open()
+
+func open():
+	visible = true
+	is_open = true
+	
+func close():
+	visible = false
+	is_open = false
+"
+
+[node name="pack" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = SubResource("GDScript_enrll")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+layout_mode = 0
+offset_right = 561.0
+offset_bottom = 333.0
+
+[node name="GridContainer" type="GridContainer" parent="NinePatchRect"]
+layout_mode = 0
+offset_right = 416.0
+offset_bottom = 297.0
+columns = 5
+
+[node name="slot" parent="NinePatchRect/GridContainer" instance=ExtResource("1_35ppj")]
+layout_mode = 2
+
+[node name="slot2" parent="NinePatchRect/GridContainer" instance=ExtResource("1_35ppj")]
+layout_mode = 2
+
+[node name="slot3" parent="NinePatchRect/GridContainer" instance=ExtResource("1_35ppj")]
+layout_mode = 2
+
+[node name="slot4" parent="NinePatchRect/GridContainer" instance=ExtResource("1_35ppj")]
+layout_mode = 2
+
+[node name="slot5" parent="NinePatchRect/GridContainer" instance=ExtResource("1_35ppj")]
+layout_mode = 2
+
+[node name="slot6" parent="NinePatchRect/GridContainer" instance=ExtResource("1_35ppj")]
+layout_mode = 2
+
+[node name="slot7" parent="NinePatchRect/GridContainer" instance=ExtResource("1_35ppj")]
+layout_mode = 2

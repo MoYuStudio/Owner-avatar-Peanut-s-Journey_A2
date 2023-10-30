@@ -1,4 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://w8ck34jfqcqf"]
+[gd_scene load_steps=4 format=3 uid="uid://w8ck34jfqcqf"]
+
+[ext_resource type="PackedScene" uid="uid://cc8tff42tx3e" path="res://source/object/pack.tscn" id="1_fkk60"]
 
 [sub_resource type="GDScript" id="GDScript_4r2uh"]
 script/source = "
@@ -53,3 +55,9 @@ position_smoothing_enabled = true
 position_smoothing_speed = 6.0
 rotation_smoothing_enabled = true
 rotation_smoothing_speed = 6.0
+
+[node name="pack" parent="." instance=ExtResource("1_fkk60")]
+offset_left = -208.0
+offset_top = -121.0
+offset_right = -208.0
+offset_bottom = -121.0
