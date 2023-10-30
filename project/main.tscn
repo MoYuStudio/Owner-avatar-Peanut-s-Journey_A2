@@ -5,7 +5,7 @@
 
 [node name="Main" type="Node"]
 
-[node name="TileMap" parent="." instance=ExtResource("1_i5oiu")]
+[node name="World" parent="." instance=ExtResource("1_i5oiu")]
 
 [node name="Player" parent="." instance=ExtResource("2_dqwjg")]
 position = Vector2(1920, 1080)

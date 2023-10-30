@@ -4,9 +4,9 @@
 script/source = "
 extends CharacterBody2D
 
-const max_speed = 80 # 300
-const accel = 300 # 800
-const friction = 200 # 600
+const max_speed = 280   # 极速
+const accel = 300      # 加速
+const friction = 200   # 摩擦
 
 var input = Vector2.ZERO
 
@@ -47,17 +47,9 @@ color = Color(0.984314, 0.72549, 0.329412, 1)
 polygon = PackedVector2Array(-3, -6, -3, 6, 3, 6, 3, -6)
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(9, 9)
+zoom = Vector2(7, 7)
 process_callback = 0
 position_smoothing_enabled = true
 position_smoothing_speed = 6.0
 rotation_smoothing_enabled = true
 rotation_smoothing_speed = 6.0
-
-[node name="ColorRect" type="ColorRect" parent="."]
-z_index = -1
-offset_left = -413.0
-offset_top = -234.0
-offset_right = 417.0
-offset_bottom = 253.0
-color = Color(0.301961, 0.607843, 0.901961, 1)

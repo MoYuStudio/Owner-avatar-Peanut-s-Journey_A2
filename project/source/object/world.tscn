@@ -1,50 +1,14 @@
-[gd_scene load_steps=10 format=3 uid="uid://yak5oxpc2kif"]
+[gd_scene load_steps=6 format=3 uid="uid://yak5oxpc2kif"]
 
-[ext_resource type="Texture2D" uid="uid://30t105trua7e" path="res://resource/tile/0.png" id="1_sge14"]
-[ext_resource type="Texture2D" uid="uid://cxertttyhe285" path="res://resource/tile/1.png" id="2_e8dvi"]
-[ext_resource type="Texture2D" uid="uid://bu7xe1ki3ap0r" path="res://resource/tile/2.png" id="3_ogno4"]
+[ext_resource type="Texture2D" uid="uid://kw3qobh1bhha" path="res://resource/tile/land_tiles_pro.png" id="1_j8cny"]
 
 [sub_resource type="GDScript" id="GDScript_m11tv"]
 script/source = "
 extends Node2D
-
-'''
-@onready var tilemap = $TileMap
-
-var board = 256
-
-var noise
-var noise_seed = 0
-var octaves = 2 # 4
-var period = 6 # 20.0
-var persistence = 3 # 0.8
-
-func _ready():
-	
-	noise = FastNoiseLite.new()
-	noise.noise_type = 4 # 4
-	# randomize()
-	noise.seed = noise_seed
-	noise.fractal_octaves = octaves
-	noise.fractal_lacunarity = period
-	noise.fractal_gain = persistence
-	
-	# tile_map.clear()
-	for x in range(board):
-		for y in range(board):
-			var the_land_noise = noise.get_noise_2d(x,y)*100+100
-			print(the_land_noise)
-			if 110 < the_land_noise and the_land_noise <= 115:
-				tilemap.set_cell(0, Vector2(x,y), 2, Vector2.ZERO, 0)
-			if 115 < the_land_noise and the_land_noise <= 200:
-				tilemap.set_cell(0, Vector2(x,y), 0, Vector2.ZERO, 0)
-
-			#	tilemap.set_cell(0, Vector2(x,y), 5, Vector2.ZERO, 0)
-'''
 "
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xvmq0"]
-texture = ExtResource("1_sge14")
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ofjgt"]
+texture = ExtResource("1_j8cny")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -54,7 +18,6 @@ texture = ExtResource("1_sge14")
 6:0/0 = 0
 7:0/0 = 0
 8:0/0 = 0
-9:0/0 = 0
 0:1/0 = 0
 1:1/0 = 0
 2:1/0 = 0
@@ -64,7 +27,6 @@ texture = ExtResource("1_sge14")
 6:1/0 = 0
 7:1/0 = 0
 8:1/0 = 0
-9:1/0 = 0
 0:2/0 = 0
 1:2/0 = 0
 2:2/0 = 0
@@ -74,8 +36,6 @@ texture = ExtResource("1_sge14")
 6:2/0 = 0
 7:2/0 = 0
 8:2/0 = 0
-9:2/0 = 0
-10:2/0 = 0
 0:3/0 = 0
 1:3/0 = 0
 2:3/0 = 0
@@ -85,138 +45,67 @@ texture = ExtResource("1_sge14")
 6:3/0 = 0
 7:3/0 = 0
 8:3/0 = 0
-9:3/0 = 0
-10:3/0 = 0
 0:4/0 = 0
 1:4/0 = 0
+2:4/0 = 0
+3:4/0 = 0
 4:4/0 = 0
 5:4/0 = 0
 6:4/0 = 0
 7:4/0 = 0
 8:4/0 = 0
-2:4/0 = 0
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vemeo"]
-texture = ExtResource("2_e8dvi")
-0:0/0 = 0
-1:0/0 = 0
-2:0/0 = 0
-3:0/0 = 0
-4:0/0 = 0
-5:0/0 = 0
-6:0/0 = 0
-7:0/0 = 0
-8:0/0 = 0
-9:0/0 = 0
-0:1/0 = 0
-1:1/0 = 0
-2:1/0 = 0
-3:1/0 = 0
-4:1/0 = 0
-5:1/0 = 0
-6:1/0 = 0
-7:1/0 = 0
-8:1/0 = 0
-9:1/0 = 0
-0:2/0 = 0
-1:2/0 = 0
-2:2/0 = 0
-3:2/0 = 0
-4:2/0 = 0
-5:2/0 = 0
-6:2/0 = 0
-7:2/0 = 0
-8:2/0 = 0
-9:2/0 = 0
-10:2/0 = 0
-0:3/0 = 0
-1:3/0 = 0
-2:3/0 = 0
-3:3/0 = 0
-4:3/0 = 0
-5:3/0 = 0
-6:3/0 = 0
-7:3/0 = 0
-8:3/0 = 0
-9:3/0 = 0
-10:3/0 = 0
-0:4/0 = 0
-1:4/0 = 0
-2:4/0 = 0
-4:4/0 = 0
-5:4/0 = 0
-6:4/0 = 0
-7:4/0 = 0
-8:4/0 = 0
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5kloa"]
-texture = ExtResource("3_ogno4")
-0:0/0 = 0
-1:0/0 = 0
-2:0/0 = 0
-3:0/0 = 0
-4:0/0 = 0
-5:0/0 = 0
-6:0/0 = 0
-7:0/0 = 0
-8:0/0 = 0
-9:0/0 = 0
-0:1/0 = 0
-1:1/0 = 0
-2:1/0 = 0
-3:1/0 = 0
-4:1/0 = 0
-5:1/0 = 0
-6:1/0 = 0
-7:1/0 = 0
-8:1/0 = 0
-9:1/0 = 0
-0:2/0 = 0
-1:2/0 = 0
-2:2/0 = 0
-3:2/0 = 0
-4:2/0 = 0
-5:2/0 = 0
-6:2/0 = 0
-7:2/0 = 0
-8:2/0 = 0
-9:2/0 = 0
-10:2/0 = 0
-0:3/0 = 0
-1:3/0 = 0
-2:3/0 = 0
-3:3/0 = 0
-4:3/0 = 0
-5:3/0 = 0
-6:3/0 = 0
-7:3/0 = 0
-8:3/0 = 0
-9:3/0 = 0
-10:3/0 = 0
-0:4/0 = 0
-1:4/0 = 0
-2:4/0 = 0
-4:4/0 = 0
-5:4/0 = 0
-6:4/0 = 0
-7:4/0 = 0
-8:4/0 = 0
+0:5/0 = 0
+1:5/0 = 0
+2:5/0 = 0
+3:5/0 = 0
+4:5/0 = 0
+5:5/0 = 0
+6:5/0 = 0
+7:5/0 = 0
+8:5/0 = 0
+0:6/0 = 0
+1:6/0 = 0
+2:6/0 = 0
+3:6/0 = 0
+4:6/0 = 0
+5:6/0 = 0
+6:6/0 = 0
+7:6/0 = 0
+8:6/0 = 0
+0:7/0 = 0
+1:7/0 = 0
+2:7/0 = 0
+3:7/0 = 0
+4:7/0 = 0
+5:7/0 = 0
+6:7/0 = 0
+7:7/0 = 0
+8:7/0 = 0
+0:8/0 = 0
+1:8/0 = 0
+2:8/0 = 0
+3:8/0 = 0
+4:8/0 = 0
+5:8/0 = 0
+6:8/0 = 0
+7:8/0 = 0
+8:8/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_yrxqs"]
-sources/0 = SubResource("TileSetAtlasSource_xvmq0")
-sources/1 = SubResource("TileSetAtlasSource_vemeo")
-sources/2 = SubResource("TileSetAtlasSource_5kloa")
+sources/0 = SubResource("TileSetAtlasSource_ofjgt")
 
 [sub_resource type="GDScript" id="GDScript_exn71"]
 script/source = "
 extends TileMap
 
+@onready var player = get_parent().get_parent().get_node('Player')
+
 var moisture = FastNoiseLite.new()      # 湿度
 var temperature = FastNoiseLite.new()   # 温度
 var altitude = FastNoiseLite.new()      # 海拔
 
-var chunk_width = 16
-var chunk_height = 16
+var chunk_width = 48
+var chunk_height = 48
 
 func _ready():
 	moisture.seed = randi()
@@ -224,19 +113,51 @@ func _ready():
 	altitude.seed = randi()
 
 func _process(delta):
-	generate_chunk(position)
+	generate_chunk(player.position)
 
 func generate_chunk(position):
 	var tile_pos = local_to_map(position)
 	for x in range(chunk_width):
 		for y in range(chunk_height):
-			var moisture_noise = moisture.\\
-			get_noise_2d(tile_pos.x + x, tile_pos.y + y)
-			var temperature_noise = temperature.\\
-			get_noise_2d(tile_pos.x + x, tile_pos.y + y)
-			var altitude_noise = altitude.\\
-			get_noise_2d(tile_pos.x + x, tile_pos.y + y)
-			set_cell(0, Vector2(tile_pos.x + x, tile_pos.y + y), 0, Vector2.ZERO, 0)
+			var real_x = tile_pos.x - chunk_width/2 + x
+			var real_y = tile_pos.y - chunk_height/2 + y
+			
+			var moisture_noise = moisture.get_noise_2d(real_x, real_y)*45
+			var temperature_noise = temperature.get_noise_2d(real_x, real_y)*45
+			var altitude_noise = altitude.get_noise_2d(real_x, real_y)*45
+			
+			if altitude_noise <= 6:
+				set_cell(
+				0,
+				Vector2(real_x, real_y),
+				0,
+				Vector2(7, round(temperature_noise+45)/10),
+				0
+				)
+			elif altitude_noise <= 5:
+				set_cell(
+				0,
+				Vector2(real_x, real_y),
+				0,
+				Vector2(8, round(temperature_noise+45)/10),
+				0
+				)
+			elif altitude_noise <= 4:
+				set_cell(
+				0,
+				Vector2(real_x, real_y),
+				0,
+				Vector2(9, round(temperature_noise+45)/10),
+				0
+				)
+			else:
+				set_cell(
+				0,
+				Vector2(real_x, real_y),
+				0,
+				Vector2(round(moisture_noise+45)/10, round(temperature_noise+45)/10),
+				0
+				)
 "
 
 [node name="World" type="Node2D"]
