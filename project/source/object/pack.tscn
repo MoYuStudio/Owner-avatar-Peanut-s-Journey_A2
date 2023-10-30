@@ -1,6 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://cc8tff42tx3e"]
+[gd_scene load_steps=3 format=3 uid="uid://5vbnyfa6nml4"]
 
-[ext_resource type="PackedScene" uid="uid://dg6yse3xthfen" path="res://source/object/slot.tscn" id="1_35ppj"]
+[ext_resource type="PackedScene" uid="uid://cccmoh38776hi" path="res://source/object/slot.tscn" id="1_35ppj"]
 
 [sub_resource type="GDScript" id="GDScript_enrll"]
 script/source = "extends Control
