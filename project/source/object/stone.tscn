@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://dl3ja3lmyhayp"]
+
+[ext_resource type="Texture2D" uid="uid://d2adt63jb4j7" path="res://resource/tile/stone.png" id="1_8c17q"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lhk6d"]
+size = Vector2(22, 9.1875)
+
+[node name="Stone" type="StaticBody2D"]
+z_index = 1
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(1, -10)
+texture = ExtResource("1_8c17q")
+
+[node name="CollisionShape" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1.40625)
+shape = SubResource("RectangleShape2D_lhk6d")

@@ -6,7 +6,7 @@ func _get_drag_data(at_position):
 		var texture = TextureRect.new()
 		texture.texture = $Sprite.texture
 		texture.scale = $Sprite.scale
-		# texture.filter = texture.TEXTURE_FILTER_NEAREST
+		texture.texture_filter = 1
 		set_drag_preview(texture)
 		return $Sprite
 	return true
@@ -17,4 +17,7 @@ func _can_drop_data(at_position, data):
 	pass
 
 func _drop_data(at_position, data):
+	if data and !has_node("Sprite"):
+		self.add_child(data.duplicate())
+		data.queue_free()
 	pass

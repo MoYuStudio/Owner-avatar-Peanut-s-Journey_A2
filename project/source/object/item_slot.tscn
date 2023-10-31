@@ -21,8 +21,3 @@ texture_filter = 1
 custom_minimum_size = Vector2(256, 256)
 theme = SubResource("Theme_y33cv")
 script = ExtResource("1_67636")
-
-[node name="Sprite" type="Sprite2D" parent="."]
-texture_filter = 1
-position = Vector2(128, 128)
-scale = Vector2(9, 9)

@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://dny5dw1vfhi8k"]
+[gd_scene load_steps=7 format=3 uid="uid://dny5dw1vfhi8k"]
 
 [ext_resource type="PackedScene" uid="uid://wgsat5ot1rkr" path="res://source/object/item_slot.tscn" id="1_m8j2u"]
-[ext_resource type="Texture2D" uid="uid://d4lu720s1cjni" path="res://resource/item/stone_axe.png" id="2_kmrhf"]
+[ext_resource type="Texture2D" uid="uid://d4lu720s1cjni" path="res://resource/item/stone_axe.png" id="2_joxkp"]
+[ext_resource type="Texture2D" uid="uid://b0kepeb638k81" path="res://resource/item/stone_sickle.png" id="3_gkin7"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_htepc"]
 content_margin_left = 0.0
@@ -56,14 +57,21 @@ columns = 6
 [node name="ItemSlot" parent="MarginContainer/GridContainer" instance=ExtResource("1_m8j2u")]
 layout_mode = 2
 
-[node name="Sprite" parent="MarginContainer/GridContainer/ItemSlot" index="1"]
-texture = ExtResource("2_kmrhf")
-
 [node name="ItemSlot2" parent="MarginContainer/GridContainer" instance=ExtResource("1_m8j2u")]
 layout_mode = 2
 
+[node name="Sprite" type="Sprite2D" parent="MarginContainer/GridContainer/ItemSlot2"]
+position = Vector2(128, 128)
+scale = Vector2(9, 9)
+texture = ExtResource("3_gkin7")
+
 [node name="ItemSlot3" parent="MarginContainer/GridContainer" instance=ExtResource("1_m8j2u")]
 layout_mode = 2
+
+[node name="Sprite" type="Sprite2D" parent="MarginContainer/GridContainer/ItemSlot3"]
+position = Vector2(128, 128)
+scale = Vector2(9, 9)
+texture = ExtResource("2_joxkp")
 
 [node name="ItemSlot4" parent="MarginContainer/GridContainer" instance=ExtResource("1_m8j2u")]
 layout_mode = 2
@@ -73,5 +81,3 @@ layout_mode = 2
 
 [node name="ItemSlot6" parent="MarginContainer/GridContainer" instance=ExtResource("1_m8j2u")]
 layout_mode = 2
-
-[editable path="MarginContainer/GridContainer/ItemSlot"]
