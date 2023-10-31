@@ -30,8 +30,8 @@ func _physics_process(delta):
 	tool_animation()
 
 func get_intput():
-	input_vector.x = int(Input.is_action_pressed('ui_right')) - int(Input.is_action_pressed('ui_left'))
-	input_vector.y = int(Input.is_action_pressed('ui_down')) - int(Input.is_action_pressed('ui_up'))
+	input_vector.x = int(Input.is_action_pressed(\"ui_right\")) - int(Input.is_action_pressed(\"ui_left\"))
+	input_vector.y = int(Input.is_action_pressed(\"ui_down\")) - int(Input.is_action_pressed(\"ui_up\"))
 	return input_vector.normalized()
 
 func player_movement(delta):

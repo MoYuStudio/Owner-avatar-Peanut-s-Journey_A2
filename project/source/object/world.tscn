@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://yak5oxpc2kif"]
+[gd_scene load_steps=10 format=3 uid="uid://yak5oxpc2kif"]
 
 [ext_resource type="Texture2D" uid="uid://b588kdd22c4l3" path="res://resource/tile/land_tiles_18x18.png" id="1_jnooj"]
+[ext_resource type="Texture2D" uid="uid://37yraqfk8as4" path="res://resource/tile/building_tiles_16x16.png" id="2_4si3l"]
 [ext_resource type="Texture2D" uid="uid://b2g06mnlrskcg" path="res://resource/tile/water.png" id="2_h8xd2"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ujg83"]
@@ -331,6 +332,16 @@ texture_region_size = Vector2i(18, 18)
 8:8/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 8:8/0/physics_layer_0/angular_velocity = 0.0
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xffpp"]
+texture = ExtResource("2_4si3l")
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+1:0/0 = 0
+1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:0/0/physics_layer_0/angular_velocity = 0.0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lyy1v"]
 texture = ExtResource("2_h8xd2")
 0:0/animation_frame_0/duration = 0.6
@@ -343,8 +354,9 @@ texture = ExtResource("2_h8xd2")
 
 [sub_resource type="TileSet" id="TileSet_yrxqs"]
 physics_layer_0/collision_layer = 1
-sources/1 = SubResource("TileSetAtlasSource_lyy1v")
 sources/0 = SubResource("TileSetAtlasSource_ujg83")
+sources/2 = SubResource("TileSetAtlasSource_lyy1v")
+sources/1 = SubResource("TileSetAtlasSource_xffpp")
 
 [sub_resource type="GDScript" id="GDScript_lthvx"]
 script/source = "
@@ -406,6 +418,10 @@ func _ready():
 
 func _physics_process(delta):
 	generate_chunks_around_player(player.position)
+	
+	if Input.is_action_pressed(\"mouse_right\"):
+		var pos = local_to_map(get_global_mouse_position())
+		set_cell(1, Vector2(pos.x, pos.y), 1, Vector2(0,0), 0)
 
 func generate_chunks_around_player(position):
 	var tile_pos = local_to_map(position)
@@ -453,7 +469,7 @@ func generate_chunk(chunk_pos):
 			
 			# 水纹动画效果
 			if land_tile_data.x == 6 or land_tile_data.x == 7 or land_tile_data.x == 8:
-				set_cell(1, Vector2(real_x, real_y), 1, Vector2.ZERO, 0)
+				set_cell(2, Vector2(real_x, real_y), 2, Vector2.ZERO, 0)
 			
 			if land_tile_data.x == 3 or land_tile_data.x == 4:
 				var tile_probability = randf()
@@ -465,9 +481,9 @@ func generate_chunk(chunk_pos):
 			if land_tile_data.x == 5:
 				var tile_probability = randf()
 				if tile_probability <= 0.03:
-					var tree_instantiate = object_tiles[\"stone\"].instantiate()
-					tree_instantiate.position = map_to_local(Vector2(real_x, real_y))
-					add_child(tree_instantiate)
+					var stone_instantiate = object_tiles[\"stone\"].instantiate()
+					stone_instantiate.position = map_to_local(Vector2(real_x, real_y))
+					add_child(stone_instantiate)
 			
 "
 
@@ -486,13 +502,20 @@ texture_filter = 1
 tile_set = SubResource("TileSet_yrxqs")
 format = 2
 layer_0/name = "Land"
-layer_1/name = "Water"
+layer_1/name = "Building"
 layer_1/enabled = true
 layer_1/modulate = Color(1, 1, 1, 1)
 layer_1/y_sort_enabled = false
 layer_1/y_sort_origin = 0
 layer_1/z_index = 0
 layer_1/tile_data = PackedInt32Array()
+layer_2/name = "Water"
+layer_2/enabled = true
+layer_2/modulate = Color(1, 1, 1, 1)
+layer_2/y_sort_enabled = false
+layer_2/y_sort_origin = 0
+layer_2/z_index = 0
+layer_2/tile_data = PackedInt32Array()
 script = SubResource("GDScript_lthvx")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
