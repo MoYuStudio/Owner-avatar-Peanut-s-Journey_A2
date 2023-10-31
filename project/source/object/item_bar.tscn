@@ -1,4 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://dny5dw1vfhi8k"]
+[gd_scene load_steps=5 format=3 uid="uid://dny5dw1vfhi8k"]
+
+[ext_resource type="PackedScene" uid="uid://wgsat5ot1rkr" path="res://source/object/item_slot.tscn" id="1_m8j2u"]
+[ext_resource type="Texture2D" uid="uid://d4lu720s1cjni" path="res://resource/item/stone_axe.png" id="2_kmrhf"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_htepc"]
 content_margin_left = 0.0
@@ -42,44 +45,25 @@ layout_mode = 2
 theme_override_constants/h_separation = 16
 columns = 6
 
-[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/GridContainer"]
+[node name="ItemSlot" parent="MarginContainer/GridContainer" instance=ExtResource("1_m8j2u")]
 layout_mode = 2
 
-[node name="Panel" type="Panel" parent="MarginContainer/GridContainer/CenterContainer"]
-custom_minimum_size = Vector2(256, 256)
+[node name="Sprite2D" parent="MarginContainer/GridContainer/ItemSlot" index="1"]
+texture = ExtResource("2_kmrhf")
+
+[node name="ItemSlot2" parent="MarginContainer/GridContainer" instance=ExtResource("1_m8j2u")]
 layout_mode = 2
 
-[node name="CenterContainer2" type="CenterContainer" parent="MarginContainer/GridContainer"]
+[node name="ItemSlot3" parent="MarginContainer/GridContainer" instance=ExtResource("1_m8j2u")]
 layout_mode = 2
 
-[node name="Panel" type="Panel" parent="MarginContainer/GridContainer/CenterContainer2"]
-custom_minimum_size = Vector2(256, 256)
+[node name="ItemSlot4" parent="MarginContainer/GridContainer" instance=ExtResource("1_m8j2u")]
 layout_mode = 2
 
-[node name="CenterContainer3" type="CenterContainer" parent="MarginContainer/GridContainer"]
+[node name="ItemSlot5" parent="MarginContainer/GridContainer" instance=ExtResource("1_m8j2u")]
 layout_mode = 2
 
-[node name="Panel" type="Panel" parent="MarginContainer/GridContainer/CenterContainer3"]
-custom_minimum_size = Vector2(256, 256)
+[node name="ItemSlot6" parent="MarginContainer/GridContainer" instance=ExtResource("1_m8j2u")]
 layout_mode = 2
 
-[node name="CenterContainer4" type="CenterContainer" parent="MarginContainer/GridContainer"]
-layout_mode = 2
-
-[node name="Panel" type="Panel" parent="MarginContainer/GridContainer/CenterContainer4"]
-custom_minimum_size = Vector2(256, 256)
-layout_mode = 2
-
-[node name="CenterContainer5" type="CenterContainer" parent="MarginContainer/GridContainer"]
-layout_mode = 2
-
-[node name="Panel" type="Panel" parent="MarginContainer/GridContainer/CenterContainer5"]
-custom_minimum_size = Vector2(256, 256)
-layout_mode = 2
-
-[node name="CenterContainer6" type="CenterContainer" parent="MarginContainer/GridContainer"]
-layout_mode = 2
-
-[node name="Panel" type="Panel" parent="MarginContainer/GridContainer/CenterContainer6"]
-custom_minimum_size = Vector2(256, 256)
-layout_mode = 2
+[editable path="MarginContainer/GridContainer/ItemSlot"]
