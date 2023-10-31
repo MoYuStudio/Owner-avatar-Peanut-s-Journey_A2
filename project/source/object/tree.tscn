@@ -2,17 +2,17 @@
 
 [ext_resource type="Texture2D" uid="uid://bc6id70qqb7sl" path="res://resource/tile/tree.png" id="1_q04bg"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0s2rx"]
-radius = 2.0
-height = 8.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lhk6d"]
+size = Vector2(9, 5)
 
 [node name="Tree" type="StaticBody2D"]
 z_index = 1
 
 [node name="Sprite" type="Sprite2D" parent="."]
 texture_filter = 1
-position = Vector2(0, -6)
+position = Vector2(0, -8)
 texture = ExtResource("1_q04bg")
 
 [node name="CollisionShape" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_0s2rx")
+position = Vector2(-0.5, 0.5)
+shape = SubResource("RectangleShape2D_lhk6d")
