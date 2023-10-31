@@ -1,0 +1,85 @@
+[gd_scene load_steps=3 format=3 uid="uid://dny5dw1vfhi8k"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_htepc"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0, 0, 0, 0.25098)
+corner_radius_top_left = 36
+corner_radius_top_right = 36
+corner_radius_bottom_right = 36
+corner_radius_bottom_left = 36
+
+[sub_resource type="Theme" id="Theme_siocg"]
+Panel/styles/panel = SubResource("StyleBoxFlat_htepc")
+
+[node name="ItemBar" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_siocg")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -196.0
+offset_top = -128.0
+offset_right = 196.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_bottom = 64
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 16
+columns = 6
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/GridContainer"]
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="MarginContainer/GridContainer/CenterContainer"]
+custom_minimum_size = Vector2(256, 256)
+layout_mode = 2
+
+[node name="CenterContainer2" type="CenterContainer" parent="MarginContainer/GridContainer"]
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="MarginContainer/GridContainer/CenterContainer2"]
+custom_minimum_size = Vector2(256, 256)
+layout_mode = 2
+
+[node name="CenterContainer3" type="CenterContainer" parent="MarginContainer/GridContainer"]
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="MarginContainer/GridContainer/CenterContainer3"]
+custom_minimum_size = Vector2(256, 256)
+layout_mode = 2
+
+[node name="CenterContainer4" type="CenterContainer" parent="MarginContainer/GridContainer"]
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="MarginContainer/GridContainer/CenterContainer4"]
+custom_minimum_size = Vector2(256, 256)
+layout_mode = 2
+
+[node name="CenterContainer5" type="CenterContainer" parent="MarginContainer/GridContainer"]
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="MarginContainer/GridContainer/CenterContainer5"]
+custom_minimum_size = Vector2(256, 256)
+layout_mode = 2
+
+[node name="CenterContainer6" type="CenterContainer" parent="MarginContainer/GridContainer"]
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="MarginContainer/GridContainer/CenterContainer6"]
+custom_minimum_size = Vector2(256, 256)
+layout_mode = 2

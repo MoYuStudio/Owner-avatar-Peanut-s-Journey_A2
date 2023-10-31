@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://yak5oxpc2kif"]
+[gd_scene load_steps=8 format=3 uid="uid://yak5oxpc2kif"]
 
 [ext_resource type="Texture2D" uid="uid://b588kdd22c4l3" path="res://resource/tile/land_tiles_18x18.png" id="1_jnooj"]
 [ext_resource type="Texture2D" uid="uid://b2g06mnlrskcg" path="res://resource/tile/water.png" id="2_h8xd2"]
@@ -456,12 +456,19 @@ func generate_chunk(chunk_pos):
 			
 			if land_tile_data.x == 3 or land_tile_data.x == 4:
 				var tile_probability = randf()
-				if tile_probability <= 0.03:
+				if tile_probability <= 0.09:
 					var tree_instantiate = object_tiles[\"tree\"].instantiate()
 					tree_instantiate.position = map_to_local(Vector2(real_x, real_y))
 					add_child(tree_instantiate)
 			
 "
+
+[sub_resource type="Environment" id="Environment_vwu2m"]
+background_mode = 3
+glow_enabled = true
+glow_normalized = true
+fog_enabled = true
+volumetric_fog_enabled = true
 
 [node name="World" type="Node2D"]
 
@@ -478,3 +485,6 @@ layer_1/y_sort_origin = 0
 layer_1/z_index = 0
 layer_1/tile_data = PackedInt32Array()
 script = SubResource("GDScript_lthvx")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_vwu2m")
