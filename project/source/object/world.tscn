@@ -358,7 +358,7 @@ func generate_chunks_around_player(position):
 	var tile_pos = local_to_map(position)
 	var current_chunk = Vector2(int(tile_pos.x / chunk_width), int(tile_pos.y / chunk_height))
 	
-	for x in range(current_chunk.x - 1, current_chunk.x + 2):
+	for x in range(current_chunk.x - 2, current_chunk.x + 3):
 		for y in range(current_chunk.y - 1, current_chunk.y + 2):
 			if not generated_chunks.has(Vector2(x, y)):
 				generate_chunk(Vector2(x, y))
