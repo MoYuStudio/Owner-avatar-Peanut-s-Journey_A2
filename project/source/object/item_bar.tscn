@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://dny5dw1vfhi8k"]
+[gd_scene load_steps=6 format=3 uid="uid://dny5dw1vfhi8k"]
 
 [ext_resource type="PackedScene" uid="uid://wgsat5ot1rkr" path="res://source/object/item_slot.tscn" id="1_m8j2u"]
 [ext_resource type="Texture2D" uid="uid://d4lu720s1cjni" path="res://resource/item/stone_axe.png" id="2_kmrhf"]
@@ -17,6 +17,13 @@ corner_radius_bottom_left = 36
 [sub_resource type="Theme" id="Theme_siocg"]
 Panel/styles/panel = SubResource("StyleBoxFlat_htepc")
 
+[sub_resource type="GDScript" id="GDScript_8k7tk"]
+script/source = "
+extends Control
+
+# @onready var item_slots:Array = $MarginContainer/GridContainer.get_children()
+"
+
 [node name="ItemBar" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -25,6 +32,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_siocg")
+script = SubResource("GDScript_8k7tk")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -48,7 +56,7 @@ columns = 6
 [node name="ItemSlot" parent="MarginContainer/GridContainer" instance=ExtResource("1_m8j2u")]
 layout_mode = 2
 
-[node name="Sprite2D" parent="MarginContainer/GridContainer/ItemSlot" index="1"]
+[node name="Sprite" parent="MarginContainer/GridContainer/ItemSlot" index="1"]
 texture = ExtResource("2_kmrhf")
 
 [node name="ItemSlot2" parent="MarginContainer/GridContainer" instance=ExtResource("1_m8j2u")]
