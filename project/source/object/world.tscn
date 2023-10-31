@@ -360,8 +360,11 @@ var moisture = FastNoiseLite.new()      # 湿度
 var temperature = FastNoiseLite.new()   # 温度
 var altitude = FastNoiseLite.new()      # 海拔
 
-var chunk_width = 16
-var chunk_height = 16
+var chunk_width = 16    # 单区块宽
+var chunk_height = 16   # 单区块高
+
+var chunk_x_num = 4   # 区块X轴渲染数
+var chunk_y_num = 3   # 区块Y轴渲染数
 
 var generated_chunks = {}
 
@@ -407,8 +410,8 @@ func generate_chunks_around_player(position):
 	var tile_pos = local_to_map(position)
 	var current_chunk = Vector2(int(tile_pos.x / chunk_width), int(tile_pos.y / chunk_height))
 	
-	for x in range(current_chunk.x - 2, current_chunk.x + 3):
-		for y in range(current_chunk.y - 1, current_chunk.y + 2):
+	for x in range(current_chunk.x - (chunk_x_num-1), current_chunk.x + chunk_x_num):
+		for y in range(current_chunk.y - (chunk_y_num-1), current_chunk.y + chunk_y_num):
 			if not generated_chunks.has(Vector2(x, y)):
 				generate_chunk(Vector2(x, y))
 				generated_chunks[Vector2(x, y)] = true
