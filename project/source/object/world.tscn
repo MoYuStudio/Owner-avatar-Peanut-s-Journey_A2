@@ -1,12 +1,11 @@
 [gd_scene load_steps=10 format=3 uid="uid://yak5oxpc2kif"]
 
-[ext_resource type="Texture2D" uid="uid://b588kdd22c4l3" path="res://resource/tile/land_tiles_18x18.png" id="1_jnooj"]
-[ext_resource type="Texture2D" uid="uid://37yraqfk8as4" path="res://resource/tile/building_tiles_16x16.png" id="2_4si3l"]
+[ext_resource type="Texture2D" uid="uid://ro033xokip6a" path="res://resource/tile/land_tiles.png" id="1_8lmkf"]
 [ext_resource type="Texture2D" uid="uid://b2g06mnlrskcg" path="res://resource/tile/water.png" id="2_h8xd2"]
+[ext_resource type="Texture2D" uid="uid://37yraqfk8as4" path="res://resource/tile/building_tiles.png" id="2_qh1nn"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ujg83"]
-texture = ExtResource("1_jnooj")
-texture_region_size = Vector2i(18, 18)
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7bfwt"]
+texture = ExtResource("1_8lmkf")
 0:0/0 = 0
 0:0/0/z_index = -1
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
@@ -333,7 +332,7 @@ texture_region_size = Vector2i(18, 18)
 8:8/0/physics_layer_0/angular_velocity = 0.0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xffpp"]
-texture = ExtResource("2_4si3l")
+texture = ExtResource("2_qh1nn")
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:0/0/physics_layer_0/angular_velocity = 0.0
@@ -349,14 +348,16 @@ texture = ExtResource("2_h8xd2")
 0:0/animation_frame_2/duration = 0.6
 0:0/animation_frame_3/duration = 1.0
 0:0/0 = 0
+0:0/0/z_index = -7
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:0/0/physics_layer_0/angular_velocity = 0.0
 
 [sub_resource type="TileSet" id="TileSet_yrxqs"]
+tile_size = Vector2i(10, 10)
 physics_layer_0/collision_layer = 1
-sources/0 = SubResource("TileSetAtlasSource_ujg83")
 sources/2 = SubResource("TileSetAtlasSource_lyy1v")
 sources/1 = SubResource("TileSetAtlasSource_xffpp")
+sources/0 = SubResource("TileSetAtlasSource_7bfwt")
 
 [sub_resource type="GDScript" id="GDScript_lthvx"]
 script/source = "

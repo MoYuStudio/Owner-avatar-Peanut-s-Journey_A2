@@ -8,4 +8,3 @@
 [node name="World" parent="." instance=ExtResource("1_q1y77")]
 
 [node name="Player" parent="." instance=ExtResource("2_hamyk")]
-position = Vector2(1920, 1080)
