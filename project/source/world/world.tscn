@@ -473,7 +473,7 @@ func generate_chunk(chunk_pos):
 			if land_tile_data.x == 6 or land_tile_data.x == 7 or land_tile_data.x == 8:
 				set_cell(2, Vector2(real_x, real_y), 2, Vector2.ZERO, 0)
 			
-			if land_tile_data.x == 2:
+			if land_tile_data.x == 1 or land_tile_data.x == 2:
 				var tile_probability = randf()
 				if tile_probability <= 0.9:
 					var wheat_instantiate = object_tiles[\"wheat\"].instantiate()
@@ -483,7 +483,7 @@ func generate_chunk(chunk_pos):
 			
 			if land_tile_data.x == 3 or land_tile_data.x == 4:
 				var tile_probability = randf()
-				if tile_probability <= 0.09:
+				if tile_probability <= 0.1:
 					var tree_instantiate = object_tiles[\"tree\"].instantiate()
 					tree_instantiate.position = map_to_local(Vector2(real_x, real_y))
 					get_parent().get_parent().add_child(tree_instantiate)
