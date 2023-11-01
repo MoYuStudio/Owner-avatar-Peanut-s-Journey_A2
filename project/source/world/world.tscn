@@ -364,9 +364,9 @@ script/source = "
 extends TileMap
 
 @onready var object_tiles = {
-	\"tree\":preload(\"res://source/object/tree.tscn\"),
-	\"stone\":preload(\"res://source/object/stone.tscn\"),
-	\"wheat\":preload(\"res://source/object/wheat.tscn\"),
+	\"tree\":preload(\"res://source/world/tree.tscn\"),
+	\"stone\":preload(\"res://source/world/stone.tscn\"),
+	\"wheat\":preload(\"res://source/world/wheat.tscn\"),
 	}
 
 @onready var player = get_parent().get_parent().get_node(\"Player\")
@@ -458,10 +458,10 @@ func generate_chunk(chunk_pos):
 			elif -10 < altitude_noise and altitude_noise <= 0:
 				set_cell(0, Vector2(real_x, real_y), 0, Vector2(7, select_y), 0)
 			# 浅滩
-			elif 0 < altitude_noise and altitude_noise <= 9:
+			elif 0 < altitude_noise and altitude_noise <= 6:
 				set_cell(0, Vector2(real_x, real_y), 0, Vector2(6, select_y), 0)
 			# 海滩
-			elif 9 < altitude_noise and altitude_noise <= 11:
+			elif 6 < altitude_noise and altitude_noise <= 9:
 				set_cell(0, Vector2(real_x, real_y), 0, Vector2(5, select_y), 0)
 			# 湿度温度地形
 			else:
@@ -473,17 +473,21 @@ func generate_chunk(chunk_pos):
 			if land_tile_data.x == 6 or land_tile_data.x == 7 or land_tile_data.x == 8:
 				set_cell(2, Vector2(real_x, real_y), 2, Vector2.ZERO, 0)
 			
+			if land_tile_data.x == 2:
+				var tile_probability = randf()
+				if tile_probability <= 0.9:
+					var wheat_instantiate = object_tiles[\"wheat\"].instantiate()
+					wheat_instantiate.position = map_to_local(Vector2(real_x, real_y))
+					get_parent().get_parent().add_child(wheat_instantiate)
+					
+			
 			if land_tile_data.x == 3 or land_tile_data.x == 4:
 				var tile_probability = randf()
-				#if tile_probability <= 0.09:
-				#	var tree_instantiate = object_tiles[\"tree\"].instantiate()
-				#	tree_instantiate.position = map_to_local(Vector2(real_x, real_y))
-				#	get_parent().get_parent().add_child(tree_instantiate)
-				#if tile_probability <= 0.9:
-				var wheat_instantiate = object_tiles[\"wheat\"].instantiate()
-				wheat_instantiate.position = map_to_local(Vector2(real_x, real_y))
-				get_parent().get_parent().add_child(wheat_instantiate)
-					
+				if tile_probability <= 0.09:
+					var tree_instantiate = object_tiles[\"tree\"].instantiate()
+					tree_instantiate.position = map_to_local(Vector2(real_x, real_y))
+					get_parent().get_parent().add_child(tree_instantiate)
+				
 			if land_tile_data.x == 5:
 				var tile_probability = randf()
 				if tile_probability <= 0.03:

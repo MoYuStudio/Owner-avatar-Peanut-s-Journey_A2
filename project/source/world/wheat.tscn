@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://bifgxmpqqcolo"]
 
-[ext_resource type="Texture2D" uid="uid://bbdk60j0vv1bm" path="res://resource/tile/wheat_background.png" id="1_kmbh8"]
-[ext_resource type="Texture2D" uid="uid://db7hdyduh8yt4" path="res://resource/tile/wheat.png" id="1_tq3rj"]
+[ext_resource type="Texture2D" uid="uid://bbdk60j0vv1bm" path="res://resource/tile/wheat_background.png" id="1_pspl7"]
+[ext_resource type="Texture2D" uid="uid://db7hdyduh8yt4" path="res://resource/tile/wheat.png" id="2_rtcek"]
 
 [sub_resource type="GDScript" id="GDScript_6trju"]
 script/source = "
@@ -54,12 +54,12 @@ script = SubResource("GDScript_6trju")
 [node name="BackgroundSprite" type="Sprite2D" parent="."]
 texture_filter = 1
 position = Vector2(0, -3)
-texture = ExtResource("1_kmbh8")
+texture = ExtResource("1_pspl7")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 texture_filter = 1
 position = Vector2(0, -16)
-texture = ExtResource("1_tq3rj")
+texture = ExtResource("2_rtcek")
 hframes = 6
 frame = 5
 
