@@ -59,9 +59,8 @@ func tool_animation():
 		tool.texture = null
 "
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_uk7vf"]
-radius = 3.0
-height = 8.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8i5v3"]
+size = Vector2(6, 2)
 
 [sub_resource type="Animation" id="Animation_eckp6"]
 resource_name = "idle_down"
@@ -273,21 +272,19 @@ transitions = ["idle", "walk", SubResource("AnimationNodeStateMachineTransition_
 graph_offset = Vector2(-51, -36)
 
 [node name="Player" type="CharacterBody2D"]
-position = Vector2(1920, 1080)
 script = SubResource("GDScript_4r2uh")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 texture_filter = 1
-position = Vector2(0, -11)
+position = Vector2(0, -9)
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("1_f088v")
 hframes = 6
 vframes = 8
-frame = 19
+frame = 20
 
 [node name="CollisionShape" type="CollisionShape2D" parent="."]
-position = Vector2(0, -5)
-shape = SubResource("CapsuleShape2D_uk7vf")
+shape = SubResource("RectangleShape2D_8i5v3")
 
 [node name="ToolSprite" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.588235)

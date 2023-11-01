@@ -366,6 +366,7 @@ extends TileMap
 @onready var object_tiles = {
 	\"tree\":preload(\"res://source/object/tree.tscn\"),
 	\"stone\":preload(\"res://source/object/stone.tscn\"),
+	\"wheat\":preload(\"res://source/object/wheat.tscn\"),
 	}
 
 @onready var player = get_parent().get_parent().get_node(\"Player\")
@@ -474,17 +475,22 @@ func generate_chunk(chunk_pos):
 			
 			if land_tile_data.x == 3 or land_tile_data.x == 4:
 				var tile_probability = randf()
-				if tile_probability <= 0.09:
-					var tree_instantiate = object_tiles[\"tree\"].instantiate()
-					tree_instantiate.position = map_to_local(Vector2(real_x, real_y))
-					add_child(tree_instantiate)
+				#if tile_probability <= 0.09:
+				#	var tree_instantiate = object_tiles[\"tree\"].instantiate()
+				#	tree_instantiate.position = map_to_local(Vector2(real_x, real_y))
+				#	get_parent().get_parent().add_child(tree_instantiate)
+				#if tile_probability <= 0.9:
+				var wheat_instantiate = object_tiles[\"wheat\"].instantiate()
+				wheat_instantiate.position = map_to_local(Vector2(real_x, real_y))
+				get_parent().get_parent().add_child(wheat_instantiate)
 					
 			if land_tile_data.x == 5:
 				var tile_probability = randf()
 				if tile_probability <= 0.03:
 					var stone_instantiate = object_tiles[\"stone\"].instantiate()
 					stone_instantiate.position = map_to_local(Vector2(real_x, real_y))
-					add_child(stone_instantiate)
+					get_parent().get_parent().add_child(stone_instantiate)
+				
 			
 "
 
@@ -497,6 +503,7 @@ fog_enabled = true
 volumetric_fog_enabled = true
 
 [node name="World" type="Node2D"]
+y_sort_enabled = true
 
 [node name="TileMap" type="TileMap" parent="."]
 texture_filter = 1
@@ -510,7 +517,7 @@ layer_1/y_sort_enabled = false
 layer_1/y_sort_origin = 0
 layer_1/z_index = 0
 layer_1/tile_data = PackedInt32Array()
-layer_2/name = "Water"
+layer_2/name = "Animation"
 layer_2/enabled = true
 layer_2/modulate = Color(1, 1, 1, 1)
 layer_2/y_sort_enabled = false
