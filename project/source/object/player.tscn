@@ -281,7 +281,7 @@ scale = Vector2(0.6, 0.6)
 texture = ExtResource("1_f088v")
 hframes = 6
 vframes = 8
-frame = 23
+frame = 21
 
 [node name="CollisionShape" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_8i5v3")
@@ -315,6 +315,9 @@ parameters/walk/blend_position = Vector2(0, 0)
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="ItemBar" parent="CanvasLayer" instance=ExtResource("1_e2xfn")]
+
+[node name="MarginContainer" parent="CanvasLayer/ItemBar" index="0"]
+visible = false
 
 [node name="BackPack" parent="CanvasLayer" instance=ExtResource("2_n3hit")]
 
