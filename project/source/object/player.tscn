@@ -322,7 +322,7 @@ texture_filter = 0
 texture = ExtResource("1_f088v")
 hframes = 6
 vframes = 8
-frame = 3
+frame = 1
 
 [node name="ToolSprite" type="Sprite3D" parent="."]
 

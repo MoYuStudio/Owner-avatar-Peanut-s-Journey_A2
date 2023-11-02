@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://dc6up85jkv08n"]
 
-[ext_resource type="MeshLibrary" uid="uid://cyy6q5jkr7w3u" path="res://resource/mesh_lib/mesh_lib.tres" id="1_x28rg"]
+[ext_resource type="MeshLibrary" uid="uid://brajnuegh6jqn" path="res://resource/mesh_lib/mesh_lib.tres" id="1_x28rg"]
 [ext_resource type="Texture2D" uid="uid://g83wiqfacchj" path="res://resource/skybox/skybox.png" id="2_0rihf"]
 
 [sub_resource type="GDScript" id="GDScript_l5mj3"]
@@ -101,7 +101,7 @@ func generate_chunk(chunk_pos):
 				set_cell_item(Vector3(real_x,0,real_y),1)
 			# 海滩
 			elif 6 < altitude_noise and altitude_noise <= 9:
-				set_cell_item(Vector3(real_x,0,real_y),0)
+				set_cell_item(Vector3(real_x,0,real_y),2)
 			# 湿度温度地形
 			else:
 				set_cell_item(Vector3(real_x,0,real_y),0)
