@@ -1,24 +1,35 @@
-[gd_scene load_steps=5 format=3 uid="uid://bntxp4iscnjlk"]
+[gd_scene load_steps=6 format=3 uid="uid://bntxp4iscnjlk"]
 
 [ext_resource type="Texture2D" uid="uid://b8ywbl5a56y15" path="res://resource/tile/grass.png" id="1_g60np"]
+[ext_resource type="Material" uid="uid://cjqcl1kyga14h" path="res://resource/shader/water_low_poly.tres" id="2_rr0cs"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_npdms"]
 size = Vector2(1, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0ey6o"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hsfvn"]
 albedo_texture = ExtResource("1_g60np")
 uv1_scale = Vector3(3, 2, 1)
 texture_filter = 0
 
-[sub_resource type="HeightMapShape3D" id="HeightMapShape3D_ihslt"]
+[sub_resource type="HeightMapShape3D" id="HeightMapShape3D_v8qhu"]
 
 [node name="MeshLib" type="Node3D"]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="Grass" type="MeshInstance3D" parent="."]
 mesh = SubResource("PlaneMesh_npdms")
-surface_material_override/0 = SubResource("StandardMaterial3D_0ey6o")
+surface_material_override/0 = SubResource("StandardMaterial3D_hsfvn")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Grass"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
-shape = SubResource("HeightMapShape3D_ihslt")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Grass/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="Water" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.66712)
+mesh = SubResource("PlaneMesh_npdms")
+surface_material_override/0 = ExtResource("2_rr0cs")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Water"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Water/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")

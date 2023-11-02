@@ -5,9 +5,9 @@
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6yk55"]
 
 [node name="Tree" type="StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.28373, -4.15991)
 
 [node name="Sprite" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.75295, 0)
 pixel_size = 0.3
 billboard = 1
 shaded = true
@@ -16,5 +16,5 @@ texture_filter = 0
 texture = ExtResource("1_xbahl")
 
 [node name="CollisionShape" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.463052, -4.34047, -0.175178)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.463052, 0.89349, -0.175178)
 shape = SubResource("CapsuleShape3D_6yk55")

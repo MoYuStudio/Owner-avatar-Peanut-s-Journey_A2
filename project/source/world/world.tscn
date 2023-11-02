@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://dc6up85jkv08n"]
 
-[ext_resource type="MeshLibrary" uid="uid://ddpqbe5e5i1if" path="res://resource/mesh_lib/mesh_lib.tres" id="1_x28rg"]
+[ext_resource type="MeshLibrary" uid="uid://dub44ddo50155" path="res://resource/mesh_lib/mesh_lib.tres" id="1_x28rg"]
 [ext_resource type="Texture2D" uid="uid://drh0epjyo0ogl" path="res://resource/skybox.jpg" id="2_bv1s4"]
 
 [sub_resource type="GDScript" id="GDScript_l5mj3"]
@@ -94,45 +94,54 @@ func generate_chunk(chunk_pos):
 			var select_x = round(moisture_noise + 45) / 10
 			var select_y = round(temperature_noise + 45) / 10
 			
+			set_cell_item(Vector3(real_x,0,real_y),0)
+			
+			
 			# 深海
 			if -100 < altitude_noise and altitude_noise <= -10:
-				set_cell_item(Vector3(x,0,y),0)
+				set_cell_item(Vector3(real_x,0,real_y),1)
 			# 海洋
 			elif -10 < altitude_noise and altitude_noise <= 0:
-				set_cell_item(Vector3(x,0,y),0)
+				set_cell_item(Vector3(real_x,0,real_y),1)
 			# 浅滩
 			elif 0 < altitude_noise and altitude_noise <= 6:
-				set_cell_item(Vector3(x,0,y),0)
+				set_cell_item(Vector3(real_x,0,real_y),1)
 			# 海滩
 			elif 6 < altitude_noise and altitude_noise <= 9:
 				set_cell_item(Vector3(x,0,y),0)
 			# 湿度温度地形
 			else:
-				set_cell_item(Vector3(x,0,y),0)
+				set_cell_item(Vector3(real_x,0,real_y),0)
+				var tile_probability = randf()
+				if tile_probability <= 0.1:
+					var tree_instantiate = object_tiles[\"tree\"].instantiate()
+					tree_instantiate.transform.origin = Vector3(real_x, 0, real_y)
+					add_child(tree_instantiate)
+				
 			
 			var land_tile_data = get_cell_item(Vector3(real_x, 0, real_y))
 			
-			if land_tile_data == 3 or land_tile_data == 4:  # Adjust this condition based on your cell types
-				print('set')
+			if land_tile_data == 3 or land_tile_data == 4:
 				var tile_probability = randf()
 				if tile_probability <= 0.1:
-					var tree_instantiate = object_tiles[\"tree\"].instance()
+					var tree_instantiate = object_tiles[\"tree\"].instantiate()
 					tree_instantiate.transform.origin = Vector3(real_x, 0, real_y)
-					add_child(tree_instantiate)  # Use add_child to add the tree to the GridMap
+					add_child(tree_instantiate)
+			
 "
 
-[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_cykko"]
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_c6i7r"]
 panorama = ExtResource("2_bv1s4")
 
 [sub_resource type="Sky" id="Sky_dkf4e"]
-sky_material = SubResource("PanoramaSkyMaterial_cykko")
+sky_material = SubResource("PanoramaSkyMaterial_c6i7r")
 
 [sub_resource type="Environment" id="Environment_s75xv"]
 background_mode = 2
 sky = SubResource("Sky_dkf4e")
 tonemap_mode = 2
 glow_enabled = true
-glow_bloom = 0.03
+glow_bloom = 0.06
 glow_blend_mode = 0
 fog_light_color = Color(1, 1, 1, 1)
 fog_light_energy = 0.67
@@ -161,4 +170,3 @@ transform = Transform3D(0.986286, -0.0385296, 0.160487, 0, 0.97237, 0.233445, -0
 light_color = Color(1, 0.47451, 0.0470588, 1)
 shadow_enabled = true
 shadow_bias = 0.0
-shadow_opacity = 0.75
