@@ -77,8 +77,8 @@ func player_movement(delta):
 		else:
 			velocity = Vector3.ZERO
 	else:
-		animation_tree.set(\"parameters/idle/blend_position\", input_vector)
-		animation_tree.set(\"parameters/walk/blend_position\", input_vector)
+		animation_tree.set(\"parameters/idle/blend_position\", Vector2(input_vector.x,input_vector.z))
+		animation_tree.set(\"parameters/walk/blend_position\", Vector2(input_vector.x,input_vector.z))
 		animation_state.travel(\"walk\")
 		velocity += (input_vector * accel * delta)
 		velocity = velocity.limit_length(max_speed)
@@ -260,9 +260,9 @@ blend_point_0/pos = Vector2(0, 1)
 blend_point_1/node = SubResource("AnimationNodeAnimation_mhicp")
 blend_point_1/pos = Vector2(0, -1)
 blend_point_2/node = SubResource("AnimationNodeAnimation_kbjvh")
-blend_point_2/pos = Vector2(-0.9, 0)
+blend_point_2/pos = Vector2(-1, 0)
 blend_point_3/node = SubResource("AnimationNodeAnimation_nqutg")
-blend_point_3/pos = Vector2(0.9, 0)
+blend_point_3/pos = Vector2(1, 0)
 y_label = "z"
 blend_mode = 1
 
@@ -280,9 +280,9 @@ animation = &"walk_down"
 
 [sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_ncip7"]
 blend_point_0/node = SubResource("AnimationNodeAnimation_ujn02")
-blend_point_0/pos = Vector2(-0.9, 0)
+blend_point_0/pos = Vector2(-1, 0)
 blend_point_1/node = SubResource("AnimationNodeAnimation_ijky4")
-blend_point_1/pos = Vector2(0.9, 0)
+blend_point_1/pos = Vector2(1, 0)
 blend_point_2/node = SubResource("AnimationNodeAnimation_a6uuo")
 blend_point_2/pos = Vector2(0, -1)
 blend_point_3/node = SubResource("AnimationNodeAnimation_inta4")
@@ -324,7 +324,7 @@ texture_filter = 0
 texture = ExtResource("1_f088v")
 hframes = 6
 vframes = 8
-frame = 21
+frame = 1
 
 [node name="ToolSprite" type="Sprite3D" parent="."]
 
