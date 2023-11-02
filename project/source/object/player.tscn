@@ -20,10 +20,10 @@ extends CharacterBody3D
 
 var gravity = ProjectSettings.get_setting(\"physics/3d/default_gravity\")
 
-var max_speed = 5.0   # 极速
-var accel = 30        # 加速
-var friction = 10     # 摩擦
-var jump_velocity = 4.5
+var max_speed = 5.0       # 极速
+var accel = 30            # 加速
+var friction = 10         # 摩擦
+var jump_velocity = 4.5   # 跳跃
 
 var input_vector = Vector3.ZERO
 
@@ -263,6 +263,7 @@ blend_point_2/node = SubResource("AnimationNodeAnimation_kbjvh")
 blend_point_2/pos = Vector2(-0.9, 0)
 blend_point_3/node = SubResource("AnimationNodeAnimation_nqutg")
 blend_point_3/pos = Vector2(0.9, 0)
+y_label = "z"
 blend_mode = 1
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ujn02"]
@@ -286,6 +287,7 @@ blend_point_2/node = SubResource("AnimationNodeAnimation_a6uuo")
 blend_point_2/pos = Vector2(0, -1)
 blend_point_3/node = SubResource("AnimationNodeAnimation_inta4")
 blend_point_3/pos = Vector2(0, 1)
+y_label = "z"
 blend_mode = 1
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_dbuai"]
@@ -322,7 +324,7 @@ texture_filter = 0
 texture = ExtResource("1_f088v")
 hframes = 6
 vframes = 8
-frame = 18
+frame = 21
 
 [node name="ToolSprite" type="Sprite3D" parent="."]
 
