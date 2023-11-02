@@ -26,6 +26,8 @@ var friction = 10         # 摩擦
 var jump_velocity = 7   # 跳跃
 
 var input_vector = Vector3.ZERO
+var direction
+var rotation_direction = 0
 
 func _physics_process(delta):
 	player_movement(delta)
@@ -42,32 +44,18 @@ func get_intput():
 	if Input.is_action_just_pressed(\"ui_accept\") and is_on_floor():
 		velocity.y = jump_velocity
 		
-	if Input.is_action_just_pressed(\"key_q\"):
-		var tween = create_tween()
-		tween.set_trans(Tween.TRANS_SINE)
-		tween.set_ease(Tween.EASE_OUT)
-		tween.tween_property(
-			self,
-			\"rotation:y\",
-			self.rotation.y + PI/2,
-			0.5
-		)
-	if Input.is_action_just_pressed(\"key_e\"):
-		var tween = create_tween()
-		tween.set_trans(Tween.TRANS_SINE)
-		tween.set_ease(Tween.EASE_OUT)
-		tween.tween_property(
-			self,
-			\"rotation:y\",
-			self.rotation.y - PI/2,
-			0.5
-		)
+	if Input.is_action_pressed(\"key_q\"):
+		rotation_direction = 1
+	elif Input.is_action_pressed(\"key_e\"):
+		rotation_direction = -1
+	else:
+		rotation_direction = 0
 	
 	return input_vector.normalized()
 	
 func player_movement(delta):
 	input_vector = get_intput()
-	var direction = (transform.basis * input_vector).normalized()
+	direction = (transform.basis * input_vector).normalized()
 	
 	if not is_on_floor():
 		velocity.y -= gravity * delta
@@ -84,6 +72,8 @@ func player_movement(delta):
 		animation_state.travel(\"walk\")
 		velocity += (direction * accel * delta)
 		velocity = velocity.limit_length(max_speed)
+		
+	self.rotation.y += rotation_direction * (PI / 2 * delta)
 		
 	move_and_slide()
 	
@@ -327,7 +317,7 @@ texture_filter = 0
 texture = ExtResource("1_f088v")
 hframes = 6
 vframes = 8
-frame = 5
+frame = 4
 
 [node name="ToolSprite" type="Sprite3D" parent="."]
 
