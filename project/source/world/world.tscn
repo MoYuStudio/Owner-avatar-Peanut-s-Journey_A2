@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://dc6up85jkv08n"]
 
-[ext_resource type="MeshLibrary" uid="uid://dub44ddo50155" path="res://resource/mesh_lib/mesh_lib.tres" id="1_x28rg"]
+[ext_resource type="MeshLibrary" uid="uid://cyy6q5jkr7w3u" path="res://resource/mesh_lib/mesh_lib.tres" id="1_x28rg"]
 [ext_resource type="Texture2D" uid="uid://g83wiqfacchj" path="res://resource/skybox/skybox.png" id="2_0rihf"]
 
 [sub_resource type="GDScript" id="GDScript_l5mj3"]
@@ -105,6 +105,12 @@ func generate_chunk(chunk_pos):
 			# 湿度温度地形
 			else:
 				set_cell_item(Vector3(real_x,0,real_y),0)
+				
+				var tile_probability = randf()
+				if tile_probability <= 0.1:
+					var tree_instantiate = object_tiles[\"tree\"].instantiate()
+					tree_instantiate.transform.origin = Vector3(real_x, 0, real_y)
+					add_child(tree_instantiate)
 			
 			var land_tile_data = get_cell_item(Vector3(real_x, 0, real_y))
 			
@@ -138,9 +144,6 @@ fog_light_energy = 0.67
 [node name="GridMap" type="GridMap" parent="."]
 mesh_library = ExtResource("1_x28rg")
 cell_size = Vector3(1, 1, 1)
-data = {
-"cells": PackedInt32Array(65535, 0, 0)
-}
 script = SubResource("GDScript_l5mj3")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
