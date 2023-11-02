@@ -60,10 +60,6 @@ func _ready():
 	temperature.seed = randi()
 	altitude.seed = randi()
 
-	#for x in range(128):
-	#	for y in range(128):
-	#		set_cell_item(Vector3(x,0,y),0)
-			
 func _physics_process(delta):
 	generate_chunks_around_player(player.transform.origin)
 
@@ -94,9 +90,6 @@ func generate_chunk(chunk_pos):
 			var select_x = round(moisture_noise + 45) / 10
 			var select_y = round(temperature_noise + 45) / 10
 			
-			set_cell_item(Vector3(real_x,0,real_y),0)
-			
-			
 			# 深海
 			if -100 < altitude_noise and altitude_noise <= -10:
 				set_cell_item(Vector3(real_x,0,real_y),1)
@@ -108,16 +101,10 @@ func generate_chunk(chunk_pos):
 				set_cell_item(Vector3(real_x,0,real_y),1)
 			# 海滩
 			elif 6 < altitude_noise and altitude_noise <= 9:
-				set_cell_item(Vector3(x,0,y),0)
+				set_cell_item(Vector3(real_x,0,real_y),0)
 			# 湿度温度地形
 			else:
 				set_cell_item(Vector3(real_x,0,real_y),0)
-				var tile_probability = randf()
-				if tile_probability <= 0.1:
-					var tree_instantiate = object_tiles[\"tree\"].instantiate()
-					tree_instantiate.transform.origin = Vector3(real_x, 0, real_y)
-					add_child(tree_instantiate)
-				
 			
 			var land_tile_data = get_cell_item(Vector3(real_x, 0, real_y))
 			
