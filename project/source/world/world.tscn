@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dc6up85jkv08n"]
+[gd_scene load_steps=7 format=3 uid="uid://dc6up85jkv08n"]
 
 [ext_resource type="MeshLibrary" uid="uid://dub44ddo50155" path="res://resource/mesh_lib/mesh_lib.tres" id="1_x28rg"]
 [ext_resource type="Texture2D" uid="uid://g83wiqfacchj" path="res://resource/skybox/skybox.png" id="2_0rihf"]
@@ -133,11 +133,6 @@ glow_blend_mode = 0
 fog_light_color = Color(1, 1, 1, 1)
 fog_light_energy = 0.67
 
-[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_vawju"]
-dof_blur_far_enabled = true
-dof_blur_far_distance = 20.0
-dof_blur_amount = 0.3
-
 [node name="World" type="Node3D"]
 
 [node name="GridMap" type="GridMap" parent="."]
@@ -150,7 +145,6 @@ script = SubResource("GDScript_l5mj3")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_s75xv")
-camera_attributes = SubResource("CameraAttributesPractical_vawju")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.986286, -0.0385296, 0.160487, 0, 0.97237, 0.233445, -0.165048, -0.230244, 0.959034, 0, 40.7696, 0)

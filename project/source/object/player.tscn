@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://c5a5gkidh6uyo"]
+[gd_scene load_steps=33 format=3 uid="uid://c5a5gkidh6uyo"]
 
 [ext_resource type="PackedScene" uid="uid://dny5dw1vfhi8k" path="res://source/object/item_bar.tscn" id="1_e2xfn"]
 [ext_resource type="Texture2D" uid="uid://ch5ln3o62p6ol" path="res://resource/player/player.png" id="1_f088v"]
@@ -84,6 +84,10 @@ func tool_animation():
 	else:
 		tool.texture = null
 "
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_ja0sm"]
+dof_blur_far_enabled = true
+dof_blur_far_distance = 20.0
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1ygdw"]
 
@@ -303,6 +307,7 @@ script = SubResource("GDScript_4vhkn")
 
 [node name="Camera" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.422618, 0.906308, 0, -0.906308, 0.422618, 0, 20, 6)
+attributes = SubResource("CameraAttributesPractical_ja0sm")
 
 [node name="CollisionShape" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.26802, 0)
