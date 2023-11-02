@@ -23,7 +23,7 @@ var gravity = ProjectSettings.get_setting(\"physics/3d/default_gravity\")
 var max_speed = 5.0       # 极速
 var accel = 30            # 加速
 var friction = 10         # 摩擦
-var jump_velocity = 4.5   # 跳跃
+var jump_velocity = 7   # 跳跃
 
 var input_vector = Vector3.ZERO
 
@@ -31,44 +31,46 @@ func _physics_process(delta):
 	player_movement(delta)
 	tool_animation()
 
-'''
-func _physics_process(delta):
+func get_intput():
 
-	if not is_on_floor():
-		velocity.y -= gravity * delta
-		
+	input_vector = Vector3(
+		int(Input.is_action_pressed(\"ui_right\")) - int(Input.is_action_pressed(\"ui_left\")),
+		0,
+		int(Input.is_action_pressed(\"ui_down\")) - int(Input.is_action_pressed(\"ui_up\"))
+	)
+	
 	if Input.is_action_just_pressed(\"ui_accept\") and is_on_floor():
 		velocity.y = jump_velocity
-
-	var input_dir = Input.get_vector(\"ui_left\", \"ui_right\", \"ui_up\", \"ui_down\")
-	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	if direction:
-		animation_tree.set(\"parameters/idle/blend_position\", Vector2(0, 0))
-		animation_tree.set(\"parameters/walk/blend_position\", input_dir)
-		animation_state.travel(\"walk\")
-		velocity.x = direction.x * speed
-		velocity.z = direction.z * speed
-	else:
-		animation_state.travel(\"idle\")
-		velocity.x = move_toward(velocity.x, 0, speed)
-		velocity.z = move_toward(velocity.z, 0, speed)
-
-	move_and_slide()
-'''
-
-func get_intput():
-	input_vector.x = int(Input.is_action_pressed(\"ui_right\")) - int(Input.is_action_pressed(\"ui_left\"))
-	input_vector.z = int(Input.is_action_pressed(\"ui_down\")) - int(Input.is_action_pressed(\"ui_up\"))
+		
+	if Input.is_action_just_pressed(\"key_q\"):
+		var tween = create_tween()
+		tween.set_trans(Tween.TRANS_SINE)
+		tween.set_ease(Tween.EASE_OUT)
+		tween.tween_property(
+			self,
+			\"rotation:y\",
+			self.rotation.y + 2,
+			0.5
+		)
+	if Input.is_action_just_pressed(\"key_e\"):
+		var tween = create_tween()
+		tween.set_trans(Tween.TRANS_SINE)
+		tween.set_ease(Tween.EASE_OUT)
+		tween.tween_property(
+			self,
+			\"rotation:y\",
+			self.rotation.y - 2,
+			0.5
+		)
+	
 	return input_vector.normalized()
 	
 func player_movement(delta):
 	input_vector = get_intput()
+	print(input_vector)
 	
 	if not is_on_floor():
 		velocity.y -= gravity * delta
-		
-	if Input.is_action_just_pressed(\"ui_accept\") and is_on_floor():
-		velocity.y = jump_velocity
 		
 	if input_vector == Vector3.ZERO:
 		animation_state.travel(\"idle\")
@@ -84,6 +86,7 @@ func player_movement(delta):
 		velocity = velocity.limit_length(max_speed)
 		
 	move_and_slide()
+	
 
 func tool_animation():
 	if tool_item_slot.has_node(\"Sprite\"):
@@ -324,7 +327,7 @@ texture_filter = 0
 texture = ExtResource("1_f088v")
 hframes = 6
 vframes = 8
-frame = 1
+frame = 5
 
 [node name="ToolSprite" type="Sprite3D" parent="."]
 
