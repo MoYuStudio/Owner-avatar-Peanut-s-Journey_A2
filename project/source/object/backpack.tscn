@@ -1,6 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://5vbnyfa6nml4"]
+[gd_scene load_steps=7 format=3 uid="uid://5vbnyfa6nml4"]
 
 [ext_resource type="PackedScene" uid="uid://wgsat5ot1rkr" path="res://source/object/item_slot.tscn" id="1_givk8"]
+[ext_resource type="Texture2D" uid="uid://d4lu720s1cjni" path="res://resource/item/stone_axe.png" id="2_ae8og"]
+[ext_resource type="Texture2D" uid="uid://b0kepeb638k81" path="res://resource/item/stone_sickle.png" id="3_acyd6"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_htepc"]
 content_margin_left = 0.0
@@ -57,7 +59,7 @@ func _on_button_pressed():
 	sprite.texture = load(\"res://resource/item/stone_axe.png\")
 	sprite.position = Vector2(120,120)
 	sprite.scale = Vector2(9,9)
-	get_node(\"GridContainer/ItemSlot\").add_child(sprite)
+	get_node(\"MarginContainer2/GridContainer/ItemSlot2\").add_child(sprite)
 "
 
 [node name="BackPack" type="Control"]
@@ -65,10 +67,6 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 15.0
-offset_top = 22.0
-offset_right = 15.0
-offset_bottom = 22.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_ucsae")
@@ -171,8 +169,18 @@ columns = 6
 [node name="ItemSlot" parent="MarginContainer2/GridContainer" instance=ExtResource("1_givk8")]
 layout_mode = 2
 
+[node name="Sprite" type="Sprite2D" parent="MarginContainer2/GridContainer/ItemSlot"]
+position = Vector2(119.5, 123)
+scale = Vector2(15.9375, 16.375)
+texture = ExtResource("2_ae8og")
+
 [node name="ItemSlot2" parent="MarginContainer2/GridContainer" instance=ExtResource("1_givk8")]
 layout_mode = 2
+
+[node name="Sprite" type="Sprite2D" parent="MarginContainer2/GridContainer/ItemSlot2"]
+position = Vector2(119.5, 109)
+scale = Vector2(15.9375, 14.625)
+texture = ExtResource("3_acyd6")
 
 [node name="ItemSlot3" parent="MarginContainer2/GridContainer" instance=ExtResource("1_givk8")]
 layout_mode = 2
@@ -189,9 +197,9 @@ layout_mode = 2
 [node name="Button" type="Button" parent="."]
 visible = false
 layout_mode = 0
-offset_left = 189.0
-offset_top = 189.0
-offset_right = 462.0
-offset_bottom = 332.0
+offset_left = 142.0
+offset_top = 646.0
+offset_right = 415.0
+offset_bottom = 789.0
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
