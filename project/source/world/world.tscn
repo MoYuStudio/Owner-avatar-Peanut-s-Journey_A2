@@ -20,8 +20,8 @@ var altitude = FastNoiseLite.new()      # 海拔
 var chunk_width = 16    # 单区块宽
 var chunk_height = 16   # 单区块高
 
-var chunk_x_num = 4   # 区块X轴渲染数
-var chunk_y_num = 3   # 区块Y轴渲染数
+var chunk_x_num = 6   # 区块X轴渲染数
+var chunk_y_num = 6   # 区块Y轴渲染数
 
 var generated_chunks = {}
 
