@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://bntxp4iscnjlk"]
+
+[ext_resource type="Texture2D" uid="uid://b8ywbl5a56y15" path="res://resource/tile/grass.png" id="1_g60np"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_npdms"]
+size = Vector2(1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0ey6o"]
+albedo_texture = ExtResource("1_g60np")
+uv1_scale = Vector3(3, 2, 1)
+texture_filter = 0
+
+[sub_resource type="HeightMapShape3D" id="HeightMapShape3D_ihslt"]
+
+[node name="MeshLib" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_npdms")
+surface_material_override/0 = SubResource("StandardMaterial3D_0ey6o")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_ihslt")

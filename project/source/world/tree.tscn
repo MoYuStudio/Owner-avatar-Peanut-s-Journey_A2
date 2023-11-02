@@ -1,16 +1,20 @@
-[gd_scene load_steps=3 format=3 uid="uid://di7w4pe0vaxfb"]
+[gd_scene load_steps=3 format=3 uid="uid://hnmkj0jegif6"]
 
 [ext_resource type="Texture2D" uid="uid://bc6id70qqb7sl" path="res://resource/tile/tree.png" id="1_xbahl"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_lhk6d"]
-size = Vector2(9, 4.34375)
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6yk55"]
 
-[node name="Tree" type="StaticBody2D"]
+[node name="Tree" type="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.28373, -4.15991)
 
-[node name="Sprite" type="Sprite2D" parent="."]
-texture_filter = 1
-position = Vector2(0, -13)
+[node name="Sprite" type="Sprite3D" parent="."]
+pixel_size = 0.3
+billboard = 1
+shaded = true
+alpha_cut = 2
+texture_filter = 0
 texture = ExtResource("1_xbahl")
 
-[node name="CollisionShape" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_lhk6d")
+[node name="CollisionShape" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.463052, -4.34047, -0.175178)
+shape = SubResource("CapsuleShape3D_6yk55")

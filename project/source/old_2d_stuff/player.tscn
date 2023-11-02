@@ -1,5 +1,6 @@
-[gd_scene load_steps=32 format=3 uid="uid://c5a5gkidh6uyo"]
+[gd_scene load_steps=33 format=3 uid="uid://w8ck34jfqcqf"]
 
+[ext_resource type="Texture2D" uid="uid://d4lu720s1cjni" path="res://resource/item/stone_axe.png" id="1_7pyld"]
 [ext_resource type="PackedScene" uid="uid://dny5dw1vfhi8k" path="res://source/object/item_bar.tscn" id="1_e2xfn"]
 [ext_resource type="Texture2D" uid="uid://ch5ln3o62p6ol" path="res://resource/player/player.png" id="1_f088v"]
 [ext_resource type="PackedScene" uid="uid://5vbnyfa6nml4" path="res://source/object/backpack.tscn" id="2_n3hit"]
@@ -7,40 +8,59 @@
 [ext_resource type="Texture2D" uid="uid://dyf1e4v7nado3" path="res://resource/player/bar_over.png" id="6_3uwdu"]
 [ext_resource type="Texture2D" uid="uid://d0l823ck0c75a" path="res://resource/player/bar_progress.png" id="7_krfl5"]
 
-[sub_resource type="GDScript" id="GDScript_4vhkn"]
+[sub_resource type="GDScript" id="GDScript_4r2uh"]
 script/source = "
-extends CharacterBody3D
+extends CharacterBody2D
 
-const SPEED = 5.0
-const JUMP_VELOCITY = 4.5
+@onready var tool_item_slot = $CanvasLayer/ItemBar/MarginContainer/GridContainer/ItemSlot
+@onready var tool = $ToolSprite
 
-# Get the gravity from the project settings to be synced with RigidBody nodes.
-var gravity = ProjectSettings.get_setting(\"physics/3d/default_gravity\")
+@onready var animation = $AnimationPlayer
+@onready var animation_tree = $AnimationTree
+@onready var animation_state = $AnimationTree.get(\"parameters/playback\")
+
+const max_speed = 80   # 极速
+const accel = 300      # 加速
+const friction = 200   # 摩擦
+
+var input_vector = Vector2.ZERO
 
 func _physics_process(delta):
-	# Add the gravity.
-	if not is_on_floor():
-		velocity.y -= gravity * delta
+	player_movement(delta)
+	tool_animation()
 
-	# Handle Jump.
-	#if Input.is_action_just_pressed(\"ui_accept\") and is_on_floor():
-	#	velocity.y = JUMP_VELOCITY
+func get_intput():
+	input_vector.x = int(Input.is_action_pressed(\"ui_right\")) - int(Input.is_action_pressed(\"ui_left\"))
+	input_vector.y = int(Input.is_action_pressed(\"ui_down\")) - int(Input.is_action_pressed(\"ui_up\"))
+	return input_vector.normalized()
 
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
-	var input_dir = Input.get_vector(\"ui_left\", \"ui_right\", \"ui_up\", \"ui_down\")
-	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	if direction:
-		velocity.x = direction.x * SPEED
-		velocity.z = direction.z * SPEED
+func player_movement(delta):
+	input_vector = get_intput()
+	
+	if input_vector == Vector2.ZERO:
+		animation_state.travel(\"idle\")
+		if velocity.length() > (friction * delta):
+			velocity -= velocity.normalized() * (friction * delta)
+		else:
+			velocity = Vector2.ZERO
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		velocity.z = move_toward(velocity.z, 0, SPEED)
-
+		animation_tree.set(\"parameters/idle/blend_position\", input_vector)
+		animation_tree.set(\"parameters/walk/blend_position\", input_vector)
+		animation_state.travel(\"walk\")
+		velocity += (input_vector * accel * delta)
+		velocity = velocity.limit_length(max_speed)
+		
 	move_and_slide()
+
+func tool_animation():
+	if tool_item_slot.has_node(\"Sprite\"):
+		tool.texture = tool_item_slot.get_node(\"Sprite\").texture
+	else:
+		tool.texture = null
 "
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1ygdw"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8i5v3"]
+size = Vector2(6, 2)
 
 [sub_resource type="Animation" id="Animation_eckp6"]
 resource_name = "idle_down"
@@ -243,7 +263,7 @@ blend_mode = 1
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_a0asg"]
 advance_mode = 2
 
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_3pvos"]
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_7jj4j"]
 states/idle/node = SubResource("AnimationNodeBlendSpace2D_fyp8n")
 states/idle/position = Vector2(386, 100)
 states/walk/node = SubResource("AnimationNodeBlendSpace2D_ncip7")
@@ -251,27 +271,34 @@ states/walk/position = Vector2(573, 100)
 transitions = ["idle", "walk", SubResource("AnimationNodeStateMachineTransition_dbuai"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_fthm3"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_a0asg")]
 graph_offset = Vector2(-51, -36)
 
-[node name="Player" type="CharacterBody3D"]
-script = SubResource("GDScript_4vhkn")
+[node name="Player" type="CharacterBody2D"]
+script = SubResource("GDScript_4r2uh")
 
-[node name="Camera" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.422618, 0.906308, 0, -0.906308, 0.422618, 0, 20, 6)
-fov = 100.0
-
-[node name="CollisionShape" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.26802, 0)
-shape = SubResource("CapsuleShape3D_1ygdw")
-
-[node name="Sprite" type="Sprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.9727, 0)
-pixel_size = 0.1
-billboard = 1
-alpha_cut = 2
-texture_filter = 0
+[node name="Sprite" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, -9)
+scale = Vector2(0.6, 0.6)
 texture = ExtResource("1_f088v")
 hframes = 6
 vframes = 8
-frame = 21
+frame = 19
+
+[node name="CollisionShape" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_8i5v3")
+
+[node name="ToolSprite" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.588235)
+texture_filter = 1
+position = Vector2(0, -24)
+texture = ExtResource("1_7pyld")
+
+[node name="Camera" type="Camera2D" parent="."]
+zoom = Vector2(9, 9)
+process_callback = 0
+position_smoothing_enabled = true
+position_smoothing_speed = 6.0
+rotation_smoothing_enabled = true
+rotation_smoothing_speed = 6.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -279,7 +306,7 @@ libraries = {
 }
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource("AnimationNodeStateMachine_3pvos")
+tree_root = SubResource("AnimationNodeStateMachine_7jj4j")
 anim_player = NodePath("../AnimationPlayer")
 active = true
 parameters/idle/blend_position = Vector2(0, 0)
