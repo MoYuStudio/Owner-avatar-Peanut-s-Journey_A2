@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://dc6up85jkv08n"]
 
 [ext_resource type="MeshLibrary" uid="uid://dub44ddo50155" path="res://resource/mesh_lib/mesh_lib.tres" id="1_x28rg"]
-[ext_resource type="Texture2D" uid="uid://drh0epjyo0ogl" path="res://resource/skybox.jpg" id="2_bv1s4"]
+[ext_resource type="Texture2D" uid="uid://g83wiqfacchj" path="res://resource/skybox/skybox.png" id="2_0rihf"]
 
 [sub_resource type="GDScript" id="GDScript_l5mj3"]
 script/source = "
@@ -131,7 +131,7 @@ func generate_chunk(chunk_pos):
 "
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_c6i7r"]
-panorama = ExtResource("2_bv1s4")
+panorama = ExtResource("2_0rihf")
 
 [sub_resource type="Sky" id="Sky_dkf4e"]
 sky_material = SubResource("PanoramaSkyMaterial_c6i7r")
