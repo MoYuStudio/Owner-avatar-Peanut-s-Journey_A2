@@ -29,6 +29,8 @@ var input_vector = Vector3.ZERO
 var direction
 var rotation_direction = 0
 
+var tween
+
 func _physics_process(delta):
 	player_movement(delta)
 	tool_animation()
@@ -43,48 +45,40 @@ func get_intput():
 	
 	if Input.is_action_just_pressed(\"ui_accept\") and is_on_floor():
 		velocity.y = jump_velocity
-	
-	
-	
-	if Input.is_action_just_pressed(\"rotate_left\"):
-		var tween = create_tween()
-		tween.set_trans(Tween.TRANS_SINE)
-		tween.set_ease(Tween.EASE_OUT)
-		tween.tween_property(
-			self,
-			\"rotation:y\",
-			self.rotation.y + PI/2,
-			0.6
-		)
-
-		print(self.rotation_degrees.y)
-
-	elif Input.is_action_just_pressed(\"rotate_right\"):
-		var tween = create_tween()
-		tween.set_trans(Tween.TRANS_SINE)
-		tween.set_ease(Tween.EASE_OUT)
-		tween.tween_property(
-			self,
-			\"rotation:y\",
-			self.rotation.y - PI/2,
-			0.6
-		)
-
-		print(self.rotation_degrees.y)
 		
-	elif Input.is_action_pressed(\"rotate_left\") and Input.is_action_pressed(\"rotate_right\") :
-		var tween = create_tween()
-		tween.set_trans(Tween.TRANS_SINE)
-		tween.set_ease(Tween.EASE_OUT)
-		tween.tween_property(self,\"rotation:y\",PI,0.6)
+	if Input.is_action_just_pressed(\"key_q\"):
+		if tween.finished:
+			tween = create_tween()
+			tween.set_trans(Tween.TRANS_SINE)
+			tween.set_ease(Tween.EASE_OUT)
+			tween.tween_property(
+				self,
+				\"rotation_degrees:y\",
+				int(round(self.rotation_degrees.y + 90)),
+				0.6
+			)
+			print(self.rotation_degrees.y)
+
+	if Input.is_action_just_pressed(\"key_e\"):
+		if tween.finished:
+			tween = create_tween()
+			tween.set_trans(Tween.TRANS_SINE)
+			tween.set_ease(Tween.EASE_OUT)
+			tween.tween_property(
+				self,
+				\"rotation_degrees:y\",
+				int(round(self.rotation_degrees.y - 90)),
+				0.6
+			)
+			print(self.rotation_degrees.y)
 
 		
-	if Input.is_action_pressed(\"rotate_left\"):
-		rotation_direction = 1
-	elif Input.is_action_pressed(\"rotate_right\"):
-		rotation_direction = -1
-	else:
-		rotation_direction = 0
+	#if Input.is_action_pressed(\"key_q\"):
+	#	rotation_direction = 1
+	#elif Input.is_action_pressed(\"key_e\"):
+	#	rotation_direction = -1
+	#else:
+	#	rotation_direction = 0
 	
 	return input_vector.normalized()
 	
@@ -108,7 +102,7 @@ func player_movement(delta):
 		velocity += (direction * accel * delta)
 		velocity = velocity.limit_length(max_speed)
 		
-	self.rotation.y += rotation_direction * (PI / 2 * delta)
+	# self.rotation.y += rotation_direction * (PI / 2 * delta)
 		
 	move_and_slide()
 	
@@ -358,7 +352,7 @@ texture_filter = 0
 texture = ExtResource("1_f088v")
 hframes = 6
 vframes = 8
-frame = 4
+frame = 2
 
 [node name="ToolSprite" type="Sprite3D" parent="."]
 
