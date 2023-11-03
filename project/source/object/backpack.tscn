@@ -74,17 +74,17 @@ script = SubResource("GDScript_enrll")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -1344.0
-offset_top = -264.0
-offset_bottom = 264.0
-grow_horizontal = 0
-grow_vertical = 2
-theme_override_constants/margin_right = 64
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -808.0
+offset_top = -898.0
+offset_right = 808.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_bottom = 360
 
 [node name="GridContainer" type="GridContainer" parent="MarginContainer"]
 layout_mode = 2
@@ -128,24 +128,6 @@ layout_mode = 2
 [node name="ItemSlot12" parent="MarginContainer/GridContainer" instance=ExtResource("1_givk8")]
 layout_mode = 2
 
-[node name="ItemSlot13" parent="MarginContainer/GridContainer" instance=ExtResource("1_givk8")]
-layout_mode = 2
-
-[node name="ItemSlot14" parent="MarginContainer/GridContainer" instance=ExtResource("1_givk8")]
-layout_mode = 2
-
-[node name="ItemSlot15" parent="MarginContainer/GridContainer" instance=ExtResource("1_givk8")]
-layout_mode = 2
-
-[node name="ItemSlot16" parent="MarginContainer/GridContainer" instance=ExtResource("1_givk8")]
-layout_mode = 2
-
-[node name="ItemSlot17" parent="MarginContainer/GridContainer" instance=ExtResource("1_givk8")]
-layout_mode = 2
-
-[node name="ItemSlot18" parent="MarginContainer/GridContainer" instance=ExtResource("1_givk8")]
-layout_mode = 2
-
 [node name="MarginContainer2" type="MarginContainer" parent="."]
 layout_mode = 1
 anchors_preset = 7
@@ -170,16 +152,16 @@ columns = 6
 layout_mode = 2
 
 [node name="Sprite" type="Sprite2D" parent="MarginContainer2/GridContainer/ItemSlot"]
-position = Vector2(119.5, 123)
-scale = Vector2(15.9375, 16.375)
+position = Vector2(128, 128)
+scale = Vector2(9, 9)
 texture = ExtResource("2_ae8og")
 
 [node name="ItemSlot2" parent="MarginContainer2/GridContainer" instance=ExtResource("1_givk8")]
 layout_mode = 2
 
 [node name="Sprite" type="Sprite2D" parent="MarginContainer2/GridContainer/ItemSlot2"]
-position = Vector2(119.5, 109)
-scale = Vector2(15.9375, 14.625)
+position = Vector2(128, 128)
+scale = Vector2(9, 9)
 texture = ExtResource("3_acyd6")
 
 [node name="ItemSlot3" parent="MarginContainer2/GridContainer" instance=ExtResource("1_givk8")]

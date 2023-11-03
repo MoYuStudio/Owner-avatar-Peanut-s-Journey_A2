@@ -91,23 +91,23 @@ func generate_chunk(chunk_pos):
 			var select_y = round(temperature_noise + 45) / 10
 			
 			# 深海
-			if -100 < altitude_noise and altitude_noise <= -10:
+			if -100 < altitude_noise and altitude_noise <= -9:
 				set_cell_item(Vector3(real_x,0,real_y),1)
 			# 海洋
-			elif -10 < altitude_noise and altitude_noise <= 0:
+			elif -9 < altitude_noise and altitude_noise <= -3:
 				set_cell_item(Vector3(real_x,0,real_y),1)
 			# 浅滩
-			elif 0 < altitude_noise and altitude_noise <= 6:
+			elif -3 < altitude_noise and altitude_noise <= 0:
 				set_cell_item(Vector3(real_x,0,real_y),1)
 			# 海滩
-			elif 6 < altitude_noise and altitude_noise <= 9:
+			elif 0 < altitude_noise and altitude_noise <= 3:
 				set_cell_item(Vector3(real_x,0,real_y),2)
 			# 湿度温度地形
 			else:
 				set_cell_item(Vector3(real_x,0,real_y),0)
 				
 				var tile_probability = randf()
-				if tile_probability <= 0.1:
+				if tile_probability <= 0.03:
 					var tree_instantiate = object_tiles[\"tree\"].instantiate()
 					tree_instantiate.transform.origin = Vector3(real_x, 0, real_y)
 					add_child(tree_instantiate)
@@ -132,13 +132,19 @@ sky_material = SubResource("PanoramaSkyMaterial_c6i7r")
 [sub_resource type="Environment" id="Environment_s75xv"]
 background_mode = 2
 sky = SubResource("Sky_dkf4e")
-tonemap_mode = 2
+ambient_light_source = 3
+reflected_light_source = 2
+tonemap_mode = 3
 glow_enabled = true
-glow_bloom = 0.06
+glow_intensity = 0.9
+glow_bloom = 0.09
 glow_blend_mode = 0
+glow_hdr_threshold = 0.6
+glow_hdr_scale = 0.9
 fog_light_color = Color(1, 1, 1, 1)
 fog_light_energy = 0.3
 volumetric_fog_enabled = true
+volumetric_fog_density = 0.03
 
 [node name="World" type="Node3D"]
 
@@ -152,6 +158,9 @@ environment = SubResource("Environment_s75xv")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.927184, 0.157723, -0.339785, 0, 0.907044, 0.421035, 0.374607, 0.390378, -0.840996, 0, 0, 0)
-light_color = Color(1, 0.627451, 0, 1)
-light_energy = 1.2
+light_color = Color(1, 0.603922, 0, 1)
+light_energy = 2.0
 shadow_enabled = true
+shadow_bias = 0.0
+shadow_normal_bias = 0.0
+shadow_blur = 3.0

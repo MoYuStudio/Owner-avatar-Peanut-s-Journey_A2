@@ -1,7 +1,8 @@
-[gd_scene load_steps=33 format=3 uid="uid://c5a5gkidh6uyo"]
+[gd_scene load_steps=34 format=3 uid="uid://c5a5gkidh6uyo"]
 
 [ext_resource type="PackedScene" uid="uid://dny5dw1vfhi8k" path="res://source/object/item_bar.tscn" id="1_e2xfn"]
 [ext_resource type="Texture2D" uid="uid://ch5ln3o62p6ol" path="res://resource/player/player.png" id="1_f088v"]
+[ext_resource type="Texture2D" uid="uid://d4lu720s1cjni" path="res://resource/item/stone_axe.png" id="2_f3hiv"]
 [ext_resource type="PackedScene" uid="uid://5vbnyfa6nml4" path="res://source/object/backpack.tscn" id="2_n3hit"]
 [ext_resource type="Texture2D" uid="uid://bh72h6q7g72l2" path="res://resource/player/bar_under.png" id="5_k7woa"]
 [ext_resource type="Texture2D" uid="uid://dyf1e4v7nado3" path="res://resource/player/bar_over.png" id="6_3uwdu"]
@@ -22,10 +23,10 @@ extends CharacterBody3D
 
 var gravity = ProjectSettings.get_setting(\"physics/3d/default_gravity\")
 
-var max_speed = 5.0       # 极速
-var accel = 30            # 加速
-var friction = 20         # 摩擦
-var jump_velocity = 7   # 跳跃
+var max_speed = 6       # 极速
+var accel = 36          # 加速
+var friction = 16       # 摩擦
+var jump_velocity = 9   # 跳跃
 
 var input_vector = Vector3.ZERO
 var direction
@@ -47,7 +48,7 @@ func get_intput():
 		velocity.y = jump_velocity
 	
 	
-	
+	'''
 	if Input.is_action_just_pressed(\"rotate_left\"):
 		var tween = create_tween()
 		tween.set_trans(Tween.TRANS_SINE)
@@ -75,12 +76,12 @@ func get_intput():
 		print(self.rotation_degrees.y)
 		
 	elif Input.is_action_pressed(\"rotate_left\") and Input.is_action_pressed(\"rotate_right\") :
-		var tween = create_tween()
+		var tween = create_tween()w
 		tween.set_trans(Tween.TRANS_SINE)
 		tween.set_ease(Tween.EASE_OUT)
 		tween.tween_property(self,\"rotation:y\",PI,0.6)
-
-		
+	'''
+	
 	if Input.is_action_pressed(\"rotate_left\"):
 		rotation_direction = 1
 	elif Input.is_action_pressed(\"rotate_right\"):
@@ -106,11 +107,9 @@ func get_intput():
 				camera_arm.rotation_degrees.x + 64,
 				0.6
 			)
-			camera_arm.rotation_degrees.x += 2
-			camera_arm.position.z += 0.3
+			camera_arm.rotation_degrees.x += 1
+			camera_arm.position.z += 0.36
 			camera_arm.position.y += 0.1
-			print(camera_arm.rotation_degrees.x)
-			
 			
 	if Input.is_action_just_pressed(\"zoom_out\"):
 		if camera_arm.spring_length < 9:
@@ -130,10 +129,9 @@ func get_intput():
 				camera_arm.rotation_degrees.x - 64,
 				0.6
 			)
-			camera_arm.rotation_degrees.x -= 2
-			camera_arm.position.z -= 0.3
+			camera_arm.rotation_degrees.x -= 1
+			camera_arm.position.z -= 0.36
 			camera_arm.position.y -= 0.1
-			print(camera_arm.rotation_degrees.x)
 	
 	return input_vector.normalized()
 	
@@ -157,7 +155,7 @@ func player_movement(delta):
 		velocity += (direction * accel * delta)
 		velocity = velocity.limit_length(max_speed)
 		
-	self.rotation.y += rotation_direction * (PI / 2 * delta)
+	self.rotation.y += rotation_direction * (PI / 1 * delta)
 		
 	move_and_slide()
 	
@@ -411,9 +409,16 @@ texture_filter = 0
 texture = ExtResource("1_f088v")
 hframes = 6
 vframes = 8
-frame = 5
+frame = 3
 
 [node name="ToolSprite" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
+modulate = Color(1, 1, 1, 0.25098)
+pixel_size = 0.03
+billboard = 1
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("2_f3hiv")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

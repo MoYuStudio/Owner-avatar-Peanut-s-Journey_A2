@@ -106,4 +106,4 @@ hit={
 
 [physics]
 
-3d/default_gravity=16.0
+3d/default_gravity=32.0
