@@ -24,7 +24,7 @@ var gravity = ProjectSettings.get_setting(\"physics/3d/default_gravity\")
 
 var max_speed = 5.0       # 极速
 var accel = 30            # 加速
-var friction = 10         # 摩擦
+var friction = 20         # 摩擦
 var jump_velocity = 7   # 跳跃
 
 var input_vector = Vector3.ZERO
@@ -89,30 +89,45 @@ func get_intput():
 		rotation_direction = 0
 		
 	if Input.is_action_just_pressed(\"zoom_in\"):
-		if camera_arm.spring_length >= -6 :
+		if camera_arm.spring_length >= 3 :
 			var new_length = camera_arm.spring_length - 3
 			var tween = create_tween()
 			tween.set_trans(Tween.TRANS_SINE)
 			tween.set_ease(Tween.EASE_OUT)
-			tween.tween_property(
+			tween.parallel().tween_property(
 				camera_arm,
 				\"spring_length\",
 				new_length,
 				0.6
 			)
+			tween.parallel().tween_property(
+				camera_arm,
+				\"rotation_degrees\",
+				camera_arm.rotation_degrees.x + 64,
+				0.6
+			)
+			print(camera_arm.rotation_degrees.x)
+			
 			
 	if Input.is_action_just_pressed(\"zoom_out\"):
-		if camera_arm.spring_length < 3:
+		if camera_arm.spring_length < 9:
 			var new_length = camera_arm.spring_length + 3
 			var tween = create_tween()
 			tween.set_trans(Tween.TRANS_SINE)
 			tween.set_ease(Tween.EASE_OUT)
-			tween.tween_property(
+			tween.parallel().tween_property(
 				camera_arm,
 				\"spring_length\",
 				new_length,
 				0.6
 			)
+			tween.parallel().tween_property(
+				camera_arm,
+				\"rotation_degrees\",
+				camera_arm.rotation_degrees.x - 64,
+				0.6
+			)
+			print(camera_arm.rotation_degrees.x)
 	
 	return input_vector.normalized()
 	
@@ -370,7 +385,7 @@ graph_offset = Vector2(-51, -36)
 script = SubResource("GDScript_4vhkn")
 
 [node name="CameraArm" type="SpringArm3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 16, 12)
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 8, 6)
 
 [node name="Camera" type="Camera3D" parent="CameraArm"]
 attributes = SubResource("CameraAttributesPractical_ja0sm")
@@ -381,13 +396,14 @@ shape = SubResource("CapsuleShape3D_1ygdw")
 
 [node name="Sprite" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.9727, 0)
-pixel_size = 0.1
+pixel_size = 0.06
 billboard = 1
 alpha_cut = 2
 texture_filter = 0
 texture = ExtResource("1_f088v")
 hframes = 6
 vframes = 8
+frame = 3
 
 [node name="ToolSprite" type="Sprite3D" parent="."]
 
