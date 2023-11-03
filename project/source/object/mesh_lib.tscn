@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bntxp4iscnjlk"]
+[gd_scene load_steps=30 format=3 uid="uid://bntxp4iscnjlk"]
 
 [ext_resource type="Texture2D" uid="uid://b8ywbl5a56y15" path="res://resource/tile/grass.png" id="1_g60np"]
 [ext_resource type="Shader" uid="uid://djdvvewfn86x2" path="res://resource/shader/grass.tres" id="2_jnyf6"]
@@ -9,12 +9,57 @@
 [sub_resource type="PlaneMesh" id="PlaneMesh_npdms"]
 size = Vector2(1, 1)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lh8ab"]
+albedo_color = Color(0.294118, 0.294118, 0.294118, 1)
+
+[sub_resource type="HeightMapShape3D" id="HeightMapShape3D_v8qhu"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k3rp3"]
+albedo_color = Color(0.72549, 0.72549, 0.72549, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xlyqc"]
+albedo_color = Color(0.431373, 0.196078, 0.00392157, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ehfcr"]
+albedo_color = Color(0.164706, 0.470588, 0.0392157, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wt037"]
+albedo_color = Color(0.431373, 0.823529, 0.215686, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0utmr"]
+albedo_color = Color(1, 1, 0.0235294, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tw73c"]
+albedo_color = Color(0.666667, 0.431373, 0.0392157, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_886hs"]
+albedo_color = Color(0.54902, 1, 0.188235, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q8unh"]
+albedo_color = Color(0.521569, 0, 0.521569, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wqedx"]
+albedo_color = Color(1, 0.207843, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lbepx"]
+albedo_color = Color(1, 0.352941, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v26dg"]
+albedo_color = Color(0, 0.705882, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xqft2"]
+albedo_color = Color(0.32549, 1, 0.431373, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_loqrb"]
+albedo_color = Color(0.745098, 0.407843, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lf7oe"]
+albedo_color = Color(1, 0.796078, 0, 1)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hsfvn"]
 albedo_texture = ExtResource("1_g60np")
 uv1_scale = Vector3(3, 2, 1)
 texture_filter = 0
-
-[sub_resource type="HeightMapShape3D" id="HeightMapShape3D_v8qhu"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ie6tm"]
 render_priority = 0
@@ -63,7 +108,1063 @@ albedo_texture = ExtResource("5_hqqap")
 
 [node name="MeshLib" type="Node3D"]
 
+[node name="0" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_npdms")
+surface_material_override/0 = SubResource("StandardMaterial3D_lh8ab")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="0/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="1" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+mesh = SubResource("PlaneMesh_npdms")
+skeleton = NodePath("../0")
+surface_material_override/0 = SubResource("StandardMaterial3D_k3rp3")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="1"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="1/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+mesh = SubResource("PlaneMesh_npdms")
+skeleton = NodePath("../0")
+surface_material_override/0 = SubResource("StandardMaterial3D_xlyqc")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="2/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0)
+mesh = SubResource("PlaneMesh_npdms")
+skeleton = NodePath("../0")
+surface_material_override/0 = SubResource("StandardMaterial3D_ehfcr")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="3"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="3/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="4" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+mesh = SubResource("PlaneMesh_npdms")
+skeleton = NodePath("../0")
+surface_material_override/0 = SubResource("StandardMaterial3D_ehfcr")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="4"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="4/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="5" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
+mesh = SubResource("PlaneMesh_npdms")
+skeleton = NodePath("../0")
+surface_material_override/0 = SubResource("StandardMaterial3D_wt037")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="5"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="5/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="6" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0)
+mesh = SubResource("PlaneMesh_npdms")
+skeleton = NodePath("../0")
+surface_material_override/0 = SubResource("StandardMaterial3D_0utmr")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="6"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="6/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="7" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 0)
+mesh = SubResource("PlaneMesh_npdms")
+surface_material_override/0 = ExtResource("2_rr0cs")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="7"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="7/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="8" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0)
+mesh = SubResource("PlaneMesh_npdms")
+surface_material_override/0 = ExtResource("2_rr0cs")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="8"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="8/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="9" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 0)
+mesh = SubResource("PlaneMesh_npdms")
+surface_material_override/0 = ExtResource("2_rr0cs")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="9"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="9/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="10" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+mesh = SubResource("PlaneMesh_npdms")
+surface_material_override/0 = SubResource("StandardMaterial3D_lh8ab")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="10"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="10/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="11" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1)
+mesh = SubResource("PlaneMesh_npdms")
+skeleton = NodePath("../0")
+surface_material_override/0 = SubResource("StandardMaterial3D_k3rp3")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="11"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="11/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="12" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 1)
+mesh = SubResource("PlaneMesh_npdms")
+skeleton = NodePath("../0")
+surface_material_override/0 = SubResource("StandardMaterial3D_xlyqc")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="12"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="12/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="13" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 1)
+mesh = SubResource("PlaneMesh_npdms")
+skeleton = NodePath("../0")
+surface_material_override/0 = SubResource("StandardMaterial3D_ehfcr")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="13"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="13/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="14" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 1)
+mesh = SubResource("PlaneMesh_npdms")
+skeleton = NodePath("../0")
+surface_material_override/0 = SubResource("StandardMaterial3D_ehfcr")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="14"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="14/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="15" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 1)
+mesh = SubResource("PlaneMesh_npdms")
+skeleton = NodePath("../0")
+surface_material_override/0 = SubResource("StandardMaterial3D_wt037")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="15"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="15/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="16" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 1)
+mesh = SubResource("PlaneMesh_npdms")
+skeleton = NodePath("../0")
+surface_material_override/0 = SubResource("StandardMaterial3D_0utmr")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="16"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="16/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="17" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 1)
+mesh = SubResource("PlaneMesh_npdms")
+surface_material_override/0 = ExtResource("2_rr0cs")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="17"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="17/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="18" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 1)
+mesh = SubResource("PlaneMesh_npdms")
+surface_material_override/0 = ExtResource("2_rr0cs")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="18"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="18/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="19" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 1)
+mesh = SubResource("PlaneMesh_npdms")
+surface_material_override/0 = ExtResource("2_rr0cs")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="19"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="19/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="20" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+mesh = SubResource("PlaneMesh_npdms")
+surface_material_override/0 = SubResource("StandardMaterial3D_lh8ab")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="20"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="20/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="21" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 2)
+mesh = SubResource("PlaneMesh_npdms")
+skeleton = NodePath("../0")
+surface_material_override/0 = SubResource("StandardMaterial3D_ehfcr")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="21"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="21/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="22" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 2)
+mesh = SubResource("PlaneMesh_npdms")
+skeleton = NodePath("../0")
+surface_material_override/0 = SubResource("StandardMaterial3D_xlyqc")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="22"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="22/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="23" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 2)
+mesh = SubResource("PlaneMesh_npdms")
+skeleton = NodePath("../0")
+surface_material_override/0 = SubResource("StandardMaterial3D_ehfcr")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="23"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="23/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="24" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 2)
+mesh = SubResource("PlaneMesh_npdms")
+skeleton = NodePath("../0")
+surface_material_override/0 = SubResource("StandardMaterial3D_ehfcr")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="24"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="24/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="25" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 2)
+mesh = SubResource("PlaneMesh_npdms")
+skeleton = NodePath("../0")
+surface_material_override/0 = SubResource("StandardMaterial3D_wt037")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="25"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="25/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="26" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 2)
+mesh = SubResource("PlaneMesh_npdms")
+skeleton = NodePath("../0")
+surface_material_override/0 = SubResource("StandardMaterial3D_0utmr")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="26"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="26/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="27" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 2)
+mesh = SubResource("PlaneMesh_npdms")
+surface_material_override/0 = ExtResource("2_rr0cs")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="27"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="27/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="28" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 2)
+mesh = SubResource("PlaneMesh_npdms")
+surface_material_override/0 = ExtResource("2_rr0cs")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="28"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="28/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="29" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 2)
+mesh = SubResource("PlaneMesh_npdms")
+surface_material_override/0 = ExtResource("2_rr0cs")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="29"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="29/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="30" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
+mesh = SubResource("PlaneMesh_npdms")
+surface_material_override/0 = SubResource("StandardMaterial3D_lh8ab")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="30"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="30/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="31" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 3)
+mesh = SubResource("PlaneMesh_npdms")
+skeleton = NodePath("../0")
+surface_material_override/0 = SubResource("StandardMaterial3D_ehfcr")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="31"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="31/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="32" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 3)
+mesh = SubResource("PlaneMesh_npdms")
+skeleton = NodePath("../0")
+surface_material_override/0 = SubResource("StandardMaterial3D_xlyqc")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="32"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="32/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="33" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 3)
+mesh = SubResource("PlaneMesh_npdms")
+skeleton = NodePath("../0")
+surface_material_override/0 = SubResource("StandardMaterial3D_ehfcr")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="33"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="33/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="34" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 3)
+mesh = SubResource("PlaneMesh_npdms")
+skeleton = NodePath("../0")
+surface_material_override/0 = SubResource("StandardMaterial3D_ehfcr")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="34"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="34/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="35" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 3)
+mesh = SubResource("PlaneMesh_npdms")
+skeleton = NodePath("../0")
+surface_material_override/0 = SubResource("StandardMaterial3D_wt037")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="35"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="35/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="36" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 3)
+mesh = SubResource("PlaneMesh_npdms")
+skeleton = NodePath("../0")
+surface_material_override/0 = SubResource("StandardMaterial3D_0utmr")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="36"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="36/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="37" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 3)
+mesh = SubResource("PlaneMesh_npdms")
+surface_material_override/0 = ExtResource("2_rr0cs")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="37"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="37/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="38" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 3)
+mesh = SubResource("PlaneMesh_npdms")
+surface_material_override/0 = ExtResource("2_rr0cs")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="38"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="38/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="39" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 3)
+mesh = SubResource("PlaneMesh_npdms")
+surface_material_override/0 = ExtResource("2_rr0cs")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="39"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="39/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="40" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+mesh = SubResource("PlaneMesh_npdms")
+surface_material_override/0 = SubResource("StandardMaterial3D_lh8ab")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="40"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="40/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="41" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 4)
+mesh = SubResource("PlaneMesh_npdms")
+skeleton = NodePath("../0")
+surface_material_override/0 = SubResource("StandardMaterial3D_wt037")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="41"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="41/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="42" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 4)
+mesh = SubResource("PlaneMesh_npdms")
+skeleton = NodePath("../0")
+surface_material_override/0 = SubResource("StandardMaterial3D_tw73c")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="42"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="42/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="43" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 4)
+mesh = SubResource("PlaneMesh_npdms")
+skeleton = NodePath("../0")
+surface_material_override/0 = SubResource("StandardMaterial3D_wt037")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="43"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="43/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="44" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 4)
+mesh = SubResource("PlaneMesh_npdms")
+skeleton = NodePath("../0")
+surface_material_override/0 = SubResource("StandardMaterial3D_wt037")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="44"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="44/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="45" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 4)
+mesh = SubResource("PlaneMesh_npdms")
+skeleton = NodePath("../0")
+surface_material_override/0 = SubResource("StandardMaterial3D_886hs")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="45"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="45/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="46" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 4)
+mesh = SubResource("PlaneMesh_npdms")
+skeleton = NodePath("../0")
+surface_material_override/0 = SubResource("StandardMaterial3D_0utmr")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="46"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="46/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="47" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 4)
+mesh = SubResource("PlaneMesh_npdms")
+surface_material_override/0 = ExtResource("2_rr0cs")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="47"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="47/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="48" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 4)
+mesh = SubResource("PlaneMesh_npdms")
+surface_material_override/0 = ExtResource("2_rr0cs")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="48"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="48/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="49" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 4)
+mesh = SubResource("PlaneMesh_npdms")
+surface_material_override/0 = ExtResource("2_rr0cs")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="49"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="49/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="50" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
+mesh = SubResource("PlaneMesh_npdms")
+surface_material_override/0 = SubResource("StandardMaterial3D_lh8ab")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="50"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="50/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="51" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 5)
+mesh = SubResource("PlaneMesh_npdms")
+skeleton = NodePath("../0")
+surface_material_override/0 = SubResource("StandardMaterial3D_wt037")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="51"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="51/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="52" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 5)
+mesh = SubResource("PlaneMesh_npdms")
+skeleton = NodePath("../0")
+surface_material_override/0 = SubResource("StandardMaterial3D_tw73c")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="52"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="52/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="53" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 5)
+mesh = SubResource("PlaneMesh_npdms")
+skeleton = NodePath("../0")
+surface_material_override/0 = SubResource("StandardMaterial3D_wt037")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="53"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="53/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="54" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 5)
+mesh = SubResource("PlaneMesh_npdms")
+skeleton = NodePath("../0")
+surface_material_override/0 = SubResource("StandardMaterial3D_wt037")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="54"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="54/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="55" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 5)
+mesh = SubResource("PlaneMesh_npdms")
+skeleton = NodePath("../0")
+surface_material_override/0 = SubResource("StandardMaterial3D_886hs")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="55"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="55/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="56" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 5)
+mesh = SubResource("PlaneMesh_npdms")
+skeleton = NodePath("../0")
+surface_material_override/0 = SubResource("StandardMaterial3D_0utmr")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="56"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="56/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="57" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 5)
+mesh = SubResource("PlaneMesh_npdms")
+surface_material_override/0 = ExtResource("2_rr0cs")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="57"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="57/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="58" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 5)
+mesh = SubResource("PlaneMesh_npdms")
+surface_material_override/0 = ExtResource("2_rr0cs")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="58"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="58/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="59" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 5)
+mesh = SubResource("PlaneMesh_npdms")
+surface_material_override/0 = ExtResource("2_rr0cs")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="59"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="59/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="60" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6)
+mesh = SubResource("PlaneMesh_npdms")
+surface_material_override/0 = SubResource("StandardMaterial3D_q8unh")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="60"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="60/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="61" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 6)
+mesh = SubResource("PlaneMesh_npdms")
+surface_material_override/0 = SubResource("StandardMaterial3D_wqedx")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="61"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="61/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="62" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 6)
+mesh = SubResource("PlaneMesh_npdms")
+skeleton = NodePath("../0")
+surface_material_override/0 = SubResource("StandardMaterial3D_lbepx")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="62"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="62/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="63" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 6)
+mesh = SubResource("PlaneMesh_npdms")
+skeleton = NodePath("../0")
+surface_material_override/0 = SubResource("StandardMaterial3D_v26dg")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="63"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="63/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="64" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 6)
+mesh = SubResource("PlaneMesh_npdms")
+skeleton = NodePath("../0")
+surface_material_override/0 = SubResource("StandardMaterial3D_v26dg")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="64"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="64/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="65" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 6)
+mesh = SubResource("PlaneMesh_npdms")
+skeleton = NodePath("../0")
+surface_material_override/0 = SubResource("StandardMaterial3D_xqft2")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="65"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="65/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="66" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 6)
+mesh = SubResource("PlaneMesh_npdms")
+skeleton = NodePath("../0")
+surface_material_override/0 = SubResource("StandardMaterial3D_0utmr")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="66"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="66/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="67" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 6)
+mesh = SubResource("PlaneMesh_npdms")
+surface_material_override/0 = ExtResource("2_rr0cs")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="67"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="67/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="68" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 6)
+mesh = SubResource("PlaneMesh_npdms")
+surface_material_override/0 = ExtResource("2_rr0cs")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="68"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="68/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="69" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 6)
+mesh = SubResource("PlaneMesh_npdms")
+surface_material_override/0 = ExtResource("2_rr0cs")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="69"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="69/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="70" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7)
+mesh = SubResource("PlaneMesh_npdms")
+surface_material_override/0 = SubResource("StandardMaterial3D_loqrb")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="70"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="70/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="71" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 7)
+mesh = SubResource("PlaneMesh_npdms")
+surface_material_override/0 = SubResource("StandardMaterial3D_lf7oe")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="71"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="71/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="72" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 7)
+mesh = SubResource("PlaneMesh_npdms")
+skeleton = NodePath("../0")
+surface_material_override/0 = SubResource("StandardMaterial3D_lbepx")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="72"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="72/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="73" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 7)
+mesh = SubResource("PlaneMesh_npdms")
+skeleton = NodePath("../0")
+surface_material_override/0 = SubResource("StandardMaterial3D_v26dg")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="73"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="73/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="74" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 7)
+mesh = SubResource("PlaneMesh_npdms")
+skeleton = NodePath("../0")
+surface_material_override/0 = SubResource("StandardMaterial3D_v26dg")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="74"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="74/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="75" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 7)
+mesh = SubResource("PlaneMesh_npdms")
+skeleton = NodePath("../0")
+surface_material_override/0 = SubResource("StandardMaterial3D_xqft2")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="75"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="75/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="76" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 7)
+mesh = SubResource("PlaneMesh_npdms")
+skeleton = NodePath("../0")
+surface_material_override/0 = SubResource("StandardMaterial3D_0utmr")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="76"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="76/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="77" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 7)
+mesh = SubResource("PlaneMesh_npdms")
+surface_material_override/0 = ExtResource("2_rr0cs")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="77"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="77/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="78" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 7)
+mesh = SubResource("PlaneMesh_npdms")
+surface_material_override/0 = ExtResource("2_rr0cs")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="78"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="78/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="79" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 7)
+mesh = SubResource("PlaneMesh_npdms")
+surface_material_override/0 = ExtResource("2_rr0cs")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="79"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="79/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="80" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
+mesh = SubResource("PlaneMesh_npdms")
+surface_material_override/0 = SubResource("StandardMaterial3D_loqrb")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="80"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="80/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="81" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 8)
+mesh = SubResource("PlaneMesh_npdms")
+surface_material_override/0 = SubResource("StandardMaterial3D_lf7oe")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="81"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="81/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="82" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 8)
+mesh = SubResource("PlaneMesh_npdms")
+skeleton = NodePath("../0")
+surface_material_override/0 = SubResource("StandardMaterial3D_lbepx")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="82"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="82/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="83" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 8)
+mesh = SubResource("PlaneMesh_npdms")
+skeleton = NodePath("../0")
+surface_material_override/0 = SubResource("StandardMaterial3D_v26dg")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="83"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="83/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="84" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 8)
+mesh = SubResource("PlaneMesh_npdms")
+skeleton = NodePath("../0")
+surface_material_override/0 = SubResource("StandardMaterial3D_v26dg")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="84"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="84/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="85" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 8)
+mesh = SubResource("PlaneMesh_npdms")
+skeleton = NodePath("../0")
+surface_material_override/0 = SubResource("StandardMaterial3D_xqft2")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="85"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="85/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="86" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 8)
+mesh = SubResource("PlaneMesh_npdms")
+skeleton = NodePath("../0")
+surface_material_override/0 = SubResource("StandardMaterial3D_0utmr")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="86"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="86/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="87" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 8)
+mesh = SubResource("PlaneMesh_npdms")
+surface_material_override/0 = ExtResource("2_rr0cs")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="87"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="87/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="88" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 8)
+mesh = SubResource("PlaneMesh_npdms")
+surface_material_override/0 = ExtResource("2_rr0cs")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="88"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="88/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="89" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 8)
+mesh = SubResource("PlaneMesh_npdms")
+surface_material_override/0 = ExtResource("2_rr0cs")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="89"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="89/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="90" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 9)
+mesh = SubResource("PlaneMesh_npdms")
+surface_material_override/0 = SubResource("StandardMaterial3D_loqrb")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="90"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="90/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="91" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 9)
+mesh = SubResource("PlaneMesh_npdms")
+surface_material_override/0 = SubResource("StandardMaterial3D_lf7oe")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="91"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="91/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="92" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 9)
+mesh = SubResource("PlaneMesh_npdms")
+skeleton = NodePath("../0")
+surface_material_override/0 = SubResource("StandardMaterial3D_lbepx")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="92"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="92/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="93" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 9)
+mesh = SubResource("PlaneMesh_npdms")
+skeleton = NodePath("../0")
+surface_material_override/0 = SubResource("StandardMaterial3D_v26dg")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="93"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="93/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="94" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 9)
+mesh = SubResource("PlaneMesh_npdms")
+skeleton = NodePath("../0")
+surface_material_override/0 = SubResource("StandardMaterial3D_v26dg")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="94"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="94/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="95" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 9)
+mesh = SubResource("PlaneMesh_npdms")
+skeleton = NodePath("../0")
+surface_material_override/0 = SubResource("StandardMaterial3D_xqft2")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="95"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="95/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="96" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 9)
+mesh = SubResource("PlaneMesh_npdms")
+skeleton = NodePath("../0")
+surface_material_override/0 = SubResource("StandardMaterial3D_0utmr")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="96"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="96/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="97" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 9)
+mesh = SubResource("PlaneMesh_npdms")
+surface_material_override/0 = ExtResource("2_rr0cs")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="97"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="97/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="98" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 9)
+mesh = SubResource("PlaneMesh_npdms")
+surface_material_override/0 = ExtResource("2_rr0cs")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="98"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="98/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
+[node name="99" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 9)
+mesh = SubResource("PlaneMesh_npdms")
+surface_material_override/0 = ExtResource("2_rr0cs")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="99"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="99/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_v8qhu")
+
 [node name="Grass" type="MeshInstance3D" parent="."]
+visible = false
 mesh = SubResource("PlaneMesh_npdms")
 surface_material_override/0 = SubResource("StandardMaterial3D_hsfvn")
 
@@ -83,6 +1184,7 @@ visible = false
 
 [node name="Water" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+visible = false
 mesh = SubResource("PlaneMesh_npdms")
 surface_material_override/0 = ExtResource("2_rr0cs")
 
@@ -93,6 +1195,7 @@ shape = SubResource("HeightMapShape3D_v8qhu")
 
 [node name="Sand" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+visible = false
 mesh = SubResource("PlaneMesh_npdms")
 surface_material_override/0 = SubResource("StandardMaterial3D_fyvcg")
 

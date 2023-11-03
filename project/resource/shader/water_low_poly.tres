@@ -7,9 +7,9 @@ shader_type spatial;
 // Water color
 uniform vec4 out_color: source_color = vec4(0.0, 0.3, 0.6, 0.1);//0.0, 0.2, 1.0, 1.0
 // Amount of height for each triangle
-uniform float amount: hint_range(0.2, 5.0, 0.1) = 0.1;//0.8
+uniform float amount: hint_range(0.0, 5.0, 0.1) = 0.1;//0.8
 // The speed of the trangles height change
-uniform float speed: hint_range(0.1, 5.0, 0.1) = 0.6;
+uniform float speed: hint_range(0.0, 5.0, 0.1) = 0.6;
 // Beer factor (used to calculate how transparent the water is going to be) if equals to 0.0 then the alpha is going to be the out_color's alpha
 uniform float beer_factor = 0;//0.2
 uniform float metallic = 0.6;
@@ -61,10 +61,10 @@ void fragment() {
 [resource]
 render_priority = 0
 shader = SubResource("Shader_t5u00")
-shader_parameter/out_color = Color(0, 0.776471, 1, 0.482353)
+shader_parameter/out_color = Color(0, 1, 1, 1)
 shader_parameter/amount = 0.1
-shader_parameter/speed = 0.6
+shader_parameter/speed = 0.0
 shader_parameter/beer_factor = 0.0
-shader_parameter/metallic = 0.6
+shader_parameter/metallic = 0.0
 shader_parameter/specular = 1.0
 shader_parameter/roughness = 1.0
