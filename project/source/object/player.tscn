@@ -106,6 +106,9 @@ func get_intput():
 				camera_arm.rotation_degrees.x + 64,
 				0.6
 			)
+			camera_arm.rotation_degrees.x += 2
+			camera_arm.position.z += 0.3
+			camera_arm.position.y += 0.1
 			print(camera_arm.rotation_degrees.x)
 			
 			
@@ -127,6 +130,9 @@ func get_intput():
 				camera_arm.rotation_degrees.x - 64,
 				0.6
 			)
+			camera_arm.rotation_degrees.x -= 2
+			camera_arm.position.z -= 0.3
+			camera_arm.position.y -= 0.1
 			print(camera_arm.rotation_degrees.x)
 	
 	return input_vector.normalized()
@@ -169,6 +175,8 @@ dof_blur_far_distance = 26.0
 dof_blur_amount = 0.3
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1ygdw"]
+radius = 0.3
+height = 1.0
 
 [sub_resource type="Animation" id="Animation_eckp6"]
 resource_name = "idle_down"
@@ -385,17 +393,17 @@ graph_offset = Vector2(-51, -36)
 script = SubResource("GDScript_4vhkn")
 
 [node name="CameraArm" type="SpringArm3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 8, 6)
+transform = Transform3D(1, 0, 0, 0, 0.819152, 0.573577, 0, -0.573577, 0.819152, 0, 8, 8)
 
 [node name="Camera" type="Camera3D" parent="CameraArm"]
 attributes = SubResource("CameraAttributesPractical_ja0sm")
 
 [node name="CollisionShape" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.26802, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("CapsuleShape3D_1ygdw")
 
 [node name="Sprite" type="Sprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.9727, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 pixel_size = 0.06
 billboard = 1
 alpha_cut = 2
@@ -403,7 +411,7 @@ texture_filter = 0
 texture = ExtResource("1_f088v")
 hframes = 6
 vframes = 8
-frame = 3
+frame = 5
 
 [node name="ToolSprite" type="Sprite3D" parent="."]
 
