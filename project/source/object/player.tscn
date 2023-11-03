@@ -53,8 +53,8 @@ func get_intput():
 	if Input.is_action_just_pressed(\"ui_accept\") and is_on_floor():
 		velocity.y = jump_velocity
 	
-	if rotation_timer.is_stopped():
 	# 人物旋转 非线性 & 线性
+	if rotation_timer.is_stopped():
 		if Input.is_action_just_pressed(\"rotate_left\"):
 			var tween = create_tween()
 			tween.set_trans(Tween.TRANS_SINE)
@@ -66,8 +66,6 @@ func get_intput():
 				0.6
 			)
 			rotation_timer.start()
-			#self.rotation_degrees.y = int(self.rotation_degrees.y)
-			print(self.rotation_degrees.y)
 
 		elif Input.is_action_just_pressed(\"rotate_right\"):
 			var tween = create_tween()
@@ -80,8 +78,6 @@ func get_intput():
 				0.6
 			)
 			rotation_timer.start()
-			#self.rotation_degrees.y = int(self.rotation_degrees.y)
-			print(self.rotation_degrees.y)
 			
 		#elif Input.is_action_pressed(\"rotate_left\") and Input.is_action_pressed(\"rotate_right\") :
 		#	var tween = create_tween()
@@ -427,6 +423,7 @@ texture_filter = 0
 texture = ExtResource("1_f088v")
 hframes = 6
 vframes = 8
+frame = 3
 
 [node name="ToolSprite" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
@@ -497,7 +494,7 @@ tint_under = Color(1, 1, 1, 0.376471)
 tint_progress = Color(0, 0.784314, 0.905882, 1)
 
 [node name="RotationTimer" type="Timer" parent="."]
-wait_time = 0.6
+wait_time = 0.7
 script = SubResource("GDScript_71rhy")
 
 [connection signal="timeout" from="RotationTimer" to="RotationTimer" method="_on_timeout"]
