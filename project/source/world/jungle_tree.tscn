@@ -1,6 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://hnmkj0jegif6"]
+[gd_scene load_steps=5 format=3 uid="uid://4wcr1lwmaupv"]
 
-[ext_resource type="Texture2D" uid="uid://bc6id70qqb7sl" path="res://resource/tile/tree.png" id="1_xbahl"]
+[ext_resource type="Texture2D" uid="uid://cgycpb2qr2tgi" path="res://resource/tile/jungle_tree.png" id="1_1ku3w"]
 
 [sub_resource type="GDScript" id="GDScript_ui2k5"]
 script/source = "
@@ -27,7 +27,7 @@ pixel_size = 0.3
 shaded = true
 alpha_cut = 2
 texture_filter = 0
-texture = ExtResource("1_xbahl")
+texture = ExtResource("1_1ku3w")
 
 [node name="Sprite2" type="Sprite3D" parent="."]
 transform = Transform3D(-0.71934, 0, 0.694658, 0, 1, 0, -0.694658, 0, -0.71934, 0, 4.5, 0)
@@ -35,7 +35,7 @@ pixel_size = 0.3
 shaded = true
 alpha_cut = 2
 texture_filter = 0
-texture = ExtResource("1_xbahl")
+texture = ExtResource("1_1ku3w")
 
 [node name="CollisionShape" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)

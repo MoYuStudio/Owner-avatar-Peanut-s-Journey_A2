@@ -8,7 +8,9 @@ script/source = "
 extends GridMap
 
 @onready var object_tiles = {
-	\"tree\":preload(\"res://source/world/tree.tscn\"),
+	\"plains_tree\":preload(\"res://source/world/plains_tree.tscn\"),
+	\"coniferous_tree\":preload(\"res://source/world/coniferous_tree.tscn\"),
+	\"jungle_tree\":preload(\"res://source/world/jungle_tree.tscn\"),
 	}
 
 @onready var player = get_parent().get_parent().get_node(\"Player\")
@@ -26,19 +28,19 @@ var chunk_y_num = 6   # 区块Y轴渲染数
 var generated_chunks = {}
 
 var biome_list = {
-	\"deep_ocean\":{}, # 深海群系
-	\"ocean\":{}, # 海洋群系
-	\"shoal\":{}, # 浅滩群系
+	\"deep_ocean\":[], # 深海群系
+	\"ocean\":[], # 海洋群系
+	\"shoal\":[], # 浅滩群系
 	
-	\"beach\":{}, # 沙滩群系
+	\"beach\":[], # 沙滩群系
 	
-	\"jungle\":{}, # 热带雨林群系
-	\"plains\":{}, # 平原群系
-	\"coniferous\":{}, # 针叶林群系
+	\"jungle\":[63,64,65,73,74,75,83,84,85,93,94,95], # 热带雨林群系
+	\"plains\":[43,44,45,53,54,55], # 平原群系
+	\"coniferous\":[3,4,5,13,14,15,23,24,25,33,34,35], # 针叶林群系
 	
-	\"desert\":{}, # 沙漠群系
-	\"mushroom\":{}, # 蘑菇群系
-	\"mountain\":{}, # 山脉群系
+	\"desert\":[], # 沙漠群系
+	\"mushroom\":[], # 蘑菇群系
+	\"mountain\":[], # 山脉群系
 }
 
 var biome_data = {
@@ -48,9 +50,9 @@ var biome_data = {
 	
 	\"beach\":{}, # 沙滩群系
 	
-	\"jungle\":{}, # 热带雨林群系
-	\"plains\":{\"tree\":0.03}, # 平原群系
-	\"coniferous\":{}, # 针叶林群系
+	\"jungle\":{\"jungle_tree\":0.01}, # 热带雨林群系
+	\"plains\":{\"plains_tree\":0.03}, # 平原群系
+	\"coniferous\":{\"coniferous_tree\":0.03}, # 针叶林群系
 	
 	\"desert\":{}, # 沙漠群系
 	\"mushroom\":{}, # 蘑菇群系
@@ -131,12 +133,29 @@ func generate_chunk(chunk_pos):
 				
 			var land_tile_data = get_cell_item(Vector3(real_x, 0, real_y))
 			
-			if land_tile_data == 3 or land_tile_data == 4:
-				var tile_probability = randf()
-				if tile_probability <= 0.03:
-					var tree_instantiate = object_tiles[\"tree\"].instantiate()
-					tree_instantiate.transform.origin = Vector3(real_x, 0, real_y)
-					add_child(tree_instantiate)
+			for id in biome_list[\"jungle\"]:
+				if land_tile_data == id :
+					var tile_probability = randf()
+					if tile_probability <= biome_data[\"jungle\"][\"jungle_tree\"]:
+						var tree_instantiate = object_tiles[\"jungle_tree\"].instantiate()
+						tree_instantiate.transform.origin = Vector3(real_x, 0, real_y)
+						add_child(tree_instantiate)
+			
+			for id in biome_list[\"plains\"]:
+				if land_tile_data == id :
+					var tile_probability = randf()
+					if tile_probability <= biome_data[\"plains\"][\"plains_tree\"]:
+						var tree_instantiate = object_tiles[\"plains_tree\"].instantiate()
+						tree_instantiate.transform.origin = Vector3(real_x, 0, real_y)
+						add_child(tree_instantiate)
+						
+			for id in biome_list[\"coniferous\"]:
+				if land_tile_data == id :
+					var tile_probability = randf()
+					if tile_probability <= biome_data[\"coniferous\"][\"coniferous_tree\"]:
+						var tree_instantiate = object_tiles[\"coniferous_tree\"].instantiate()
+						tree_instantiate.transform.origin = Vector3(real_x, 0, real_y)
+						add_child(tree_instantiate)
 			
 "
 
