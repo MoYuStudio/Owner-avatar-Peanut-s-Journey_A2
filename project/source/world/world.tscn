@@ -29,17 +29,15 @@ var biome_list = {
 	\"deep_ocean\":{}, # 深海群系
 	\"ocean\":{}, # 海洋群系
 	\"shoal\":{}, # 浅滩群系
+	
 	\"beach\":{}, # 沙滩群系
-	\"plains\":[
-		[3,2],[4,2],
-		[3,3],[4,3],
-		[3,4],[4,4],
-		[3,5],[4,5],
-		[3,6],[4,6],
-	],# 平原群系
-	\"coniferous\":{}, # 针叶林群系
+	
 	\"jungle\":{}, # 热带雨林群系
+	\"plains\":{}, # 平原群系
+	\"coniferous\":{}, # 针叶林群系
+	
 	\"desert\":{}, # 沙漠群系
+	\"mushroom\":{}, # 蘑菇群系
 	\"mountain\":{}, # 山脉群系
 }
 
@@ -47,11 +45,15 @@ var biome_data = {
 	\"deep_ocean\":{}, # 深海群系
 	\"ocean\":{}, # 海洋群系
 	\"shoal\":{}, # 浅滩群系
+	
 	\"beach\":{}, # 沙滩群系
-	\"plains\":{\"tree\":0.1}, # 平原群系
-	\"coniferous\":{}, # 针叶林群系
+	
 	\"jungle\":{}, # 热带雨林群系
+	\"plains\":{\"tree\":0.03}, # 平原群系
+	\"coniferous\":{}, # 针叶林群系
+	
 	\"desert\":{}, # 沙漠群系
+	\"mushroom\":{}, # 蘑菇群系
 	\"mountain\":{}, # 山脉群系
 }
 

@@ -36,18 +36,21 @@ func _physics_process(delta):
 	player_movement(delta)
 	tool_animation()
 
+# 输入控制
 func get_intput():
-
+	
+	# 移动
 	input_vector = Vector3(
 		int(Input.is_action_pressed(\"ui_right\")) - int(Input.is_action_pressed(\"ui_left\")),
 		0,
 		int(Input.is_action_pressed(\"ui_down\")) - int(Input.is_action_pressed(\"ui_up\"))
 	)
 	
+	# 跳跃
 	if Input.is_action_just_pressed(\"ui_accept\") and is_on_floor():
 		velocity.y = jump_velocity
 	
-	
+	# 人物旋转 非线性 & 线性
 	'''
 	if Input.is_action_just_pressed(\"rotate_left\"):
 		var tween = create_tween()
@@ -81,7 +84,6 @@ func get_intput():
 		tween.set_ease(Tween.EASE_OUT)
 		tween.tween_property(self,\"rotation:y\",PI,0.6)
 	'''
-	
 	if Input.is_action_pressed(\"rotate_left\"):
 		rotation_direction = 1
 	elif Input.is_action_pressed(\"rotate_right\"):
@@ -89,6 +91,7 @@ func get_intput():
 	else:
 		rotation_direction = 0
 		
+	# 相机臂缩放
 	if Input.is_action_just_pressed(\"zoom_in\"):
 		if camera_arm.spring_length >= 3 :
 			var new_length = camera_arm.spring_length - 3
@@ -110,7 +113,6 @@ func get_intput():
 			camera_arm.rotation_degrees.x += 1
 			camera_arm.position.z += 0.36
 			camera_arm.position.y += 0.1
-			
 	if Input.is_action_just_pressed(\"zoom_out\"):
 		if camera_arm.spring_length < 9:
 			var new_length = camera_arm.spring_length + 3
@@ -136,12 +138,15 @@ func get_intput():
 	return input_vector.normalized()
 	
 func player_movement(delta):
+	
 	input_vector = get_intput()
 	direction = (transform.basis * input_vector).normalized()
 	
+	# 重力
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 		
+	# 移动 及 状态机
 	if input_vector == Vector3.ZERO:
 		animation_state.travel(\"idle\")
 		if velocity.length() > (friction * delta):
@@ -155,11 +160,11 @@ func player_movement(delta):
 		velocity += (direction * accel * delta)
 		velocity = velocity.limit_length(max_speed)
 		
+	# 转向
 	self.rotation.y += rotation_direction * (PI / 1 * delta)
-		
+	
 	move_and_slide()
 	
-
 func tool_animation():
 	if tool_item_slot.has_node(\"Sprite\"):
 		tool.texture = tool_item_slot.get_node(\"Sprite\").texture
@@ -409,7 +414,7 @@ texture_filter = 0
 texture = ExtResource("1_f088v")
 hframes = 6
 vframes = 8
-frame = 3
+frame = 2
 
 [node name="ToolSprite" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
