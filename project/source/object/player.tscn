@@ -87,7 +87,8 @@ func tool_animation():
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_ja0sm"]
 dof_blur_far_enabled = true
-dof_blur_far_distance = 20.0
+dof_blur_far_distance = 16.0
+dof_blur_amount = 0.3
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1ygdw"]
 
@@ -306,7 +307,7 @@ graph_offset = Vector2(-51, -36)
 script = SubResource("GDScript_4vhkn")
 
 [node name="Camera" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.422618, 0.906308, 0, -0.906308, 0.422618, 0, 20, 6)
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 16, 9)
 attributes = SubResource("CameraAttributesPractical_ja0sm")
 
 [node name="CollisionShape" type="CollisionShape3D" parent="."]
