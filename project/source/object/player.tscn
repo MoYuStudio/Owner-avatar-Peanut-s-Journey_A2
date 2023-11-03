@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://c5a5gkidh6uyo"]
+[gd_scene load_steps=35 format=3 uid="uid://c5a5gkidh6uyo"]
 
 [ext_resource type="PackedScene" uid="uid://dny5dw1vfhi8k" path="res://source/object/item_bar.tscn" id="1_e2xfn"]
 [ext_resource type="Texture2D" uid="uid://ch5ln3o62p6ol" path="res://resource/player/player.png" id="1_f088v"]
@@ -21,16 +21,19 @@ extends CharacterBody3D
 @onready var animation_tree = $AnimationTree
 @onready var animation_state = $AnimationTree.get(\"parameters/playback\")
 
+@onready var rotation_timer = $RotationTimer
+
 var gravity = ProjectSettings.get_setting(\"physics/3d/default_gravity\")
 
-var max_speed = 6       # 极速
-var accel = 36          # 加速
-var friction = 16       # 摩擦
+var max_speed = 9       # 极速
+var accel = 32          # 加速
+var friction = 32       # 摩擦
 var jump_velocity = 9   # 跳跃
 
 var input_vector = Vector3.ZERO
 var direction
 var rotation_direction = 0
+var rotation_timer_lock = false
 
 func _physics_process(delta):
 	player_movement(delta)
@@ -50,46 +53,48 @@ func get_intput():
 	if Input.is_action_just_pressed(\"ui_accept\") and is_on_floor():
 		velocity.y = jump_velocity
 	
+	if rotation_timer.is_stopped():
 	# 人物旋转 非线性 & 线性
-	'''
-	if Input.is_action_just_pressed(\"rotate_left\"):
-		var tween = create_tween()
-		tween.set_trans(Tween.TRANS_SINE)
-		tween.set_ease(Tween.EASE_OUT)
-		tween.tween_property(
-			self,
-			\"rotation:y\",
-			self.rotation.y + PI/2,
-			0.6
-		)
+		if Input.is_action_just_pressed(\"rotate_left\"):
+			var tween = create_tween()
+			tween.set_trans(Tween.TRANS_SINE)
+			tween.set_ease(Tween.EASE_OUT)
+			tween.tween_property(
+				self,
+				\"rotation:y\",
+				self.rotation.y + PI/2,
+				0.6
+			)
+			rotation_timer.start()
+			#self.rotation_degrees.y = int(self.rotation_degrees.y)
+			print(self.rotation_degrees.y)
 
-		print(self.rotation_degrees.y)
-
-	elif Input.is_action_just_pressed(\"rotate_right\"):
-		var tween = create_tween()
-		tween.set_trans(Tween.TRANS_SINE)
-		tween.set_ease(Tween.EASE_OUT)
-		tween.tween_property(
-			self,
-			\"rotation:y\",
-			self.rotation.y - PI/2,
-			0.6
-		)
-
-		print(self.rotation_degrees.y)
-		
-	elif Input.is_action_pressed(\"rotate_left\") and Input.is_action_pressed(\"rotate_right\") :
-		var tween = create_tween()w
-		tween.set_trans(Tween.TRANS_SINE)
-		tween.set_ease(Tween.EASE_OUT)
-		tween.tween_property(self,\"rotation:y\",PI,0.6)
-	'''
-	if Input.is_action_pressed(\"rotate_left\"):
-		rotation_direction = 1
-	elif Input.is_action_pressed(\"rotate_right\"):
-		rotation_direction = -1
-	else:
-		rotation_direction = 0
+		elif Input.is_action_just_pressed(\"rotate_right\"):
+			var tween = create_tween()
+			tween.set_trans(Tween.TRANS_SINE)
+			tween.set_ease(Tween.EASE_OUT)
+			tween.tween_property(
+				self,
+				\"rotation:y\",
+				self.rotation.y - PI/2,
+				0.6
+			)
+			rotation_timer.start()
+			#self.rotation_degrees.y = int(self.rotation_degrees.y)
+			print(self.rotation_degrees.y)
+			
+		#elif Input.is_action_pressed(\"rotate_left\") and Input.is_action_pressed(\"rotate_right\") :
+		#	var tween = create_tween()
+		#	tween.set_trans(Tween.TRANS_SINE)
+		#	tween.set_ease(Tween.EASE_OUT)
+		#	tween.tween_property(self,\"rotation:y\",PI,0.6)
+	
+	#if Input.is_action_pressed(\"rotate_left\"):
+	#	rotation_direction = 1
+	#elif Input.is_action_pressed(\"rotate_right\"):
+	#	rotation_direction = -1
+	#else:
+	#	rotation_direction = 0
 		
 	# 相机臂缩放
 	if Input.is_action_just_pressed(\"zoom_in\"):
@@ -392,6 +397,14 @@ states/walk/position = Vector2(573, 100)
 transitions = ["idle", "walk", SubResource("AnimationNodeStateMachineTransition_dbuai"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_fthm3"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_a0asg")]
 graph_offset = Vector2(-51, -36)
 
+[sub_resource type="GDScript" id="GDScript_71rhy"]
+script/source = "
+extends Timer
+
+func _on_timeout():
+	stop()
+"
+
 [node name="Player" type="CharacterBody3D"]
 script = SubResource("GDScript_4vhkn")
 
@@ -414,7 +427,6 @@ texture_filter = 0
 texture = ExtResource("1_f088v")
 hframes = 6
 vframes = 8
-frame = 2
 
 [node name="ToolSprite" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
@@ -483,5 +495,11 @@ texture_over = ExtResource("6_3uwdu")
 texture_progress = ExtResource("7_krfl5")
 tint_under = Color(1, 1, 1, 0.376471)
 tint_progress = Color(0, 0.784314, 0.905882, 1)
+
+[node name="RotationTimer" type="Timer" parent="."]
+wait_time = 0.6
+script = SubResource("GDScript_71rhy")
+
+[connection signal="timeout" from="RotationTimer" to="RotationTimer" method="_on_timeout"]
 
 [editable path="CanvasLayer/ItemBar"]

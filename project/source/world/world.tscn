@@ -120,7 +120,7 @@ func generate_chunk(chunk_pos):
 			elif -3 < altitude_noise and altitude_noise <= 0:
 				set_cell_item(Vector3(real_x,0,real_y),7)
 			# 海滩
-			elif 0 < altitude_noise and altitude_noise <= 3:
+			elif 0 < altitude_noise and altitude_noise <= 9:
 				set_cell_item(Vector3(real_x,0,real_y),6)
 			# 湿度温度地形
 			else:
