@@ -1,3 +1,83 @@
-[gd_scene format=3 uid="uid://c68icky7vvduu"]
+[gd_scene load_steps=7 format=3 uid="uid://c68icky7vvduu"]
+
+[ext_resource type="PackedScene" uid="uid://dc6up85jkv08n" path="res://source/world/world.tscn" id="1_ex1kn"]
+[ext_resource type="PackedScene" uid="uid://c5a5gkidh6uyo" path="res://source/object/player.tscn" id="2_lo16r"]
+[ext_resource type="FontFile" uid="uid://dwo3w3m0bti6d" path="res://resource/font/YouSheBiaoTiHei.ttf" id="3_07ogi"]
+[ext_resource type="Theme" uid="uid://0qdr3n63kd22" path="res://resource/theme/menu_main.tres" id="4_c72en"]
+
+[sub_resource type="GDScript" id="GDScript_1duaf"]
+script/source = "
+extends Node
+
+@onready var player_animation = $Player/AnimationPlayer
+
+@onready var camera = $Camera
+
+func _ready():
+	pass
+"
+
+[sub_resource type="GDScript" id="GDScript_fu40t"]
+script/source = "
+extends Button
+
+func _pressed():
+	# get_tree().change_scene_to_file('res://source/scene/menu_main.tscn')
+	SceneTransition.change_scene('black','res://source/scene/game_main.tscn')
+"
 
 [node name="MenuMain" type="Node"]
+script = SubResource("GDScript_1duaf")
+
+[node name="World" parent="." instance=ExtResource("1_ex1kn")]
+
+[node name="Player" parent="." instance=ExtResource("2_lo16r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+
+[node name="Sprite" parent="Player" index="2"]
+frame = 5
+
+[node name="CanvasLayer" parent="Player" index="6"]
+visible = false
+
+[node name="Camera" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.906308, 0.422618, 0, -0.422618, 0.906308, -1.6, 4, 6)
+current = true
+
+[node name="Label" type="Label" parent="."]
+offset_left = 340.0
+offset_top = 249.0
+offset_right = 1532.0
+offset_bottom = 668.0
+theme_override_fonts/font = ExtResource("3_07ogi")
+theme_override_font_sizes/font_size = 320
+text = "花生迷途"
+
+[node name="Label2" type="Label" parent="."]
+offset_left = 1567.0
+offset_top = 454.0
+offset_right = 1919.0
+offset_bottom = 582.0
+theme_override_fonts/font = ExtResource("3_07ogi")
+theme_override_font_sizes/font_size = 96
+text = "内部测试"
+
+[node name="Button" type="Button" parent="."]
+texture_filter = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -1699.0
+offset_top = 524.0
+offset_right = -373.0
+offset_bottom = 740.0
+grow_horizontal = 0
+grow_vertical = 2
+theme = ExtResource("4_c72en")
+text = "开始"
+script = SubResource("GDScript_fu40t")
+
+[editable path="Player"]
+[editable path="Player/CanvasLayer/ItemBar"]
