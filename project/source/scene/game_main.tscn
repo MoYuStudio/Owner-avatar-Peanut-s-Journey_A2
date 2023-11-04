@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://c1hw0b4l7uhsv"]
+[gd_scene load_steps=4 format=3 uid="uid://c1hw0b4l7uhsv"]
 
 [ext_resource type="PackedScene" uid="uid://dc6up85jkv08n" path="res://source/world/world.tscn" id="1_q1y77"]
 [ext_resource type="PackedScene" uid="uid://c5a5gkidh6uyo" path="res://source/object/player.tscn" id="2_hamyk"]
+[ext_resource type="PackedScene" uid="uid://e8qpku58gb7o" path="res://source/item/wood.tscn" id="3_ucwy2"]
 
 [node name="GameMain" type="Node"]
 
@@ -9,3 +10,6 @@
 
 [node name="Player" parent="." instance=ExtResource("2_hamyk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+
+[node name="Wood" parent="." instance=ExtResource("3_ucwy2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)

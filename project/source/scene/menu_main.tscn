@@ -35,7 +35,7 @@ script = SubResource("GDScript_1duaf")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
 
 [node name="Sprite" parent="Player" index="2"]
-frame = 0
+frame = 3
 
 [node name="CanvasLayer" parent="Player" index="6"]
 visible = false
