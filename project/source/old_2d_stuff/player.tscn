@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://d4lu720s1cjni" path="res://resource/item/stone_axe.png" id="1_7pyld"]
 [ext_resource type="PackedScene" uid="uid://dny5dw1vfhi8k" path="res://source/object/item_bar.tscn" id="1_e2xfn"]
-[ext_resource type="Texture2D" uid="uid://ch5ln3o62p6ol" path="res://resource/player/player.png" id="1_f088v"]
+[ext_resource type="Texture2D" uid="uid://d2ugubcvgru5h" path="res://resource/player/player.png" id="1_f088v"]
 [ext_resource type="PackedScene" uid="uid://5vbnyfa6nml4" path="res://source/object/backpack.tscn" id="2_n3hit"]
 [ext_resource type="Texture2D" uid="uid://bh72h6q7g72l2" path="res://resource/player/bar_under.png" id="5_k7woa"]
 [ext_resource type="Texture2D" uid="uid://dyf1e4v7nado3" path="res://resource/player/bar_over.png" id="6_3uwdu"]
