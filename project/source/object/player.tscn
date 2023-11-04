@@ -28,7 +28,7 @@ extends CharacterBody3D
 var max_speed = 9       # 极速
 var accel = 32          # 加速
 var friction = 32       # 摩擦
-var jump_velocity = 16   # 跳跃
+var jump_velocity = 9   # 跳跃
 
 var input_vector = Vector3.ZERO
 var direction
@@ -423,7 +423,7 @@ texture_filter = 0
 texture = ExtResource("1_f088v")
 hframes = 6
 vframes = 8
-frame = 1
+frame = 4
 
 [node name="ToolSprite" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
