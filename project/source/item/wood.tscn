@@ -5,6 +5,15 @@
 [sub_resource type="GDScript" id="GDScript_iyaqr"]
 script/source = "
 extends Node3D
+
+@onready var animation = $AnimationPlayer
+
+func _ready():
+	pass
+	
+func _physics_process(delta):
+	if position.y < 0:
+		position.y += 3
 "
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_gfq8b"]
@@ -16,11 +25,13 @@ radius = 0.6
 [node name="Wood" type="RigidBody3D"]
 collision_layer = 8
 collision_mask = 8
+mass = 0.1
 script = SubResource("GDScript_iyaqr")
 
 [node name="Sprite" type="Sprite3D" parent="."]
 pixel_size = 0.06
 billboard = 1
+alpha_cut = 2
 texture_filter = 0
 texture = ExtResource("1_bx1m2")
 
