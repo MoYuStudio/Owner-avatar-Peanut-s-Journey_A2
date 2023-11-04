@@ -111,13 +111,13 @@ func generate_chunk(chunk_pos):
 				select_y = 0
 				
 			# 深海
-			if -1000 < altitude_noise and altitude_noise <= -9:
+			if -1000 < altitude_noise and altitude_noise <= -16:
 				set_cell_item(Vector3(real_x,0,real_y),9)
 			# 海洋
-			elif -9 < altitude_noise and altitude_noise <= -3:
+			elif -16 < altitude_noise and altitude_noise <= -12:
 				set_cell_item(Vector3(real_x,0,real_y),8)
 			# 浅滩
-			elif -3 < altitude_noise and altitude_noise <= 0:
+			elif -12 < altitude_noise and altitude_noise <= 0:
 				set_cell_item(Vector3(real_x,0,real_y),7)
 			# 海滩
 			elif 0 < altitude_noise and altitude_noise <= 9:
