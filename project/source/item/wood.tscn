@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://e8qpku58gb7o"]
+
+[ext_resource type="Texture2D" uid="uid://dgun7om6tnxv1" path="res://resource/item/wood.png" id="1_bx1m2"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_2kmpn"]
+radius = 0.3
+
+[node name="Wood" type="Node3D"]
+
+[node name="Sprite" type="Sprite3D" parent="."]
+pixel_size = 0.03
+billboard = 1
+texture_filter = 0
+texture = ExtResource("1_bx1m2")
+
+[node name="Area" type="Area3D" parent="."]
+
+[node name="CollisionShape" type="CollisionShape3D" parent="Area"]
+shape = SubResource("SphereShape3D_2kmpn")
