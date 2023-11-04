@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://c5a5gkidh6uyo"]
+[gd_scene load_steps=36 format=3 uid="uid://c5a5gkidh6uyo"]
 
 [ext_resource type="PackedScene" uid="uid://dny5dw1vfhi8k" path="res://source/object/item_bar.tscn" id="1_e2xfn"]
 [ext_resource type="Texture2D" uid="uid://ch5ln3o62p6ol" path="res://resource/player/player.png" id="1_f088v"]
@@ -52,6 +52,7 @@ func get_intput():
 	# 跳跃
 	if Input.is_action_just_pressed(\"ui_accept\") and is_on_floor():
 		velocity.y = jump_velocity
+		
 	
 	# 人物旋转 非线性 & 线性
 	if rotation_timer.is_stopped():
@@ -171,6 +172,10 @@ func tool_animation():
 		tool.texture = tool_item_slot.get_node(\"Sprite\").texture
 	else:
 		tool.texture = null
+
+
+func _on_collection_area_entered(area):
+	pass # Replace with function body.
 "
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_ja0sm"]
@@ -181,6 +186,10 @@ dof_blur_amount = 0.3
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1ygdw"]
 radius = 0.3
 height = 1.0
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_b5exw"]
+radius = 1.80281
+height = 3.60562
 
 [sub_resource type="Animation" id="Animation_eckp6"]
 resource_name = "idle_down"
@@ -414,6 +423,11 @@ attributes = SubResource("CameraAttributesPractical_ja0sm")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("CapsuleShape3D_1ygdw")
 
+[node name="Collection" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Collection"]
+shape = SubResource("CapsuleShape3D_b5exw")
+
 [node name="Sprite" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.961262, 0.275637, 0, -0.275637, 0.961262, 0, 1, -0.2)
 pixel_size = 0.06
@@ -423,7 +437,7 @@ texture_filter = 0
 texture = ExtResource("1_f088v")
 hframes = 6
 vframes = 8
-frame = 4
+frame = 2
 
 [node name="ToolSprite" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
