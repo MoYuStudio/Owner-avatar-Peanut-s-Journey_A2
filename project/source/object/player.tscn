@@ -186,10 +186,20 @@ func _on_collect_area_area_entered(area):
 		
 		for slot_num in range(0,5):
 			var slot = item_bar_slot.get_node(\"ItemSlot\"+str(slot_num))
-			if !slot.has_node(\"Item\"):
+			if slot.has_node(\"Item\"):
+				if slot.get_node(\"Item\").type == area.type:
+					if area.max_pile > int(slot.get_node(\"Item/Label\").text):
+						found_empty_slot = true
+						slot.get_node(\"Item/Label\").text = \\
+							str(int(slot.get_node(\"Item/Label\").text)+1)
+						area.collect()
+						break
+			elif !slot.has_node(\"Item\"):
 				found_empty_slot = true
 				
 				var item_instantiate = item.instantiate()
+				item_instantiate.type = area.type
+				item_instantiate.max_pile = area.max_pile
 				
 				item_instantiate.get_node(\"Sprite\").texture = item_list[area.type]
 
@@ -200,13 +210,23 @@ func _on_collect_area_area_entered(area):
 		if not found_empty_slot:
 			for slot_num in range(0,11):
 				var slot = backpack_slot.get_node(\"ItemSlot\"+str(slot_num))
-				if !slot.has_node(\"Item\"):
+				if slot.has_node(\"Item\"):
+					if slot.get_node(\"Item\").type == area.type:
+						if area.max_pile > int(slot.get_node(\"Item/Label\").text):
+							found_empty_slot = true
+							slot.get_node(\"Item/Label\").text = \\
+								str(int(slot.get_node(\"Item/Label\").text)+1)
+							area.collect()
+							break
+				elif !slot.has_node(\"Item\"):
 					found_empty_slot = true
 					
 					var item_instantiate = item.instantiate()
 					
 					item_instantiate.get_node(\"Sprite\").texture = item_list[area.type]
-
+					item_instantiate.type = area.type
+					item_instantiate.max_pile = area.max_pile
+					
 					slot.add_child(item_instantiate)
 					area.collect()
 					break
@@ -484,7 +504,7 @@ texture_filter = 0
 texture = ExtResource("1_f088v")
 hframes = 6
 vframes = 8
-frame = 1
+frame = 2
 
 [node name="ToolSprite" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)

@@ -1,9 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://cuge0l7atv2or"]
+[gd_scene load_steps=4 format=3 uid="uid://cuge0l7atv2or"]
 
 [ext_resource type="Texture2D" uid="uid://dgun7om6tnxv1" path="res://resource/item/wood.png" id="1_3yv8a"]
 [ext_resource type="FontFile" uid="uid://cyvdvdsbhwc8m" path="res://resource/font/kenney_mini_square.ttf" id="2_3lqha"]
 
+[sub_resource type="GDScript" id="GDScript_ghyw8"]
+script/source = "
+extends Node2D
+
+var type
+var max_pile
+"
+
 [node name="Item" type="Node2D"]
+script = SubResource("GDScript_ghyw8")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 texture_filter = 1
