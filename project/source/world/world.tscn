@@ -197,7 +197,6 @@ environment = SubResource("Environment_s75xv")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.927184, 0.157723, -0.339785, 0, 0.907044, 0.421035, 0.374607, 0.390378, -0.840996, 0, 0, 0)
 light_color = Color(1, 0.603922, 0, 1)
-light_energy = 1.6
 shadow_enabled = true
 shadow_bias = 0.0
 shadow_normal_bias = 0.0
