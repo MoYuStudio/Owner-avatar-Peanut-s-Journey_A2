@@ -4,8 +4,8 @@ extends PanelContainer
 func _get_drag_data(at_position):
 	if has_node("Item"):
 		var texture = TextureRect.new()
-		texture.texture = $Item.texture
-		texture.scale = $Item.scale
+		texture.texture = $Item/Sprite.texture
+		texture.scale = $Item/Sprite.scale
 		texture.texture_filter = 1
 		set_drag_preview(texture)
 		return $Item

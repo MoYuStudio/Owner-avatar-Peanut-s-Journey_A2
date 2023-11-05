@@ -13,8 +13,11 @@ extends CharacterBody3D
 
 @onready var tool = $ToolSprite
 @onready var tool_item_slot = $CanvasLayer/BackPack/ItemBar/GridContainer/ItemSlot0
+
+@onready var item_bar_slot = $CanvasLayer/BackPack/ItemBar/GridContainer
 @onready var backpack_slot = $CanvasLayer/BackPack/BackPack/GridContainer
 
+@onready var item = preload(\"res://source/object/item.tscn\")
 @onready var item_list = {
 	\"wood\":preload(\"res://resource/item/wood.png\"),
 }
@@ -172,29 +175,41 @@ func player_movement(delta):
 	move_and_slide()
 	
 func tool_animation():
-	if tool_item_slot.has_node(\"Item\"):
-		tool.texture = tool_item_slot.get_node(\"Item\").texture
+	if tool_item_slot.has_node(\"Item/Sprite\"):
+		tool.texture = tool_item_slot.get_node(\"Item/Sprite\").texture
 	else:
 		tool.texture = null
 
 func _on_collect_area_area_entered(area):
 	if area.is_in_group(\"loot\"):
 		var found_empty_slot = false
-		for slot_num in range(0,11):
-			var slot = backpack_slot.get_node(\"ItemSlot\"+str(slot_num))
+		
+		for slot_num in range(0,5):
+			var slot = item_bar_slot.get_node(\"ItemSlot\"+str(slot_num))
 			if !slot.has_node(\"Item\"):
 				found_empty_slot = true
 				
-				var item = Sprite2D.new()
-				item.name = \"Item\"
-				item.position = Vector2(128,128)
-				item.scale = Vector2(9,9)
-				item.texture = item_list[area.type]
-				item.texture_filter = 1
+				var item_instantiate = item.instantiate()
 				
-				slot.add_child(item)
+				item_instantiate.get_node(\"Sprite\").texture = item_list[area.type]
+
+				slot.add_child(item_instantiate)
 				area.collect()
 				break
+		
+		if not found_empty_slot:
+			for slot_num in range(0,11):
+				var slot = backpack_slot.get_node(\"ItemSlot\"+str(slot_num))
+				if !slot.has_node(\"Item\"):
+					found_empty_slot = true
+					
+					var item_instantiate = item.instantiate()
+					
+					item_instantiate.get_node(\"Sprite\").texture = item_list[area.type]
+
+					slot.add_child(item_instantiate)
+					area.collect()
+					break
 			
 		if not found_empty_slot:
 			print(\"背包已满，无法添加物品\")
@@ -469,7 +484,7 @@ texture_filter = 0
 texture = ExtResource("1_f088v")
 hframes = 6
 vframes = 8
-frame = 3
+frame = 1
 
 [node name="ToolSprite" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
