@@ -3,13 +3,13 @@ extends PanelContainer
 
 
 func _get_drag_data(at_position):
-	if has_node("Sprite"):
+	if has_node("Item"):
 		var texture = TextureRect.new()
-		texture.texture = $Sprite.texture
-		texture.scale = $Sprite.scale
+		texture.texture = $Item.texture
+		texture.scale = $Item.scale
 		texture.texture_filter = 1
 		set_drag_preview(texture)
-		return $Sprite
+		return $Item
 	return true
 	pass
 	
@@ -18,7 +18,7 @@ func _can_drop_data(at_position, data):
 	pass
 
 func _drop_data(at_position,data):
-	if data and !has_node("Sprite"):
+	if data and !has_node("Item"):
 		var new_sprite = data.duplicate()
 		new_sprite.position = at_position
 		self.add_child(data.duplicate())

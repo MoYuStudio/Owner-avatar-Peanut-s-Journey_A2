@@ -25,10 +25,12 @@ albedo_color = Color(0.431373, 0.196078, 0.00392157, 1)
 albedo_color = Color(0.164706, 0.470588, 0.0392157, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wt037"]
-albedo_color = Color(0.431373, 0.823529, 0.215686, 1)
+albedo_texture = ExtResource("1_g60np")
+texture_filter = 0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0utmr"]
-albedo_color = Color(1, 1, 0.0235294, 1)
+albedo_texture = ExtResource("5_hqqap")
+texture_filter = 0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tw73c"]
 albedo_color = Color(0.666667, 0.431373, 0.0392157, 1)

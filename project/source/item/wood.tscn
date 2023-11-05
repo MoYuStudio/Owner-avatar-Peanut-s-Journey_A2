@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://e8qpku58gb7o"]
+[gd_scene load_steps=8 format=3 uid="uid://e8qpku58gb7o"]
 
 [ext_resource type="Texture2D" uid="uid://dgun7om6tnxv1" path="res://resource/item/wood.png" id="1_bx1m2"]
 
@@ -6,38 +6,45 @@
 script/source = "
 extends Node3D
 
+@onready var area = $Area
+
 @onready var animation = $AnimationPlayer
 @onready var timer = $Timer
 
 var type = 'wood'
-var player
+#var player
 
-var speed = 5
+#var speed = 5
 
 func _ready():
-	player = $\"res://source/object/player.tscn\"
+	# player = $\"res://source/object/player.tscn\"
+	area.type = type
 	pass
 	
 func _physics_process(delta):
 	if position.y < 0:
 		position.y += 3
-	if player:
-		var player_position = player.global_transform.origin
-		print(\"Player position:\", player_position)
-		var direction_to_player = (player.position - position).normalized()
-		var move_distance = speed * delta
-		global_transform.origin += direction_to_player * move_distance
-	
+	#if player:
+	#	var player_position = player.global_transform.origin
+	#	print(\"Player position:\", player_position)
+	#	var direction_to_player = (player.position - position).normalized()
+	#	var move_distance = speed * delta
+	#	global_transform.origin += direction_to_player * move_distance
 	
 func _on_area_area_entered(area):
-	animation.play(\"animation\")
-
-func _on_animation_player_animation_finished(anim_name):
-	queue_free()
+	# print('wood: player in')
+	pass
 "
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_gfq8b"]
 radius = 0.4
+
+[sub_resource type="GDScript" id="GDScript_33y4l"]
+script/source = "
+extends Area3D
+
+var type
+"
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_2kmpn"]
 radius = 0.6
@@ -62,7 +69,7 @@ _data = {
 "animation": SubResource("Animation_b3f2h")
 }
 
-[node name="Wood" type="RigidBody3D"]
+[node name="Wood" type="RigidBody3D" groups=["loot"]]
 collision_layer = 12
 collision_mask = 12
 mass = 0.1
@@ -78,9 +85,10 @@ texture = ExtResource("1_bx1m2")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_gfq8b")
 
-[node name="Area" type="Area3D" parent="."]
-collision_layer = 4
-collision_mask = 5
+[node name="Area" type="Area3D" parent="." groups=["loot"]]
+collision_layer = 8
+collision_mask = 8
+script = SubResource("GDScript_33y4l")
 
 [node name="CollisionShape" type="CollisionShape3D" parent="Area"]
 shape = SubResource("SphereShape3D_2kmpn")

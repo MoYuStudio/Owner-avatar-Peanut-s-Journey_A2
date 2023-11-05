@@ -1,6 +1,5 @@
-[gd_scene load_steps=36 format=3 uid="uid://c5a5gkidh6uyo"]
+[gd_scene load_steps=35 format=3 uid="uid://c5a5gkidh6uyo"]
 
-[ext_resource type="PackedScene" uid="uid://dny5dw1vfhi8k" path="res://source/object/item_bar.tscn" id="1_e2xfn"]
 [ext_resource type="Texture2D" uid="uid://dt3jbrv46474q" path="res://resource/player/player.png" id="1_f088v"]
 [ext_resource type="Texture2D" uid="uid://d4lu720s1cjni" path="res://resource/item/stone_axe.png" id="2_f3hiv"]
 [ext_resource type="PackedScene" uid="uid://5vbnyfa6nml4" path="res://source/object/backpack.tscn" id="2_n3hit"]
@@ -12,8 +11,13 @@
 script/source = "
 extends CharacterBody3D
 
-@onready var tool_item_slot = $CanvasLayer/ItemBar/MarginContainer/GridContainer/ItemSlot
 @onready var tool = $ToolSprite
+@onready var tool_item_slot = $CanvasLayer/BackPack/ItemBar/GridContainer/ItemSlot
+@onready var backpack_slot = $CanvasLayer/BackPack/BackPack/GridContainer/ItemSlot
+
+@onready var item_list = {
+	\"wood\":preload(\"res://resource/item/wood.png\"),
+}
 
 @onready var camera_arm = $CameraArm
 
@@ -173,9 +177,15 @@ func tool_animation():
 	else:
 		tool.texture = null
 
-
-func _on_collection_area_entered(area):
-	pass # Replace with function body.
+func _on_collect_area_area_entered(area):
+	if area.is_in_group(\"loot\"):
+		var item = Sprite2D.new()
+		item.name = \"Item\"
+		item.position = Vector2(128,128)
+		item.scale = Vector2(9,9)
+		item.texture = item_list[area.type]
+		item.texture_filter = 1
+		backpack_slot.add_child(item)
 "
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_ja0sm"]
@@ -418,7 +428,7 @@ func _on_timeout():
 	stop()
 "
 
-[node name="Player" type="CharacterBody3D"]
+[node name="Player" type="CharacterBody3D" groups=["player"]]
 script = SubResource("GDScript_4vhkn")
 
 [node name="CameraArm" type="SpringArm3D" parent="."]
@@ -431,9 +441,11 @@ attributes = SubResource("CameraAttributesPractical_ja0sm")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("CapsuleShape3D_1ygdw")
 
-[node name="Collection" type="Area3D" parent="."]
+[node name="CollectArea" type="Area3D" parent="."]
+collision_layer = 8
+collision_mask = 8
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Collection"]
+[node name="CollisionShape" type="CollisionShape3D" parent="CollectArea"]
 shape = SubResource("CapsuleShape3D_b5exw")
 
 [node name="Sprite" type="Sprite3D" parent="."]
@@ -448,10 +460,9 @@ vframes = 8
 frame = 5
 
 [node name="ToolSprite" type="Sprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
-modulate = Color(1, 1, 1, 0.25098)
-pixel_size = 0.03
-billboard = 1
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+modulate = Color(1, 1, 1, 0.501961)
+pixel_size = 0.06
 alpha_cut = 2
 texture_filter = 0
 texture = ExtResource("2_f3hiv")
@@ -469,11 +480,6 @@ parameters/idle/blend_position = Vector2(0, 0)
 parameters/walk/blend_position = Vector2(0, 0)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="ItemBar" parent="CanvasLayer" instance=ExtResource("1_e2xfn")]
-
-[node name="MarginContainer" parent="CanvasLayer/ItemBar" index="0"]
-visible = false
 
 [node name="BackPack" parent="CanvasLayer" instance=ExtResource("2_n3hit")]
 
@@ -519,6 +525,7 @@ tint_progress = Color(0, 0.784314, 0.905882, 1)
 wait_time = 0.7
 script = SubResource("GDScript_71rhy")
 
+[connection signal="area_entered" from="CollectArea" to="." method="_on_collect_area_area_entered"]
 [connection signal="timeout" from="RotationTimer" to="RotationTimer" method="_on_timeout"]
 
-[editable path="CanvasLayer/ItemBar"]
+[editable path="CanvasLayer/BackPack"]

@@ -24,19 +24,10 @@ extends Control
 
 var is_open = false
 
-@onready var margin = $MarginContainer
+@onready var backpack = $BackPack
 
 func _ready():
 	close()
-	
-#	for item in $GridContainer.get_children():
-#		item.Callable(\"gui_input\",self,\"_on_gui_input\",[item])
-#	pass
-
-func _on_gui_input(event,item):
-	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		print(item)
-	pass
 
 func _process(delta):
 	if Input.is_action_just_pressed(\"ui_focus_next\"):
@@ -46,20 +37,12 @@ func _process(delta):
 			open()
 
 func open():
-	margin.visible = true
+	backpack.visible = true
 	is_open = true
 
 func close():
-	margin.visible = false
+	backpack.visible = false
 	is_open = false
-
-
-func _on_button_pressed():
-	var sprite = Sprite2D.new()
-	sprite.texture = load(\"res://resource/item/stone_axe.png\")
-	sprite.position = Vector2(120,120)
-	sprite.scale = Vector2(9,9)
-	get_node(\"MarginContainer2/GridContainer/ItemSlot2\").add_child(sprite)
 "
 
 [node name="BackPack" type="Control"]
@@ -72,7 +55,7 @@ grow_vertical = 2
 theme = SubResource("Theme_ucsae")
 script = SubResource("GDScript_enrll")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="BackPack" type="MarginContainer" parent="."]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -86,49 +69,49 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_constants/margin_bottom = 360
 
-[node name="GridContainer" type="GridContainer" parent="MarginContainer"]
+[node name="GridContainer" type="GridContainer" parent="BackPack"]
 layout_mode = 2
 theme_override_constants/h_separation = 16
 theme_override_constants/v_separation = 16
 columns = 6
 
-[node name="ItemSlot" parent="MarginContainer/GridContainer" instance=ExtResource("1_givk8")]
+[node name="ItemSlot" parent="BackPack/GridContainer" instance=ExtResource("1_givk8")]
 layout_mode = 2
 
-[node name="ItemSlot2" parent="MarginContainer/GridContainer" instance=ExtResource("1_givk8")]
+[node name="ItemSlot2" parent="BackPack/GridContainer" instance=ExtResource("1_givk8")]
 layout_mode = 2
 
-[node name="ItemSlot3" parent="MarginContainer/GridContainer" instance=ExtResource("1_givk8")]
+[node name="ItemSlot3" parent="BackPack/GridContainer" instance=ExtResource("1_givk8")]
 layout_mode = 2
 
-[node name="ItemSlot4" parent="MarginContainer/GridContainer" instance=ExtResource("1_givk8")]
+[node name="ItemSlot4" parent="BackPack/GridContainer" instance=ExtResource("1_givk8")]
 layout_mode = 2
 
-[node name="ItemSlot5" parent="MarginContainer/GridContainer" instance=ExtResource("1_givk8")]
+[node name="ItemSlot5" parent="BackPack/GridContainer" instance=ExtResource("1_givk8")]
 layout_mode = 2
 
-[node name="ItemSlot6" parent="MarginContainer/GridContainer" instance=ExtResource("1_givk8")]
+[node name="ItemSlot6" parent="BackPack/GridContainer" instance=ExtResource("1_givk8")]
 layout_mode = 2
 
-[node name="ItemSlot7" parent="MarginContainer/GridContainer" instance=ExtResource("1_givk8")]
+[node name="ItemSlot7" parent="BackPack/GridContainer" instance=ExtResource("1_givk8")]
 layout_mode = 2
 
-[node name="ItemSlot8" parent="MarginContainer/GridContainer" instance=ExtResource("1_givk8")]
+[node name="ItemSlot8" parent="BackPack/GridContainer" instance=ExtResource("1_givk8")]
 layout_mode = 2
 
-[node name="ItemSlot9" parent="MarginContainer/GridContainer" instance=ExtResource("1_givk8")]
+[node name="ItemSlot9" parent="BackPack/GridContainer" instance=ExtResource("1_givk8")]
 layout_mode = 2
 
-[node name="ItemSlot10" parent="MarginContainer/GridContainer" instance=ExtResource("1_givk8")]
+[node name="ItemSlot10" parent="BackPack/GridContainer" instance=ExtResource("1_givk8")]
 layout_mode = 2
 
-[node name="ItemSlot11" parent="MarginContainer/GridContainer" instance=ExtResource("1_givk8")]
+[node name="ItemSlot11" parent="BackPack/GridContainer" instance=ExtResource("1_givk8")]
 layout_mode = 2
 
-[node name="ItemSlot12" parent="MarginContainer/GridContainer" instance=ExtResource("1_givk8")]
+[node name="ItemSlot12" parent="BackPack/GridContainer" instance=ExtResource("1_givk8")]
 layout_mode = 2
 
-[node name="MarginContainer2" type="MarginContainer" parent="."]
+[node name="ItemBar" type="MarginContainer" parent="."]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -142,46 +125,36 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_constants/margin_bottom = 64
 
-[node name="GridContainer" type="GridContainer" parent="MarginContainer2"]
+[node name="GridContainer" type="GridContainer" parent="ItemBar"]
 layout_mode = 2
 theme_override_constants/h_separation = 16
 theme_override_constants/v_separation = 16
 columns = 6
 
-[node name="ItemSlot" parent="MarginContainer2/GridContainer" instance=ExtResource("1_givk8")]
+[node name="ItemSlot" parent="ItemBar/GridContainer" instance=ExtResource("1_givk8")]
 layout_mode = 2
 
-[node name="Sprite" type="Sprite2D" parent="MarginContainer2/GridContainer/ItemSlot"]
+[node name="Item" type="Sprite2D" parent="ItemBar/GridContainer/ItemSlot"]
 position = Vector2(128, 128)
 scale = Vector2(9, 9)
 texture = ExtResource("2_ae8og")
 
-[node name="ItemSlot2" parent="MarginContainer2/GridContainer" instance=ExtResource("1_givk8")]
+[node name="ItemSlot2" parent="ItemBar/GridContainer" instance=ExtResource("1_givk8")]
 layout_mode = 2
 
-[node name="Sprite" type="Sprite2D" parent="MarginContainer2/GridContainer/ItemSlot2"]
+[node name="Item" type="Sprite2D" parent="ItemBar/GridContainer/ItemSlot2"]
 position = Vector2(128, 128)
 scale = Vector2(9, 9)
 texture = ExtResource("3_acyd6")
 
-[node name="ItemSlot3" parent="MarginContainer2/GridContainer" instance=ExtResource("1_givk8")]
+[node name="ItemSlot3" parent="ItemBar/GridContainer" instance=ExtResource("1_givk8")]
 layout_mode = 2
 
-[node name="ItemSlot4" parent="MarginContainer2/GridContainer" instance=ExtResource("1_givk8")]
+[node name="ItemSlot4" parent="ItemBar/GridContainer" instance=ExtResource("1_givk8")]
 layout_mode = 2
 
-[node name="ItemSlot5" parent="MarginContainer2/GridContainer" instance=ExtResource("1_givk8")]
+[node name="ItemSlot5" parent="ItemBar/GridContainer" instance=ExtResource("1_givk8")]
 layout_mode = 2
 
-[node name="ItemSlot6" parent="MarginContainer2/GridContainer" instance=ExtResource("1_givk8")]
+[node name="ItemSlot6" parent="ItemBar/GridContainer" instance=ExtResource("1_givk8")]
 layout_mode = 2
-
-[node name="Button" type="Button" parent="."]
-visible = false
-layout_mode = 0
-offset_left = 142.0
-offset_top = 646.0
-offset_right = 415.0
-offset_bottom = 789.0
-
-[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
