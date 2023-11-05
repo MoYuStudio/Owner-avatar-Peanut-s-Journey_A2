@@ -147,6 +147,7 @@ func generate_chunk(chunk_pos):
 					if tile_probability <= biome_data[\"plains\"][\"plains_tree\"]:
 						var tree_instantiate = object_tiles[\"plains_tree\"].instantiate()
 						tree_instantiate.transform.origin = Vector3(real_x, 0, real_y)
+						tree_instantiate.rotation.y = randi_range(0,360)
 						add_child(tree_instantiate)
 						
 			for id in biome_list[\"coniferous\"]:

@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://dw2uv4foch26h"]
+
+[ext_resource type="Texture2D" uid="uid://bb2447fnmcnjv" path="res://resource/models/plains_tree.png" id="1_ebd7l"]
+[ext_resource type="ArrayMesh" uid="uid://codu0pdt7iasc" path="res://resource/models/plains_tree.obj" id="2_5mjqt"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6ij3t"]
+albedo_texture = ExtResource("1_ebd7l")
+
+[node name="Tree" type="Node3D"]
+
+[node name="PlainsTree" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+material_override = SubResource("StandardMaterial3D_6ij3t")
+mesh = ExtResource("2_5mjqt")

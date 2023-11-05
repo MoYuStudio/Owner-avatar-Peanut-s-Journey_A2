@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://bntxp4iscnjlk"]
+[gd_scene load_steps=34 format=3 uid="uid://bntxp4iscnjlk"]
 
 [ext_resource type="Material" uid="uid://bvky8nrhry6kc" path="res://resource/shader/moyu_shoal.tres" id="1_7bjf6"]
 [ext_resource type="Texture2D" uid="uid://b8ywbl5a56y15" path="res://resource/tile/grass.png" id="1_g60np"]
@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://b53debqmbaiou" path="res://resource/grass.glb" id="2_psyis"]
 [ext_resource type="Material" uid="uid://cjqcl1kyga14h" path="res://resource/shader/water_low_poly.tres" id="2_rr0cs"]
 [ext_resource type="Texture2D" uid="uid://bv62uc0h0kspc" path="res://resource/tile/sand.png" id="5_hqqap"]
+[ext_resource type="ArrayMesh" uid="uid://cvla42svp1ong" path="res://resource/models/plains_grass.obj" id="5_j4gia"]
+[ext_resource type="Texture2D" uid="uid://bq174ixv7wvh8" path="res://resource/models/plains_grass.png" id="6_erpeo"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_npdms"]
 size = Vector2(1, 1)
@@ -34,6 +36,10 @@ texture_filter = 0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tw73c"]
 albedo_color = Color(0.666667, 0.431373, 0.0392157, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_chi25"]
+albedo_texture = ExtResource("6_erpeo")
+albedo_texture_force_srgb = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_886hs"]
 albedo_color = Color(0.54902, 1, 0.188235, 1)
@@ -590,12 +596,12 @@ surface_material_override/0 = SubResource("StandardMaterial3D_wt037")
 shape = SubResource("HeightMapShape3D_v8qhu")
 
 [node name="44" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 4)
-mesh = SubResource("PlaneMesh_npdms")
-skeleton = NodePath("../0")
-surface_material_override/0 = SubResource("StandardMaterial3D_wt037")
+transform = Transform3D(0.63, 0, 0, 0, 0.63, 0, 0, 0, 0.63, 4, 0, 4)
+mesh = ExtResource("5_j4gia")
+surface_material_override/0 = SubResource("StandardMaterial3D_chi25")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="44"]
+transform = Transform3D(1.6, 0, 0, 0, 1.6, 0, 0, 0, 1.6, 0, 0.2, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="44/StaticBody3D"]
 shape = SubResource("HeightMapShape3D_v8qhu")
