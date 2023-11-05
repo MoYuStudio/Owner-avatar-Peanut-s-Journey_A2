@@ -35,7 +35,7 @@ script = SubResource("GDScript_1duaf")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
 
 [node name="Sprite" parent="Player" index="3"]
-frame = 3
+frame = 5
 
 [node name="CanvasLayer" parent="Player" index="7"]
 visible = false
@@ -80,4 +80,4 @@ text = "开始"
 script = SubResource("GDScript_fu40t")
 
 [editable path="Player"]
-[editable path="Player/CanvasLayer/ItemBar"]
+[editable path="Player/CanvasLayer/BackPack"]

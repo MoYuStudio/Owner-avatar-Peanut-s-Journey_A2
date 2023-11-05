@@ -75,7 +75,10 @@ theme_override_constants/h_separation = 16
 theme_override_constants/v_separation = 16
 columns = 6
 
-[node name="ItemSlot" parent="BackPack/GridContainer" instance=ExtResource("1_givk8")]
+[node name="ItemSlot0" parent="BackPack/GridContainer" instance=ExtResource("1_givk8")]
+layout_mode = 2
+
+[node name="ItemSlot1" parent="BackPack/GridContainer" instance=ExtResource("1_givk8")]
 layout_mode = 2
 
 [node name="ItemSlot2" parent="BackPack/GridContainer" instance=ExtResource("1_givk8")]
@@ -108,9 +111,6 @@ layout_mode = 2
 [node name="ItemSlot11" parent="BackPack/GridContainer" instance=ExtResource("1_givk8")]
 layout_mode = 2
 
-[node name="ItemSlot12" parent="BackPack/GridContainer" instance=ExtResource("1_givk8")]
-layout_mode = 2
-
 [node name="ItemBar" type="MarginContainer" parent="."]
 layout_mode = 1
 anchors_preset = 7
@@ -131,10 +131,13 @@ theme_override_constants/h_separation = 16
 theme_override_constants/v_separation = 16
 columns = 6
 
-[node name="ItemSlot" parent="ItemBar/GridContainer" instance=ExtResource("1_givk8")]
+[node name="ItemSlot0" parent="ItemBar/GridContainer" instance=ExtResource("1_givk8")]
 layout_mode = 2
 
-[node name="Item" type="Sprite2D" parent="ItemBar/GridContainer/ItemSlot"]
+[node name="ItemSlot1" parent="ItemBar/GridContainer" instance=ExtResource("1_givk8")]
+layout_mode = 2
+
+[node name="Item" type="Sprite2D" parent="ItemBar/GridContainer/ItemSlot1"]
 position = Vector2(128, 128)
 scale = Vector2(9, 9)
 texture = ExtResource("2_ae8og")
@@ -154,7 +157,4 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="ItemSlot5" parent="ItemBar/GridContainer" instance=ExtResource("1_givk8")]
-layout_mode = 2
-
-[node name="ItemSlot6" parent="ItemBar/GridContainer" instance=ExtResource("1_givk8")]
 layout_mode = 2

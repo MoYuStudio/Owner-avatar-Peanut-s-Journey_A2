@@ -1,7 +1,6 @@
 
 extends PanelContainer
 
-
 func _get_drag_data(at_position):
 	if has_node("Item"):
 		var texture = TextureRect.new()
