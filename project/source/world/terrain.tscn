@@ -1,0 +1,64 @@
+[gd_scene load_steps=5 format=3 uid="uid://bhudbndquvwif"]
+
+[ext_resource type="Environment" uid="uid://b3dksqa4bdkqk" path="res://resource/skybox/world_environment.tres" id="1_2kfg3"]
+[ext_resource type="Material" uid="uid://b0mxvn51055ml" path="res://resource/shader/stylized_terrain.tres" id="1_hb1gt"]
+
+[sub_resource type="GDScript" id="GDScript_iu3mj"]
+script/source = "
+extends MeshInstance3D
+
+func _ready():
+	var noise = FastNoiseLite.new()
+	
+	var plane_mesh = PlaneMesh.new()
+	plane_mesh.size = Vector2(100,100)
+	plane_mesh.subdivide_depth = 100
+	plane_mesh.subdivide_width = 100
+	
+	var surface_tool = SurfaceTool.new()
+	surface_tool.create_from(plane_mesh, 0)
+	
+	var array_plane = surface_tool.commit()
+	
+	var data_tool = MeshDataTool.new()
+	
+	data_tool.create_from_surface(array_plane, 0)
+	
+	for i in range(data_tool.get_vertex_count()):
+		var vertex = data_tool.get_vertex(i)
+		
+		vertex.y = noise.get_noise_3d(vertex.x, vertex.y, vertex.z) * 60
+		
+		data_tool.set_vertex(i, vertex)
+		
+	array_plane = ArrayMesh.new()
+		
+	data_tool.commit_to_surface(array_plane)
+	surface_tool.begin(Mesh.PRIMITIVE_TRIANGLES)
+	surface_tool.create_from(array_plane, 0)
+	surface_tool.generate_normals()
+	
+	#var mesh_instance = MeshInstance3D.new()
+	#mesh_instance.mesh = surface_tool.commit()
+	#add_child(mesh_instance)
+	
+	mesh = surface_tool.commit()
+"
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_iymx7"]
+
+[node name="Terrain" type="MeshInstance3D"]
+material_override = ExtResource("1_hb1gt")
+script = SubResource("GDScript_iu3mj")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 105.856, 0)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.323686, 0.946164, 0, -0.946164, 0.323686, 0, 1.37488, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("1_2kfg3")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_iymx7")

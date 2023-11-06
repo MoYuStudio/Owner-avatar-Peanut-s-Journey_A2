@@ -62,7 +62,6 @@ func get_intput():
 		
 	
 	# 人物旋转 非线性 & 线性
-	'''
 	if rotation_timer.is_stopped():
 		if Input.is_action_just_pressed(\"rotate_left\"):
 			var tween = create_tween()
@@ -93,13 +92,13 @@ func get_intput():
 		#	tween.set_trans(Tween.TRANS_SINE)
 		#	tween.set_ease(Tween.EASE_OUT)
 		#	tween.tween_property(self,\"rotation:y\",PI,0.6)
-	'''
-	if Input.is_action_pressed(\"rotate_left\"):
-		rotation_direction = 1
-	elif Input.is_action_pressed(\"rotate_right\"):
-		rotation_direction = -1
-	else:
-		rotation_direction = 0
+		
+	#if Input.is_action_pressed(\"rotate_left\"):
+	#	rotation_direction = 1
+	#elif Input.is_action_pressed(\"rotate_right\"):
+	#	rotation_direction = -1
+	#else:
+	#	rotation_direction = 0
 		
 	# 相机臂缩放
 	if Input.is_action_just_pressed(\"zoom_in\"):
@@ -497,7 +496,7 @@ collision_mask = 8
 shape = SubResource("CapsuleShape3D_b5exw")
 
 [node name="Sprite" type="Sprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.961262, 0.275637, 0, -0.275637, 0.961262, 0, 1.1, 0)
+transform = Transform3D(1, 0, 0, 0, 0.961262, 0.275637, 0, -0.275637, 0.961262, 0, 1, 0)
 pixel_size = 0.06
 billboard = 1
 alpha_cut = 2
@@ -505,7 +504,6 @@ texture_filter = 0
 texture = ExtResource("1_f088v")
 hframes = 6
 vframes = 8
-frame = 4
 
 [node name="ToolSprite" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
@@ -572,6 +570,13 @@ tint_progress = Color(0, 0.784314, 0.905882, 1)
 [node name="RotationTimer" type="Timer" parent="."]
 wait_time = 0.7
 script = SubResource("GDScript_71rhy")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+light_color = Color(1, 0.768627, 0.247059, 1)
+shadow_enabled = true
+spot_range = 64.0
+spot_angle = 36.0
 
 [connection signal="area_entered" from="CollectArea" to="." method="_on_collect_area_area_entered"]
 [connection signal="timeout" from="RotationTimer" to="RotationTimer" method="_on_timeout"]

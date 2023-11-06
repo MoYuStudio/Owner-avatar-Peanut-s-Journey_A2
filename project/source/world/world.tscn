@@ -10,7 +10,8 @@ extends Node3D
 @onready var animation = $AnimationPlayer
 
 func _ready():
-	animation.play(\"animation\")
+	# animation.play(\"animation\")
+	pass
 "
 
 [sub_resource type="GDScript" id="GDScript_l5mj3"]
@@ -18,6 +19,8 @@ script/source = "
 extends GridMap
 
 @onready var object_tiles = {
+	\"plains_grass\":preload(\"res://source/world/plains_grass.tscn\"),
+	
 	\"plains_tree\":preload(\"res://source/world/plains_tree.tscn\"),
 	\"coniferous_tree\":preload(\"res://source/world/coniferous_tree.tscn\"),
 	\"jungle_tree\":preload(\"res://source/world/jungle_tree.tscn\"),
@@ -32,8 +35,8 @@ var altitude = FastNoiseLite.new()      # 海拔
 var chunk_width = 16    # 单区块宽
 var chunk_height = 16   # 单区块高
 
-var chunk_x_num = 6   # 区块X轴渲染数
-var chunk_y_num = 6   # 区块Y轴渲染数
+var chunk_x_num = 3   # 区块X轴渲染数
+var chunk_y_num = 3   # 区块Y轴渲染数
 
 var generated_chunks = {}
 
@@ -149,10 +152,16 @@ func generate_chunk(chunk_pos):
 					if tile_probability <= biome_data[\"jungle\"][\"jungle_tree\"]:
 						var tree_instantiate = object_tiles[\"jungle_tree\"].instantiate()
 						tree_instantiate.transform.origin = Vector3(real_x, 0, real_y)
+						tree_instantiate.rotation.y = randi_range(0,360)
 						add_child(tree_instantiate)
 			
 			for id in biome_list[\"plains\"]:
 				if land_tile_data == id :
+					var grass_instantiate = object_tiles[\"plains_grass\"].instantiate()
+					grass_instantiate.transform.origin = Vector3(real_x, 0.5, real_y)
+					# grass_instantiate.rotation.y = randi_range(0,360)
+					add_child(grass_instantiate)
+					
 					var tile_probability = randf()
 					if tile_probability <= biome_data[\"plains\"][\"plains_tree\"]:
 						var tree_instantiate = object_tiles[\"plains_tree\"].instantiate()
@@ -166,13 +175,14 @@ func generate_chunk(chunk_pos):
 					if tile_probability <= biome_data[\"coniferous\"][\"coniferous_tree\"]:
 						var tree_instantiate = object_tiles[\"coniferous_tree\"].instantiate()
 						tree_instantiate.transform.origin = Vector3(real_x, 0, real_y)
+						tree_instantiate.rotation.y = randi_range(0,360)
 						add_child(tree_instantiate)
 			
 "
 
 [sub_resource type="Animation" id="Animation_cym8i"]
 resource_name = "animation"
-length = 10.0
+length = 60.0
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -181,7 +191,7 @@ tracks/0/path = NodePath("SunLight:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 5),
+"times": PackedFloat32Array(0, 30.1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(-3.14159, 0, 0), Vector3(3.14159, 0, 0)]
@@ -193,7 +203,7 @@ tracks/1/path = NodePath("SunLight:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 5),
+"times": PackedFloat32Array(0, 30.1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
@@ -205,7 +215,7 @@ tracks/2/path = NodePath("MoonLight:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(5, 10),
+"times": PackedFloat32Array(30.1, 60),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(-3.14159, 0, 0), Vector3(3.14159, 0, 0)]
@@ -217,7 +227,7 @@ tracks/3/path = NodePath("MoonLight:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(5, 10),
+"times": PackedFloat32Array(30.1, 60),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
@@ -242,7 +252,7 @@ script = SubResource("GDScript_l5mj3")
 environment = ExtResource("2_bjs1r")
 
 [node name="SunLight" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -1, -8.74227e-08, 0, 8.74228e-08, -0.999999, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, -0.422618, 0.906307, 0, -0.906308, -0.422618, 0, 0, 0)
 light_color = Color(1, 0.603922, 0, 1)
 light_energy = 2.0
 shadow_enabled = true
@@ -251,12 +261,14 @@ shadow_normal_bias = 0.0
 shadow_blur = 3.0
 
 [node name="MoonLight" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 0.500001, 0.866025, 0, -0.866025, 0.500001, 0, 0, 0)
+visible = false
 light_color = Color(0.27451, 0.333333, 1, 1)
 light_energy = 0.3
 
 [node name="DirectionalLight" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+visible = false
 light_energy = 0.1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
