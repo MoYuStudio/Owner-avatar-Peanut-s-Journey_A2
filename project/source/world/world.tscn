@@ -1,7 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://dc6up85jkv08n"]
+[gd_scene load_steps=4 format=3 uid="uid://dc6up85jkv08n"]
 
 [ext_resource type="MeshLibrary" uid="uid://oq8tioqnb03g" path="res://resource/mesh_lib/mesh_lib.tres" id="1_x28rg"]
-[ext_resource type="Texture2D" uid="uid://g83wiqfacchj" path="res://resource/skybox/skybox.png" id="2_0rihf"]
+[ext_resource type="Environment" uid="uid://b3dksqa4bdkqk" path="res://resource/skybox/world_environment.tres" id="2_bjs1r"]
 
 [sub_resource type="GDScript" id="GDScript_l5mj3"]
 script/source = "
@@ -64,8 +64,8 @@ func _ready():
 	temperature.seed = randi()
 	altitude.seed = randi()
 	
-	moisture.frequency = 0.003
-	temperature.frequency = 0.003
+	moisture.frequency = 0.001
+	temperature.frequency = 0.001
 
 func _physics_process(delta):
 	generate_chunks_around_player(player.transform.origin)
@@ -160,29 +160,6 @@ func generate_chunk(chunk_pos):
 			
 "
 
-[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_c6i7r"]
-panorama = ExtResource("2_0rihf")
-
-[sub_resource type="Sky" id="Sky_dkf4e"]
-sky_material = SubResource("PanoramaSkyMaterial_c6i7r")
-
-[sub_resource type="Environment" id="Environment_s75xv"]
-background_mode = 2
-sky = SubResource("Sky_dkf4e")
-ambient_light_source = 3
-reflected_light_source = 2
-tonemap_mode = 3
-glow_enabled = true
-glow_intensity = 0.9
-glow_bloom = 0.09
-glow_blend_mode = 0
-glow_hdr_threshold = 0.6
-glow_hdr_scale = 0.9
-fog_light_color = Color(1, 1, 1, 1)
-fog_light_energy = 0.3
-volumetric_fog_enabled = true
-volumetric_fog_density = 0.03
-
 [node name="World" type="Node3D"]
 
 [node name="GridMap" type="GridMap" parent="."]
@@ -193,9 +170,9 @@ collision_mask = 9
 script = SubResource("GDScript_l5mj3")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_s75xv")
+environment = ExtResource("2_bjs1r")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.927184, 0.157723, -0.339785, 0, 0.907044, 0.421035, 0.374607, 0.390378, -0.840996, 0, 0, 0)
 light_color = Color(1, 0.603922, 0, 1)
 shadow_enabled = true
