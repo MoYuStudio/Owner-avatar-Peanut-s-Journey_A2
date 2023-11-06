@@ -3,4 +3,8 @@
 [resource]
 transparency = 1
 albedo_color = Color(0, 1, 1, 0.25098)
-metallic_specular = 1.0
+roughness = 0.0
+subsurf_scatter_enabled = true
+refraction_enabled = true
+refraction_scale = 0.01
+disable_receive_shadows = true
