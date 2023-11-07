@@ -1,0 +1,110 @@
+[gd_scene load_steps=9 format=3 uid="uid://e8qpku58gb7o"]
+
+[ext_resource type="Texture2D" uid="uid://dhu4j44mvu7xm" path="res://resource/item/falling_object.png" id="1_gjywi"]
+[ext_resource type="AudioStream" uid="uid://bfnrw871ouqw5" path="res://resource/sound/pickup_audio.wav" id="1_qr4mh"]
+
+[sub_resource type="GDScript" id="GDScript_ij1g0"]
+script/source = "
+# COPYRIGHT © 2020-2023 MoYuStudio摸鱼社
+# = 100% 自主通用模块标签 =
+
+extends RigidBody3D
+
+@export var texture : Texture
+@export var type = 'falling_object'
+@export var max_pile = 64
+@export var pickup_audio : AudioStream
+
+@onready var collosion = $CollisionShape
+@onready var sprite = $Sprite
+@onready var animation = $AnimationPlayer
+@onready var area = $Area
+@onready var audio = $Area/AudioStreamPlayer3D
+
+func _ready():
+	area.type = type
+	area.max_pile = max_pile
+	sprite.texture = texture
+	audio.stream = pickup_audio
+	animation.play(\"animation\")
+
+func _on_pickup_audio_finished():
+	queue_free()
+"
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_gfq8b"]
+radius = 0.4
+
+[sub_resource type="Animation" id="Animation_v4pjm"]
+resource_name = "animation"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:offset")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 3), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_sld3p"]
+_data = {
+"animation": SubResource("Animation_v4pjm")
+}
+
+[sub_resource type="GDScript" id="GDScript_dwqoe"]
+script/source = "
+extends Area3D
+
+@onready var audio = $AudioStreamPlayer3D
+
+var type
+var max_pile
+
+func collect():
+	audio.play()
+	
+"
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_2kmpn"]
+radius = 0.6
+
+[node name="FallingObject" type="RigidBody3D" groups=["loot"]]
+collision_layer = 12
+collision_mask = 12
+mass = 0.1
+script = SubResource("GDScript_ij1g0")
+texture = ExtResource("1_gjywi")
+pickup_audio = ExtResource("1_qr4mh")
+
+[node name="CollisionShape" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_gfq8b")
+
+[node name="Sprite" type="Sprite3D" parent="."]
+pixel_size = 0.06
+billboard = 1
+alpha_cut = 2
+texture_filter = 0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_sld3p")
+}
+
+[node name="Area" type="Area3D" parent="." groups=["loot"]]
+collision_layer = 8
+collision_mask = 8
+script = SubResource("GDScript_dwqoe")
+
+[node name="CollisionShape" type="CollisionShape3D" parent="Area"]
+shape = SubResource("SphereShape3D_2kmpn")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Area"]
+volume_db = -10.0
+bus = &"SFX"
+
+[connection signal="finished" from="Area/AudioStreamPlayer3D" to="." method="_on_pickup_audio_finished"]

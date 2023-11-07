@@ -19,6 +19,7 @@ extends CharacterBody3D
 
 @onready var item = preload(\"res://source/object/item.tscn\")
 @onready var item_list = {
+	\"falling_object\":preload(\"res://resource/item/falling_object.png\"),
 	\"wood\":preload(\"res://resource/item/wood.png\"),
 }
 
@@ -119,7 +120,7 @@ func get_intput():
 				camera_arm.rotation_degrees.x + 64,
 				0.6
 			)
-			camera_arm.rotation_degrees.x += 1
+			camera_arm.rotation_degrees.x += 3
 			camera_arm.position.z += 0.36
 			camera_arm.position.y += 0.1
 	if Input.is_action_just_pressed(\"zoom_out\"):
@@ -140,7 +141,7 @@ func get_intput():
 				camera_arm.rotation_degrees.x - 64,
 				0.6
 			)
-			camera_arm.rotation_degrees.x -= 1
+			camera_arm.rotation_degrees.x -= 3
 			camera_arm.position.z -= 0.36
 			camera_arm.position.y -= 0.1
 	
@@ -206,33 +207,12 @@ func _on_collect_area_area_entered(area):
 				slot.add_child(item_instantiate)
 				area.collect()
 				break
-		
-		if not found_empty_slot:
-			for slot_num in range(0,11):
-				var slot = backpack_slot.get_node(\"ItemSlot\"+str(slot_num))
-				if slot.has_node(\"Item\"):
-					if slot.get_node(\"Item\").type == area.type:
-						if area.max_pile > int(slot.get_node(\"Item/Label\").text):
-							found_empty_slot = true
-							slot.get_node(\"Item/Label\").text = \\
-								str(int(slot.get_node(\"Item/Label\").text)+1)
-							area.collect()
-							break
-				elif !slot.has_node(\"Item\"):
-					found_empty_slot = true
-					
-					var item_instantiate = item.instantiate()
-					
-					item_instantiate.get_node(\"Sprite\").texture = item_list[area.type]
-					item_instantiate.type = area.type
-					item_instantiate.max_pile = area.max_pile
-					
-					slot.add_child(item_instantiate)
-					area.collect()
-					break
 			
 		if not found_empty_slot:
 			print(\"背包已满，无法添加物品\")
+			
+	if area.is_in_group(\"crop\"):
+		print(area.type)
 "
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_ja0sm"]
@@ -476,10 +456,11 @@ func _on_timeout():
 "
 
 [node name="Player" type="CharacterBody3D" groups=["player"]]
+floor_max_angle = 1.5708
 script = SubResource("GDScript_4vhkn")
 
 [node name="CameraArm" type="SpringArm3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.819152, 0.573577, 0, -0.573577, 0.819152, 0, 8, 8)
+transform = Transform3D(1, 0, 0, 0, 0.961262, 0.275637, 0, -0.275637, 0.961262, 0, 6, 8)
 
 [node name="Camera" type="Camera3D" parent="CameraArm"]
 attributes = SubResource("CameraAttributesPractical_ja0sm")
@@ -496,7 +477,7 @@ collision_mask = 8
 shape = SubResource("CapsuleShape3D_b5exw")
 
 [node name="Sprite" type="Sprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.961262, 0.275637, 0, -0.275637, 0.961262, 0, 1, 0)
+transform = Transform3D(1, 0, 0, 0, 0.961262, 0.275637, 0, -0.275637, 0.961262, 0, 1.2, 0)
 pixel_size = 0.06
 billboard = 1
 alpha_cut = 2
@@ -571,13 +552,6 @@ tint_progress = Color(0, 0.784314, 0.905882, 1)
 [node name="RotationTimer" type="Timer" parent="."]
 wait_time = 0.7
 script = SubResource("GDScript_71rhy")
-
-[node name="SpotLight3D" type="SpotLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-light_color = Color(1, 0.768627, 0.247059, 1)
-shadow_enabled = true
-spot_range = 64.0
-spot_angle = 36.0
 
 [connection signal="area_entered" from="CollectArea" to="." method="_on_collect_area_area_entered"]
 [connection signal="timeout" from="RotationTimer" to="RotationTimer" method="_on_timeout"]
