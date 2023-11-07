@@ -24,6 +24,8 @@ extends GridMap
 	\"plains_tree\":preload(\"res://source/world/plains_tree.tscn\"),
 	\"coniferous_tree\":preload(\"res://source/world/coniferous_tree.tscn\"),
 	\"jungle_tree\":preload(\"res://source/world/jungle_tree.tscn\"),
+	
+	\"beach_stone\":preload(\"res://source/world/beach_stone.tscn\"),
 	}
 
 @onready var player = get_parent().get_parent().get_node(\"Player\")
@@ -35,8 +37,8 @@ var altitude = FastNoiseLite.new()      # 海拔
 var chunk_width = 16    # 单区块宽
 var chunk_height = 16   # 单区块高
 
-var chunk_x_num = 3   # 区块X轴渲染数
-var chunk_y_num = 3   # 区块Y轴渲染数
+var chunk_x_num = 6   # 区块X轴渲染数
+var chunk_y_num = 6   # 区块Y轴渲染数
 
 var generated_chunks = {}
 
@@ -45,7 +47,7 @@ var biome_list = {
 	\"ocean\":[], # 海洋群系
 	\"shoal\":[], # 浅滩群系
 	
-	\"beach\":[], # 沙滩群系
+	\"beach\":[6,16,26,36,46,56,66,76,86,96], # 沙滩群系
 	
 	\"jungle\":[63,64,65,73,74,75,83,84,85,93,94,95], # 热带雨林群系
 	\"plains\":[43,44,45,53,54,55], # 平原群系
@@ -61,7 +63,7 @@ var biome_data = {
 	\"ocean\":{}, # 海洋群系
 	\"shoal\":{}, # 浅滩群系
 	
-	\"beach\":{}, # 沙滩群系
+	\"beach\":{\"beach_stone\":0.01}, # 沙滩群系
 	
 	\"jungle\":{\"jungle_tree\":0.01}, # 热带雨林群系
 	\"plains\":{\"plains_tree\":0.03}, # 平原群系
@@ -124,13 +126,13 @@ func generate_chunk(chunk_pos):
 				select_y = 0
 				
 			# 深海
-			if -1000 < altitude_noise and altitude_noise <= -16:
+			if -1000 < altitude_noise and altitude_noise <= -32:
 				set_cell_item(Vector3(real_x,0,real_y),9)
 			# 海洋
-			elif -16 < altitude_noise and altitude_noise <= -12:
+			elif -32 < altitude_noise and altitude_noise <= -16:
 				set_cell_item(Vector3(real_x,0,real_y),8)
 			# 浅滩
-			elif -12 < altitude_noise and altitude_noise <= 0:
+			elif -16 < altitude_noise and altitude_noise <= 0:
 				set_cell_item(Vector3(real_x,0,real_y),7)
 			# 海滩
 			elif 0 < altitude_noise and altitude_noise <= 9:
@@ -146,12 +148,21 @@ func generate_chunk(chunk_pos):
 				
 			var land_tile_data = get_cell_item(Vector3(real_x, 0, real_y))
 			
+			for id in biome_list[\"beach\"]:
+				if land_tile_data == id :
+					var tile_probability = randf()
+					if tile_probability <= biome_data[\"beach\"][\"beach_stone\"]:
+						var tree_instantiate = object_tiles[\"beach_stone\"].instantiate()
+						tree_instantiate.transform.origin = Vector3(real_x, 0.5, real_y)
+						tree_instantiate.rotation.y = randi_range(0,360)
+						add_child(tree_instantiate)
+			
 			for id in biome_list[\"jungle\"]:
 				if land_tile_data == id :
 					var tile_probability = randf()
 					if tile_probability <= biome_data[\"jungle\"][\"jungle_tree\"]:
 						var tree_instantiate = object_tiles[\"jungle_tree\"].instantiate()
-						tree_instantiate.transform.origin = Vector3(real_x, 0, real_y)
+						tree_instantiate.transform.origin = Vector3(real_x, 0.5, real_y)
 						tree_instantiate.rotation.y = randi_range(0,360)
 						add_child(tree_instantiate)
 			
@@ -165,7 +176,7 @@ func generate_chunk(chunk_pos):
 					var tile_probability = randf()
 					if tile_probability <= biome_data[\"plains\"][\"plains_tree\"]:
 						var tree_instantiate = object_tiles[\"plains_tree\"].instantiate()
-						tree_instantiate.transform.origin = Vector3(real_x, 0, real_y)
+						tree_instantiate.transform.origin = Vector3(real_x, 0.5, real_y)
 						tree_instantiate.rotation.y = randi_range(0,360)
 						add_child(tree_instantiate)
 						
@@ -174,7 +185,7 @@ func generate_chunk(chunk_pos):
 					var tile_probability = randf()
 					if tile_probability <= biome_data[\"coniferous\"][\"coniferous_tree\"]:
 						var tree_instantiate = object_tiles[\"coniferous_tree\"].instantiate()
-						tree_instantiate.transform.origin = Vector3(real_x, 0, real_y)
+						tree_instantiate.transform.origin = Vector3(real_x, 0.5, real_y)
 						tree_instantiate.rotation.y = randi_range(0,360)
 						add_child(tree_instantiate)
 			

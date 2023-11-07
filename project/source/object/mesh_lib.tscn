@@ -1,11 +1,14 @@
-[gd_scene load_steps=31 format=3 uid="uid://bntxp4iscnjlk"]
+[gd_scene load_steps=33 format=3 uid="uid://bntxp4iscnjlk"]
 
 [ext_resource type="Material" uid="uid://bvky8nrhry6kc" path="res://resource/shader/moyu_shoal.tres" id="1_7bjf6"]
 [ext_resource type="Texture2D" uid="uid://b8ywbl5a56y15" path="res://resource/tile/grass.png" id="1_g60np"]
+[ext_resource type="Material" uid="uid://bjuw2iyvpg441" path="res://resource/shader/moyu_beach.tres" id="2_4uoyv"]
 [ext_resource type="Shader" uid="uid://djdvvewfn86x2" path="res://resource/shader/grass.tres" id="2_jnyf6"]
 [ext_resource type="PackedScene" uid="uid://b53debqmbaiou" path="res://resource/grass/grass.glb" id="2_psyis"]
 [ext_resource type="Material" uid="uid://cjqcl1kyga14h" path="res://resource/shader/water_low_poly.tres" id="2_rr0cs"]
+[ext_resource type="Material" uid="uid://dxr727f08kise" path="res://resource/shader/moyu_ocean.tres" id="4_p2o64"]
 [ext_resource type="Texture2D" uid="uid://bv62uc0h0kspc" path="res://resource/tile/sand.png" id="5_hqqap"]
+[ext_resource type="Material" uid="uid://d2jag3geeqi2d" path="res://resource/shader/moyu_deep_ocean.tres" id="5_n5g4u"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_npdms"]
 size = Vector2(1, 1)
@@ -26,10 +29,6 @@ albedo_color = Color(0.164706, 0.470588, 0.0392157, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wt037"]
 albedo_texture = ExtResource("1_g60np")
-texture_filter = 0
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0utmr"]
-albedo_texture = ExtResource("5_hqqap")
 texture_filter = 0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tw73c"]
@@ -179,7 +178,7 @@ shape = SubResource("HeightMapShape3D_v8qhu")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0)
 mesh = SubResource("PlaneMesh_npdms")
 skeleton = NodePath("../0")
-surface_material_override/0 = SubResource("StandardMaterial3D_0utmr")
+surface_material_override/0 = ExtResource("2_4uoyv")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="6"]
 
@@ -200,7 +199,7 @@ shape = SubResource("HeightMapShape3D_v8qhu")
 [node name="8" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0)
 mesh = SubResource("PlaneMesh_npdms")
-surface_material_override/0 = ExtResource("2_rr0cs")
+surface_material_override/0 = ExtResource("4_p2o64")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="8"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.6, 0)
@@ -211,7 +210,7 @@ shape = SubResource("HeightMapShape3D_v8qhu")
 [node name="9" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 0)
 mesh = SubResource("PlaneMesh_npdms")
-surface_material_override/0 = ExtResource("2_rr0cs")
+surface_material_override/0 = ExtResource("5_n5g4u")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="9"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.9, 0)
@@ -288,7 +287,7 @@ shape = SubResource("HeightMapShape3D_v8qhu")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 1)
 mesh = SubResource("PlaneMesh_npdms")
 skeleton = NodePath("../0")
-surface_material_override/0 = SubResource("StandardMaterial3D_0utmr")
+surface_material_override/0 = ExtResource("2_4uoyv")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="16"]
 
@@ -309,7 +308,7 @@ shape = SubResource("HeightMapShape3D_v8qhu")
 [node name="18" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 1)
 mesh = SubResource("PlaneMesh_npdms")
-surface_material_override/0 = ExtResource("2_rr0cs")
+surface_material_override/0 = ExtResource("4_p2o64")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="18"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.6, 0)
@@ -320,7 +319,7 @@ shape = SubResource("HeightMapShape3D_v8qhu")
 [node name="19" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 1)
 mesh = SubResource("PlaneMesh_npdms")
-surface_material_override/0 = ExtResource("2_rr0cs")
+surface_material_override/0 = ExtResource("5_n5g4u")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="19"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.9, 0)
@@ -397,7 +396,7 @@ shape = SubResource("HeightMapShape3D_v8qhu")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 2)
 mesh = SubResource("PlaneMesh_npdms")
 skeleton = NodePath("../0")
-surface_material_override/0 = SubResource("StandardMaterial3D_0utmr")
+surface_material_override/0 = ExtResource("2_4uoyv")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="26"]
 
@@ -418,7 +417,7 @@ shape = SubResource("HeightMapShape3D_v8qhu")
 [node name="28" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 2)
 mesh = SubResource("PlaneMesh_npdms")
-surface_material_override/0 = ExtResource("2_rr0cs")
+surface_material_override/0 = ExtResource("4_p2o64")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="28"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.6, 0)
@@ -429,7 +428,7 @@ shape = SubResource("HeightMapShape3D_v8qhu")
 [node name="29" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 2)
 mesh = SubResource("PlaneMesh_npdms")
-surface_material_override/0 = ExtResource("2_rr0cs")
+surface_material_override/0 = ExtResource("5_n5g4u")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="29"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.9, 0)
@@ -506,7 +505,7 @@ shape = SubResource("HeightMapShape3D_v8qhu")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 3)
 mesh = SubResource("PlaneMesh_npdms")
 skeleton = NodePath("../0")
-surface_material_override/0 = SubResource("StandardMaterial3D_0utmr")
+surface_material_override/0 = ExtResource("2_4uoyv")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="36"]
 
@@ -527,7 +526,7 @@ shape = SubResource("HeightMapShape3D_v8qhu")
 [node name="38" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 3)
 mesh = SubResource("PlaneMesh_npdms")
-surface_material_override/0 = ExtResource("2_rr0cs")
+surface_material_override/0 = ExtResource("4_p2o64")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="38"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.6, 0)
@@ -538,7 +537,7 @@ shape = SubResource("HeightMapShape3D_v8qhu")
 [node name="39" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 3)
 mesh = SubResource("PlaneMesh_npdms")
-surface_material_override/0 = ExtResource("2_rr0cs")
+surface_material_override/0 = ExtResource("5_n5g4u")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="39"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.9, 0)
@@ -615,7 +614,7 @@ shape = SubResource("HeightMapShape3D_v8qhu")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 4)
 mesh = SubResource("PlaneMesh_npdms")
 skeleton = NodePath("../0")
-surface_material_override/0 = SubResource("StandardMaterial3D_0utmr")
+surface_material_override/0 = ExtResource("2_4uoyv")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="46"]
 
@@ -636,7 +635,7 @@ shape = SubResource("HeightMapShape3D_v8qhu")
 [node name="48" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 4)
 mesh = SubResource("PlaneMesh_npdms")
-surface_material_override/0 = ExtResource("2_rr0cs")
+surface_material_override/0 = ExtResource("4_p2o64")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="48"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.6, 0)
@@ -647,7 +646,7 @@ shape = SubResource("HeightMapShape3D_v8qhu")
 [node name="49" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 4)
 mesh = SubResource("PlaneMesh_npdms")
-surface_material_override/0 = ExtResource("2_rr0cs")
+surface_material_override/0 = ExtResource("5_n5g4u")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="49"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.9, 0)
@@ -724,7 +723,7 @@ shape = SubResource("HeightMapShape3D_v8qhu")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 5)
 mesh = SubResource("PlaneMesh_npdms")
 skeleton = NodePath("../0")
-surface_material_override/0 = SubResource("StandardMaterial3D_0utmr")
+surface_material_override/0 = ExtResource("2_4uoyv")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="56"]
 
@@ -745,7 +744,7 @@ shape = SubResource("HeightMapShape3D_v8qhu")
 [node name="58" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 5)
 mesh = SubResource("PlaneMesh_npdms")
-surface_material_override/0 = ExtResource("2_rr0cs")
+surface_material_override/0 = ExtResource("4_p2o64")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="58"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.6, 0)
@@ -756,7 +755,7 @@ shape = SubResource("HeightMapShape3D_v8qhu")
 [node name="59" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 5)
 mesh = SubResource("PlaneMesh_npdms")
-surface_material_override/0 = ExtResource("2_rr0cs")
+surface_material_override/0 = ExtResource("5_n5g4u")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="59"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.9, 0)
@@ -832,7 +831,7 @@ shape = SubResource("HeightMapShape3D_v8qhu")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 6)
 mesh = SubResource("PlaneMesh_npdms")
 skeleton = NodePath("../0")
-surface_material_override/0 = SubResource("StandardMaterial3D_0utmr")
+surface_material_override/0 = ExtResource("2_4uoyv")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="66"]
 
@@ -853,7 +852,7 @@ shape = SubResource("HeightMapShape3D_v8qhu")
 [node name="68" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 6)
 mesh = SubResource("PlaneMesh_npdms")
-surface_material_override/0 = ExtResource("2_rr0cs")
+surface_material_override/0 = ExtResource("4_p2o64")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="68"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.6, 0)
@@ -864,7 +863,7 @@ shape = SubResource("HeightMapShape3D_v8qhu")
 [node name="69" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 6)
 mesh = SubResource("PlaneMesh_npdms")
-surface_material_override/0 = ExtResource("2_rr0cs")
+surface_material_override/0 = ExtResource("5_n5g4u")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="69"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.9, 0)
@@ -940,7 +939,7 @@ shape = SubResource("HeightMapShape3D_v8qhu")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 7)
 mesh = SubResource("PlaneMesh_npdms")
 skeleton = NodePath("../0")
-surface_material_override/0 = SubResource("StandardMaterial3D_0utmr")
+surface_material_override/0 = ExtResource("2_4uoyv")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="76"]
 
@@ -961,7 +960,7 @@ shape = SubResource("HeightMapShape3D_v8qhu")
 [node name="78" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 7)
 mesh = SubResource("PlaneMesh_npdms")
-surface_material_override/0 = ExtResource("2_rr0cs")
+surface_material_override/0 = ExtResource("4_p2o64")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="78"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.6, 0)
@@ -972,7 +971,7 @@ shape = SubResource("HeightMapShape3D_v8qhu")
 [node name="79" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 7)
 mesh = SubResource("PlaneMesh_npdms")
-surface_material_override/0 = ExtResource("2_rr0cs")
+surface_material_override/0 = ExtResource("5_n5g4u")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="79"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.9, 0)
@@ -1048,7 +1047,7 @@ shape = SubResource("HeightMapShape3D_v8qhu")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 8)
 mesh = SubResource("PlaneMesh_npdms")
 skeleton = NodePath("../0")
-surface_material_override/0 = SubResource("StandardMaterial3D_0utmr")
+surface_material_override/0 = ExtResource("2_4uoyv")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="86"]
 
@@ -1069,7 +1068,7 @@ shape = SubResource("HeightMapShape3D_v8qhu")
 [node name="88" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 8)
 mesh = SubResource("PlaneMesh_npdms")
-surface_material_override/0 = ExtResource("2_rr0cs")
+surface_material_override/0 = ExtResource("4_p2o64")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="88"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.6, 0)
@@ -1080,7 +1079,7 @@ shape = SubResource("HeightMapShape3D_v8qhu")
 [node name="89" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 8)
 mesh = SubResource("PlaneMesh_npdms")
-surface_material_override/0 = ExtResource("2_rr0cs")
+surface_material_override/0 = ExtResource("5_n5g4u")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="89"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.9, 0)
@@ -1156,7 +1155,7 @@ shape = SubResource("HeightMapShape3D_v8qhu")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 9)
 mesh = SubResource("PlaneMesh_npdms")
 skeleton = NodePath("../0")
-surface_material_override/0 = SubResource("StandardMaterial3D_0utmr")
+surface_material_override/0 = ExtResource("2_4uoyv")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="96"]
 
@@ -1177,7 +1176,7 @@ shape = SubResource("HeightMapShape3D_v8qhu")
 [node name="98" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 9)
 mesh = SubResource("PlaneMesh_npdms")
-surface_material_override/0 = ExtResource("2_rr0cs")
+surface_material_override/0 = ExtResource("4_p2o64")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="98"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.6, 0)
@@ -1188,7 +1187,7 @@ shape = SubResource("HeightMapShape3D_v8qhu")
 [node name="99" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 9)
 mesh = SubResource("PlaneMesh_npdms")
-surface_material_override/0 = ExtResource("2_rr0cs")
+surface_material_override/0 = ExtResource("5_n5g4u")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="99"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.9, 0)
