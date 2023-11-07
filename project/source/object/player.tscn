@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://dt3jbrv46474q" path="res://resource/player/player.png" id="1_f088v"]
 [ext_resource type="Texture2D" uid="uid://d4lu720s1cjni" path="res://resource/item/stone_axe.png" id="2_f3hiv"]
-[ext_resource type="PackedScene" uid="uid://5vbnyfa6nml4" path="res://source/object/backpack.tscn" id="2_n3hit"]
+[ext_resource type="PackedScene" uid="uid://5vbnyfa6nml4" path="res://source/inventory/backpack.tscn" id="2_n3hit"]
 [ext_resource type="Texture2D" uid="uid://bh72h6q7g72l2" path="res://resource/player/bar_under.png" id="5_k7woa"]
 [ext_resource type="Texture2D" uid="uid://dyf1e4v7nado3" path="res://resource/player/bar_over.png" id="6_3uwdu"]
 [ext_resource type="Texture2D" uid="uid://d0l823ck0c75a" path="res://resource/player/bar_progress.png" id="7_krfl5"]
@@ -12,12 +12,11 @@ script/source = "
 extends CharacterBody3D
 
 @onready var tool = $ToolSprite
-@onready var tool_item_slot = $CanvasLayer/BackPack/ItemBar/GridContainer/ItemSlot0
+@onready var tool_item_slot = $CanvasLayer/BackPack/MarginContainer/GridContainer/ItemSlot0
 
-@onready var item_bar_slot = $CanvasLayer/BackPack/ItemBar/GridContainer
-@onready var backpack_slot = $CanvasLayer/BackPack/BackPack/GridContainer
+@onready var item_bar_slot = $CanvasLayer/BackPack/MarginContainer/GridContainer
 
-@onready var item = preload(\"res://source/object/item.tscn\")
+@onready var item = preload(\"res://source/inventory/item.tscn\")
 @onready var item_list = {
 	\"falling_object\":preload(\"res://resource/item/falling_object.png\"),
 	\"wood\":preload(\"res://resource/item/wood.png\"),
@@ -485,7 +484,7 @@ texture_filter = 0
 texture = ExtResource("1_f088v")
 hframes = 6
 vframes = 8
-frame = 2
+frame = 1
 
 [node name="ToolSprite" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)

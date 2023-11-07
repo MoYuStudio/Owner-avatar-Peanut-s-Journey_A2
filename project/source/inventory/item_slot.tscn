@@ -1,0 +1,34 @@
+[gd_scene load_steps=4 format=3 uid="uid://wgsat5ot1rkr"]
+
+[ext_resource type="Script" path="res://source/inventory/item_slot.gd" id="1_olstg"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gftio"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0, 0, 0, 0.25098)
+corner_radius_top_left = 36
+corner_radius_top_right = 36
+corner_radius_bottom_right = 36
+corner_radius_bottom_left = 36
+
+[sub_resource type="Theme" id="Theme_y33cv"]
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_gftio")
+
+[node name="ItemSlot" type="PanelContainer"]
+texture_filter = 1
+custom_minimum_size = Vector2(256, 256)
+anchors_preset = -1
+anchor_left = 0.033
+anchor_top = 0.059
+anchor_right = 0.033
+anchor_bottom = 0.059
+offset_left = -126.72
+offset_top = -127.44
+offset_right = 129.28
+offset_bottom = 128.56
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_y33cv")
+script = ExtResource("1_olstg")
