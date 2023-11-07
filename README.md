@@ -1,1 +1,2 @@
-# Peanut-s-Journey_A2
+# Peanut's Journey A2
+# 花生迷途A2
