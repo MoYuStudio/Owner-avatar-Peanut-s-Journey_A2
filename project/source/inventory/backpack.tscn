@@ -20,7 +20,22 @@ Panel/styles/panel = SubResource("StyleBoxFlat_htepc")
 script/source = "
 extends Control
 
+@onready var item_bar = $MarginContainer/GridContainer
+
 var data = {}
+
+func _physics_process(delta):
+	get_data()
+
+func get_data():
+	for slot_num in range(6):
+		var item = item_bar.get_node(\"ItemSlot\"+str(slot_num)+\"/Item\")
+		if item:
+			data[str(slot_num)] = {
+				\"type\": item.type,
+				\"max_pile\": item.max_pile,
+			}
+	return data
 "
 
 [node name="BackPack" type="Control"]
