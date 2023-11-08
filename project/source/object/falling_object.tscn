@@ -77,9 +77,9 @@ func collect():
 radius = 0.6
 
 [node name="FallingObject" type="RigidBody3D" groups=["loot"]]
-collision_layer = 12
-collision_mask = 12
-mass = 0.1
+collision_layer = 8
+collision_mask = 8
+can_sleep = false
 script = SubResource("GDScript_dug6e")
 texture = ExtResource("1_4w5o2")
 type = "falling_object"

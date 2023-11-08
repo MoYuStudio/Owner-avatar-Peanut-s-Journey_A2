@@ -1,6 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://j675rf0rng85"]
+[gd_scene load_steps=10 format=3 uid="uid://j675rf0rng85"]
 
 [ext_resource type="Texture2D" uid="uid://bc6id70qqb7sl" path="res://resource/tile/plains_tree.png" id="1_5fmrw"]
+[ext_resource type="AudioStream" uid="uid://cumuobr4cnukh" path="res://resource/sound/cut_tree_with_axe.wav" id="2_lwudl"]
+[ext_resource type="AudioStream" uid="uid://dsqp4jy5ht7wy" path="res://resource/sound/tree_cut_down.wav" id="3_lx8ro"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6yk55"]
 radius = 0.3
@@ -10,22 +12,120 @@ height = 6.0
 script/source = "
 extends Area3D
 
+@onready var falling_object = preload(\"res://source/object/falling_object.tscn\")
+@onready var falling_object_texture = preload(\"res://resource/item/wood.png\")
+
 @onready var animation = $AnimationPlayer
 
-var type = 'plains_tree'
+var type = \"plains_tree\"
 var hp = 9
 
+var hp_backup = hp
+
+func _physics_process(delta):
+	if hp < hp_backup and hp > 0:
+		animation.play(\"hit_animation\")
+		hp_backup = hp
+
 func collect():
+	animation.play(\"cut_down_animation\")
+	await animation.animation_finished
+	
+	for num in randi_range(2,5):
+		var falling_object_instantiate = falling_object.instantiate()
+		falling_object_instantiate.texture = falling_object_texture
+		falling_object_instantiate.type = \"wood\"
+		falling_object_instantiate.position = get_parent().position
+		falling_object_instantiate.position.y += 6
+		get_parent().get_parent().add_child(falling_object_instantiate)
+	
 	get_parent().queue_free()
 "
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_qd0kt"]
-radius = 1.6
+radius = 1.2
 height = 6.0
+
+[sub_resource type="Animation" id="Animation_72txw"]
+resource_name = "hit_animation"
+length = 0.3
+step = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(0.96, 0.96, 0.96), Vector3(1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AudioStreamPlayer3D:playing")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_n10hb"]
+resource_name = "_animation"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(1.5708, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Sprite:scale")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(2, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AudioStreamPlayer3D2:playing")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.1, 2.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rov5s"]
+_data = {
+"cut_down_animation": SubResource("Animation_n10hb"),
+"hit_animation": SubResource("Animation_72txw")
+}
 
 [node name="Tree" type="StaticBody3D"]
 
-[node name="Sprite" type="Sprite3D" parent="."]
+[node name="Sprite" type="Node3D" parent="."]
+
+[node name="Sprite" type="Sprite3D" parent="Sprite"]
 transform = Transform3D(0.694658, 0, 0.71934, 0, 1, 0, -0.71934, 0, 0.694658, 0, 4.5, 0)
 pixel_size = 0.3
 shaded = true
@@ -33,7 +133,7 @@ alpha_cut = 2
 texture_filter = 0
 texture = ExtResource("1_5fmrw")
 
-[node name="Sprite2" type="Sprite3D" parent="."]
+[node name="Sprite2" type="Sprite3D" parent="Sprite"]
 transform = Transform3D(-0.71934, 0, 0.694658, 0, 1, 0, -0.694658, 0, -0.71934, 0, 4.5, 0)
 pixel_size = 0.3
 shaded = true
@@ -53,3 +153,18 @@ script = SubResource("GDScript_olh5q")
 [node name="CollisionShape" type="CollisionShape3D" parent="Area"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
 shape = SubResource("CapsuleShape3D_qd0kt")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Area"]
+libraries = {
+"": SubResource("AnimationLibrary_rov5s")
+}
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Area"]
+stream = ExtResource("2_lwudl")
+bus = &"SFX"
+
+[node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="Area"]
+stream = ExtResource("3_lx8ro")
+bus = &"SFX"
+
+[connection signal="animation_finished" from="Area/AnimationPlayer" to="Area" method="_on_animation_player_animation_finished"]

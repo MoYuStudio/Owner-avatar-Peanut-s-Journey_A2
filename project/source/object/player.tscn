@@ -19,6 +19,10 @@ extends CharacterBody3D
 @onready var item = preload(\"res://source/inventory/item.tscn\")
 @onready var item_list = {
 	\"falling_object\":preload(\"res://resource/item/falling_object.png\"),
+	
+	\"stone_axe\":preload(\"res://resource/item/stone_axe.png\"),
+	\"stone_sickle\":preload(\"res://resource/item/stone_sickle.png\"),
+	
 	\"wood\":preload(\"res://resource/item/wood.png\"),
 }
 
@@ -42,9 +46,22 @@ var direction
 var rotation_direction = 0
 var rotation_timer_lock = false
 
+var collect_tool = \"\"
+
+var collect_area_list = []
+
 func _physics_process(delta):
 	player_movement(delta)
 	tool_animation()
+	
+	for area in collect_area_list:
+		if Input.is_action_just_pressed(\"hit\"):
+			if area.type == \"plains_tree\" and collect_tool == \"stone_axe\":
+				area.hp -= 1
+				if area.hp <= 0:
+					area.collect()
+					collect_area_list.erase(area)
+					break
 
 # 输入控制
 func get_intput():
@@ -177,6 +194,7 @@ func player_movement(delta):
 func tool_animation():
 	if tool_item_slot.has_node(\"Item/Sprite\"):
 		tool.texture = tool_item_slot.get_node(\"Item/Sprite\").texture
+		collect_tool = tool_item_slot.get_node(\"Item\").type
 	else:
 		tool.texture = null
 
@@ -211,7 +229,16 @@ func _on_collect_area_area_entered(area):
 			print(\"背包已满，无法添加物品\")
 			
 	if area.is_in_group(\"crop\"):
-		print(area.type)
+		collect_area_list.append(area)
+		#print(area.type)
+		#if Input.is_action_just_pressed(\"hit\"):
+		#	print(area.type)
+		#	area.collect()
+
+
+func _on_collect_area_area_exited(area):
+	if area.is_in_group(\"crop\"):
+		collect_area_list.erase(area)
 "
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_ja0sm"]
@@ -224,8 +251,8 @@ radius = 0.3
 height = 1.0
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_b5exw"]
-radius = 1.80281
-height = 3.60562
+radius = 1.2
+height = 2.4
 
 [sub_resource type="Animation" id="Animation_eckp6"]
 resource_name = "idle_down"
@@ -473,6 +500,7 @@ collision_layer = 8
 collision_mask = 8
 
 [node name="CollisionShape" type="CollisionShape3D" parent="CollectArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
 shape = SubResource("CapsuleShape3D_b5exw")
 
 [node name="Sprite" type="Sprite3D" parent="."]
@@ -484,7 +512,6 @@ texture_filter = 0
 texture = ExtResource("1_f088v")
 hframes = 6
 vframes = 8
-frame = 1
 
 [node name="ToolSprite" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
@@ -553,6 +580,7 @@ wait_time = 0.7
 script = SubResource("GDScript_71rhy")
 
 [connection signal="area_entered" from="CollectArea" to="." method="_on_collect_area_area_entered"]
+[connection signal="area_exited" from="CollectArea" to="." method="_on_collect_area_area_exited"]
 [connection signal="timeout" from="RotationTimer" to="RotationTimer" method="_on_timeout"]
 
 [editable path="CanvasLayer/BackPack"]

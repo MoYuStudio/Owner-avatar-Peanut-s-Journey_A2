@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://c1hw0b4l7uhsv"]
+[gd_scene load_steps=5 format=3 uid="uid://c1hw0b4l7uhsv"]
 
 [ext_resource type="PackedScene" uid="uid://dc6up85jkv08n" path="res://source/world/world.tscn" id="1_q1y77"]
 [ext_resource type="PackedScene" uid="uid://c5a5gkidh6uyo" path="res://source/object/player.tscn" id="2_hamyk"]
 [ext_resource type="PackedScene" uid="uid://e8qpku58gb7o" path="res://source/object/falling_object.tscn" id="3_bamxa"]
+[ext_resource type="Texture2D" uid="uid://d4lu720s1cjni" path="res://resource/item/stone_axe.png" id="4_0g8vl"]
 
 [node name="GameMain" type="Node"]
 
@@ -13,3 +14,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
 
 [node name="FallingObject" parent="." instance=ExtResource("3_bamxa")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 10, 1)
+texture = ExtResource("4_0g8vl")
+type = "stone_axe"
+max_pile = 1
