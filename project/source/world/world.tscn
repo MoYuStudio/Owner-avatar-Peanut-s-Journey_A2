@@ -168,10 +168,10 @@ func generate_chunk(chunk_pos):
 			
 			for id in biome_list[\"plains\"]:
 				if land_tile_data == id :
-					var grass_instantiate = object_tiles[\"plains_grass\"].instantiate()
-					grass_instantiate.transform.origin = Vector3(real_x, 0.5, real_y)
+					#var grass_instantiate = object_tiles[\"plains_grass\"].instantiate()
+					#grass_instantiate.transform.origin = Vector3(real_x, 0.5, real_y)
 					# grass_instantiate.rotation.y = randi_range(0,360)
-					add_child(grass_instantiate)
+					#add_child(grass_instantiate)
 					
 					var tile_probability = randf()
 					if tile_probability <= biome_data[\"plains\"][\"plains_tree\"]:

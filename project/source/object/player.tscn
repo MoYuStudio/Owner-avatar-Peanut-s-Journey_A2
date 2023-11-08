@@ -36,7 +36,7 @@ extends CharacterBody3D
 
 @onready var gravity = ProjectSettings.get_setting(\"physics/3d/default_gravity\")
 
-var max_speed = 9       # 极速
+var max_speed = 6       # 极速
 var accel = 32          # 加速
 var friction = 32       # 摩擦
 var jump_velocity = 9   # 跳跃
@@ -192,11 +192,13 @@ func player_movement(delta):
 	move_and_slide()
 	
 func tool_animation():
+	if tool_item_slot.has_node(\"Item\"):
+		collect_tool = tool_item_slot.get_node(\"Item\").type
 	if tool_item_slot.has_node(\"Item/Sprite\"):
 		tool.texture = tool_item_slot.get_node(\"Item/Sprite\").texture
-		collect_tool = tool_item_slot.get_node(\"Item\").type
 	else:
 		tool.texture = null
+		collect_tool = null
 
 func _on_collect_area_area_entered(area):
 	if area.is_in_group(\"loot\"):
@@ -512,6 +514,7 @@ texture_filter = 0
 texture = ExtResource("1_f088v")
 hframes = 6
 vframes = 8
+frame = 4
 
 [node name="ToolSprite" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)

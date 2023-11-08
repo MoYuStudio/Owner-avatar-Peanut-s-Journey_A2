@@ -7,10 +7,8 @@
 script/source = "
 extends Node2D
 
-class_name item
-
-var type
-var max_pile
+@export var type : String
+@export var max_pile : int
 "
 
 [node name="Item" type="Node2D"]
