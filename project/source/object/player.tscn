@@ -245,8 +245,6 @@ func _on_collect_area_area_exited(area):
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_ja0sm"]
 dof_blur_far_enabled = true
-dof_blur_far_distance = 24.0
-dof_blur_amount = 0.3
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1ygdw"]
 radius = 0.3
@@ -513,7 +511,7 @@ texture_filter = 0
 texture = ExtResource("1_f088v")
 hframes = 6
 vframes = 8
-frame = 3
+frame = 1
 
 [node name="ToolSprite" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.961262, 0.275637, 0, -0.275637, 0.961262, 0, 2, 0)

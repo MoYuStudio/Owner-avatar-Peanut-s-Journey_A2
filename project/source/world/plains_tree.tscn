@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://j675rf0rng85"]
+[gd_scene load_steps=23 format=3 uid="uid://j675rf0rng85"]
 
 [ext_resource type="Texture2D" uid="uid://bc6id70qqb7sl" path="res://resource/tile/plains_tree.png" id="1_5fmrw"]
 [ext_resource type="ArrayMesh" uid="uid://b3126t2of74mi" path="res://resource/tree/plains_tree.obj" id="1_xflmp"]
@@ -7,15 +7,11 @@
 [ext_resource type="Texture2D" uid="uid://cf42hi4emthjo" path="res://resource/tree/moyu_leaf1.png" id="3_aexcj"]
 [ext_resource type="AudioStream" uid="uid://dsqp4jy5ht7wy" path="res://resource/sound/tree_cut_down.wav" id="3_lx8ro"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ld5wi"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ftj5x"]
 albedo_texture = ExtResource("2_mher0")
 texture_filter = 0
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c7aj6"]
-albedo_texture = ExtResource("2_mher0")
-texture_filter = 0
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g51mn"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_srig5"]
 transparency = 1
 cull_mode = 2
 albedo_texture = ExtResource("3_aexcj")
@@ -119,7 +115,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.15, 0.3),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector3(1, 1, 1), Vector3(0.96, 0.96, 0.96), Vector3(1, 1, 1)]
+"values": [Vector3(1, 1, 1), Vector3(0.99, 0.99, 0.99), Vector3(1, 1, 1)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -183,18 +179,18 @@ _data = {
 [node name="Tree" type="StaticBody3D"]
 
 [node name="Sprite" type="Node3D" parent="."]
+transform = Transform3D(0.96, 0, 0, 0, 0.96, 0, 0, 0, 0.96, 0, 0, 0)
 
 [node name="MeshInstance" type="MeshInstance3D" parent="Sprite"]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
-visible = false
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 mesh = ExtResource("1_xflmp")
 skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("StandardMaterial3D_ld5wi")
-surface_material_override/1 = SubResource("StandardMaterial3D_c7aj6")
-surface_material_override/9 = SubResource("StandardMaterial3D_g51mn")
+surface_material_override/0 = SubResource("StandardMaterial3D_ftj5x")
+surface_material_override/1 = SubResource("StandardMaterial3D_srig5")
 
 [node name="Sprite" type="Sprite3D" parent="Sprite"]
 transform = Transform3D(0.694658, 0, 0.71934, 0, 1, 0, -0.71934, 0, 0.694658, 0, 4.5, 0)
+visible = false
 pixel_size = 0.3
 shaded = true
 alpha_cut = 2
@@ -203,6 +199,7 @@ texture = ExtResource("1_5fmrw")
 
 [node name="Sprite2" type="Sprite3D" parent="Sprite"]
 transform = Transform3D(-0.71934, 0, 0.694658, 0, 1, 0, -0.694658, 0, -0.71934, 0, 4.5, 0)
+visible = false
 pixel_size = 0.3
 shaded = true
 alpha_cut = 2
@@ -236,6 +233,7 @@ libraries = {
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Area"]
 stream = ExtResource("2_lwudl")
+stream_paused = true
 bus = &"SFX"
 
 [node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="Area"]
