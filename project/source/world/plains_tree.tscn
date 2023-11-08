@@ -54,7 +54,11 @@ scale_curve = SubResource("CurveTexture_f0xqs")
 turbulence_enabled = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k8reu"]
-albedo_color = Color(0, 0.411765, 0.0980392, 1)
+albedo_color = Color(0.427451, 0.662745, 0.0980392, 1)
+albedo_texture = ExtResource("3_aexcj")
+texture_filter = 0
+grow = true
+grow_amount = 1.0
 
 [sub_resource type="BoxMesh" id="BoxMesh_65d61"]
 material = SubResource("StandardMaterial3D_k8reu")
@@ -179,7 +183,7 @@ _data = {
 [node name="Tree" type="StaticBody3D"]
 
 [node name="Sprite" type="Node3D" parent="."]
-transform = Transform3D(0.96, 0, 0, 0, 0.96, 0, 0, 0, 0.96, 0, 0, 0)
+transform = Transform3D(0.99, 0, 0, 0, 0.99, 0, 0, 0, 0.99, 0, 0, 0)
 
 [node name="MeshInstance" type="MeshInstance3D" parent="Sprite"]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
@@ -233,7 +237,6 @@ libraries = {
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Area"]
 stream = ExtResource("2_lwudl")
-stream_paused = true
 bus = &"SFX"
 
 [node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="Area"]
