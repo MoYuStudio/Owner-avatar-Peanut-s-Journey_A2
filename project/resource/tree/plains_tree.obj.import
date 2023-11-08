@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://b3126t2of74mi"
+path="res://.godot/imported/plains_tree.obj-0963cd57e2b5640b3e71c1904693d2b1.mesh"
+
+[deps]
+
+files=["res://.godot/imported/plains_tree.obj-0963cd57e2b5640b3e71c1904693d2b1.mesh"]
+
+source_file="res://resource/tree/plains_tree.obj"
+dest_files=["res://.godot/imported/plains_tree.obj-0963cd57e2b5640b3e71c1904693d2b1.mesh", "res://.godot/imported/plains_tree.obj-0963cd57e2b5640b3e71c1904693d2b1.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

@@ -1,0 +1,12 @@
+newmtl moyu_trunk1
+Ka 1 1 1
+Kd 1 1 1
+Ks 0 0 0
+map_Kd moyu_trunk1.png
+
+newmtl moyu_leaf1
+Ka 1 1 1
+Kd 1 1 1
+Ks 0 0 0
+map_Kd moyu_leaf1.png
+

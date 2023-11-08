@@ -252,9 +252,9 @@ dof_blur_amount = 0.3
 radius = 0.3
 height = 1.0
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_b5exw"]
-radius = 1.2
-height = 2.4
+[sub_resource type="SphereShape3D" id="SphereShape3D_kp7sw"]
+margin = 0.03
+radius = 0.6
 
 [sub_resource type="Animation" id="Animation_eckp6"]
 resource_name = "idle_down"
@@ -484,7 +484,7 @@ func _on_timeout():
 "
 
 [node name="Player" type="CharacterBody3D" groups=["player"]]
-floor_max_angle = 1.5708
+floor_max_angle = 0.610865
 script = SubResource("GDScript_4vhkn")
 
 [node name="CameraArm" type="SpringArm3D" parent="."]
@@ -503,23 +503,21 @@ collision_mask = 8
 
 [node name="CollisionShape" type="CollisionShape3D" parent="CollectArea"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
-shape = SubResource("CapsuleShape3D_b5exw")
+shape = SubResource("SphereShape3D_kp7sw")
 
 [node name="Sprite" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.961262, 0.275637, 0, -0.275637, 0.961262, 0, 1.2, 0)
 pixel_size = 0.06
-billboard = 1
 alpha_cut = 2
 texture_filter = 0
 texture = ExtResource("1_f088v")
 hframes = 6
 vframes = 8
-frame = 1
+frame = 3
 
 [node name="ToolSprite" type="Sprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+transform = Transform3D(1, 0, 0, 0, 0.961262, 0.275637, 0, -0.275637, 0.961262, 0, 2, 0)
 pixel_size = 0.06
-billboard = 1
 alpha_cut = 2
 texture_filter = 0
 texture = ExtResource("2_f3hiv")
