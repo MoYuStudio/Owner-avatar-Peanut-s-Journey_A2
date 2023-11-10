@@ -36,8 +36,8 @@ void vertex(){
 [resource]
 render_priority = 0
 shader = SubResource("Shader_5rnw1")
-shader_parameter/min_grass_height = 1.71
-shader_parameter/max_rock_height = 3.5
+shader_parameter/min_grass_height = -1.6
+shader_parameter/max_rock_height = 1.6
 shader_parameter/uvscale = Vector2(5, 5)
 shader_parameter/terrain_grass = ExtResource("1_0v7nk")
 shader_parameter/terrain_rock = ExtResource("2_46m6g")
