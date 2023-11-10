@@ -36,7 +36,7 @@ func _on_pickup_audio_finished():
 "
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_gfq8b"]
-radius = 0.16
+radius = 0.3
 
 [sub_resource type="Animation" id="Animation_v4pjm"]
 resource_name = "animation"
@@ -74,12 +74,11 @@ func collect():
 "
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_2kmpn"]
-radius = 0.6
+radius = 0.9
 
 [node name="FallingObject" type="RigidBody3D" groups=["loot"]]
-collision_layer = 9
-collision_mask = 9
-can_sleep = false
+collision_layer = 8
+collision_mask = 8
 script = SubResource("GDScript_dug6e")
 texture = ExtResource("1_4w5o2")
 type = "falling_object"
@@ -89,7 +88,7 @@ pickup_audio = ExtResource("2_twwg1")
 shape = SubResource("SphereShape3D_gfq8b")
 
 [node name="Sprite" type="Sprite3D" parent="."]
-pixel_size = 0.03
+pixel_size = 0.1
 billboard = 1
 alpha_cut = 2
 texture_filter = 0
