@@ -1,0 +1,215 @@
+[gd_scene load_steps=5 format=3 uid="uid://be30q1hava1dy"]
+
+[ext_resource type="MeshLibrary" uid="uid://gxfaf04ab0sh" path="res://resource/mesh_lib/land_mesh_lib.tres" id="1_utpmx"]
+[ext_resource type="MeshLibrary" uid="uid://cauljs70d2ymr" path="res://resource/mesh_lib/building_mesh_lib.tres" id="2_koolf"]
+
+[sub_resource type="GDScript" id="GDScript_elig4"]
+script/source = "
+extends GridMap
+
+@onready var object_tiles = {
+	\"plains_grass\":preload(\"res://source/world/plains_grass.tscn\"),
+	
+	\"plains_tree\":preload(\"res://source/world/plains_tree.tscn\"),
+	\"coniferous_tree\":preload(\"res://source/world/coniferous_tree.tscn\"),
+	\"jungle_tree\":preload(\"res://source/world/jungle_tree.tscn\"),
+	
+	\"beach_stone\":preload(\"res://source/world/beach_stone.tscn\"),
+	}
+
+@onready var player = get_parent().get_parent().get_node(\"Player\")
+
+var moisture = FastNoiseLite.new()      # 湿度
+var temperature = FastNoiseLite.new()   # 温度
+var altitude = FastNoiseLite.new()      # 海拔
+
+var chunk_width = 16    # 单区块宽
+var chunk_height = 16   # 单区块高
+
+var chunk_x_num = 6   # 区块X轴渲染数
+var chunk_y_num = 6   # 区块Y轴渲染数
+
+var generated_chunks = {}
+
+var biome_list = {
+	\"deep_ocean\":[], # 深海群系
+	\"ocean\":[], # 海洋群系
+	\"shoal\":[], # 浅滩群系
+	
+	\"beach\":[6,16,26,36,46,56,66,76,86,96], # 沙滩群系
+	
+	\"jungle\":[63,64,65,73,74,75,83,84,85,93,94,95], # 热带雨林群系
+	\"plains\":[43,44,45,53,54,55], # 平原群系
+	\"coniferous\":[3,4,5,13,14,15,23,24,25,33,34,35], # 针叶林群系
+	
+	\"desert\":[], # 沙漠群系
+	\"mushroom\":[], # 蘑菇群系
+	\"mountain\":[], # 山脉群系
+}
+
+var biome_data = {
+	\"deep_ocean\":{}, # 深海群系
+	\"ocean\":{}, # 海洋群系
+	\"shoal\":{}, # 浅滩群系
+	
+	\"beach\":{\"beach_stone\":0.01}, # 沙滩群系
+	
+	\"jungle\":{\"jungle_tree\":0.01}, # 热带雨林群系
+	\"plains\":{\"plains_tree\":0.03}, # 平原群系
+	\"coniferous\":{\"coniferous_tree\":0.03}, # 针叶林群系
+	
+	\"desert\":{}, # 沙漠群系
+	\"mushroom\":{}, # 蘑菇群系
+	\"mountain\":{}, # 山脉群系
+}
+
+func _ready():
+	moisture.seed = randi()
+	temperature.seed = randi()
+	altitude.seed = randi()
+	
+	moisture.frequency = 0.001
+	temperature.frequency = 0.001
+
+func _physics_process(delta):
+	generate_chunks_around_player(player.transform.origin)
+
+# 渲染区块控制器
+func generate_chunks_around_player(position):
+	var tile_pos = local_to_map(position)
+	var current_chunk = Vector2(int(tile_pos.x / chunk_width), int(tile_pos.z / chunk_height))
+	
+	for x in range(current_chunk.x - (chunk_x_num - 1), current_chunk.x + chunk_x_num):
+		for y in range(current_chunk.y - (chunk_y_num - 1), current_chunk.y + chunk_y_num):
+			if not generated_chunks.has(Vector2(x, y)):
+				generate_chunk(Vector2(x, y))
+				generated_chunks[Vector2(x, y)] = true
+
+# 渲染区块
+func generate_chunk(chunk_pos):
+	var chunk_x = chunk_pos.x
+	var chunk_y = chunk_pos.y
+	
+	for x in range(chunk_width):
+		for y in range(chunk_height):
+			var real_x = chunk_x * chunk_width + x
+			var real_y = chunk_y * chunk_height + y
+			
+			var moisture_noise = moisture.get_noise_2d(real_x, real_y) * 100
+			var temperature_noise = temperature.get_noise_2d(real_x, real_y) * 100
+			var altitude_noise = altitude.get_noise_2d(real_x, real_y) * 100
+			
+			var select_x = round(temperature_noise + 50) / 10
+			var select_y = round(moisture_noise + 50) / 10
+			
+			select_x = int(select_x)
+			select_y = int(select_y)
+			
+			if select_x >= 10:
+				select_x = 9
+			if select_x <= 0:
+				select_x = null
+			if select_y >= 10:
+				select_y = 9
+			if select_y < 0:
+				select_y = 0
+				
+			# 深海
+			if -1000 < altitude_noise and altitude_noise <= -32:
+				set_cell_item(Vector3(real_x,0,real_y),9)
+			# 海洋
+			elif -32 < altitude_noise and altitude_noise <= -16:
+				set_cell_item(Vector3(real_x,0,real_y),8)
+			# 浅滩
+			elif -16 < altitude_noise and altitude_noise <= 0:
+				set_cell_item(Vector3(real_x,0,real_y),7)
+			# 海滩
+			elif 0 < altitude_noise and altitude_noise <= 9:
+				set_cell_item(Vector3(real_x,0,real_y),6)
+			# 湿度温度地形
+			else:
+				if int(str(select_x)+str(select_y)) < 100:
+					set_cell_item(Vector3(real_x,0,real_y),\\
+					int(str(select_x)+str(select_y)))
+				else:
+					print(int(str(select_x)+str(select_y)))
+					set_cell_item(Vector3(real_x,0,real_y),0)
+				
+			var land_tile_data = get_cell_item(Vector3(real_x, 0, real_y))
+			
+			for id in biome_list[\"beach\"]:
+				if land_tile_data == id :
+					var tile_probability = randf()
+					if tile_probability <= biome_data[\"beach\"][\"beach_stone\"]:
+						var tree_instantiate = object_tiles[\"beach_stone\"].instantiate()
+						tree_instantiate.transform.origin = Vector3(real_x, 0.5, real_y)
+						tree_instantiate.rotation.y = randi_range(0,360)
+						add_child(tree_instantiate)
+			
+			for id in biome_list[\"jungle\"]:
+				if land_tile_data == id :
+					var tile_probability = randf()
+					if tile_probability <= biome_data[\"jungle\"][\"jungle_tree\"]:
+						var tree_instantiate = object_tiles[\"jungle_tree\"].instantiate()
+						tree_instantiate.transform.origin = Vector3(real_x, 0.5, real_y)
+						tree_instantiate.rotation.y = randi_range(0,360)
+						add_child(tree_instantiate)
+			
+			for id in biome_list[\"plains\"]:
+				if land_tile_data == id :
+					var grass_instantiate = object_tiles[\"plains_grass\"].instantiate()
+					grass_instantiate.transform.origin = Vector3(real_x, 0.5, real_y)
+					# grass_instantiate.rotation.y = randi_range(0,360)
+					add_child(grass_instantiate)
+					
+					var tile_probability = randf()
+					if tile_probability <= biome_data[\"plains\"][\"plains_tree\"]:
+						var tree_instantiate = object_tiles[\"plains_tree\"].instantiate()
+						tree_instantiate.transform.origin = Vector3(real_x, 0.5, real_y)
+						tree_instantiate.rotation.y = randi_range(0,360)
+						add_child(tree_instantiate)
+						
+			for id in biome_list[\"coniferous\"]:
+				if land_tile_data == id :
+					var tile_probability = randf()
+					if tile_probability <= biome_data[\"coniferous\"][\"coniferous_tree\"]:
+						var tree_instantiate = object_tiles[\"coniferous_tree\"].instantiate()
+						tree_instantiate.transform.origin = Vector3(real_x, 0.5, real_y)
+						tree_instantiate.rotation.y = randi_range(0,360)
+						add_child(tree_instantiate)
+			
+"
+
+[sub_resource type="GDScript" id="GDScript_e1oog"]
+script/source = "
+extends GridMap
+
+@onready var player = get_parent().get_parent().get_node(\"Player\")
+
+func _ready():
+	pass
+
+func _physics_process(delta):
+	if Input.is_action_just_pressed(\"mouse_right\"):
+		var building_tile = local_to_map(player.transform.origin)
+		set_cell_item(Vector3(building_tile.x+1,player.transform.origin.y+1,building_tile.z),0)
+"
+
+[node name="GridMap" type="Node3D"]
+
+[node name="LandGridMap" type="GridMap" parent="."]
+visible = false
+mesh_library = ExtResource("1_utpmx")
+cell_size = Vector3(1, 1, 1)
+collision_layer = 9
+collision_mask = 9
+script = SubResource("GDScript_elig4")
+
+[node name="BuildingGridMap" type="GridMap" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+visible = false
+mesh_library = ExtResource("2_koolf")
+cell_size = Vector3(1, 1, 1)
+collision_layer = 9
+collision_mask = 9
+script = SubResource("GDScript_e1oog")

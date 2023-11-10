@@ -1,7 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://c68icky7vvduu"]
+[gd_scene load_steps=6 format=3 uid="uid://c68icky7vvduu"]
 
 [ext_resource type="PackedScene" uid="uid://dc6up85jkv08n" path="res://source/world/world.tscn" id="1_ex1kn"]
-[ext_resource type="PackedScene" uid="uid://c5a5gkidh6uyo" path="res://source/object/3p_player.tscn" id="2_lo16r"]
 [ext_resource type="FontFile" uid="uid://dwo3w3m0bti6d" path="res://resource/font/YouSheBiaoTiHei.ttf" id="3_07ogi"]
 [ext_resource type="Theme" uid="uid://0qdr3n63kd22" path="res://resource/theme/menu_main.tres" id="4_c72en"]
 
@@ -31,14 +30,10 @@ script = SubResource("GDScript_1duaf")
 
 [node name="World" parent="." instance=ExtResource("1_ex1kn")]
 
-[node name="Player" parent="." instance=ExtResource("2_lo16r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
-
-[node name="CanvasLayer" parent="Player" index="8"]
-visible = false
+[node name="Player" type="Node3D" parent="."]
 
 [node name="Camera" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.906308, 0.422618, 0, -0.422618, 0.906308, -1.6, 4, 6)
+transform = Transform3D(1, 0, 0, 0, 0.906308, 0.422618, 0, -0.422618, 0.906308, -1.6, 13.5205, 6)
 current = true
 
 [node name="Label" type="Label" parent="."]
@@ -75,6 +70,3 @@ grow_vertical = 2
 theme = ExtResource("4_c72en")
 text = "开始"
 script = SubResource("GDScript_fu40t")
-
-[editable path="Player"]
-[editable path="Player/CanvasLayer/BackPack"]

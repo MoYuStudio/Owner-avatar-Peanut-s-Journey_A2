@@ -1,5 +1,6 @@
-[gd_scene load_steps=11 format=3 uid="uid://b3gajvxaevj2"]
+[gd_scene load_steps=14 format=3 uid="uid://b3gajvxaevj2"]
 
+[ext_resource type="Texture2D" uid="uid://dpy82uafxeied" path="res://resource/tree/moyu_trunk1.png" id="1_dafry"]
 [ext_resource type="Texture2D" uid="uid://d4lu720s1cjni" path="res://resource/item/stone_axe.png" id="2_f3hiv"]
 [ext_resource type="PackedScene" uid="uid://5vbnyfa6nml4" path="res://source/inventory/backpack.tscn" id="2_n3hit"]
 [ext_resource type="Texture2D" uid="uid://bh72h6q7g72l2" path="res://resource/player/bar_under.png" id="5_k7woa"]
@@ -206,6 +207,14 @@ func _on_collect_area_area_exited(area):
 		collect_area_list.erase(area)
 "
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l0hne"]
+albedo_texture = ExtResource("1_dafry")
+uv1_scale = Vector3(2, 2, 2)
+texture_filter = 0
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_pxm24"]
+material = SubResource("StandardMaterial3D_l0hne")
+
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1jyd1"]
 
 [sub_resource type="Animation" id="Animation_px2ms"]
@@ -221,7 +230,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.3),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector3(-0.590047, -0.102767, -0.295492), Vector3(-0.589921, -1.67552, -0.294961), Vector3(-0.590047, -0.102767, -0.295492)]
+"values": [Vector3(-0.590047, -0.102767, -0.295492), Vector3(-0.589921, 0.628319, -0.294961), Vector3(-0.590047, -0.102767, -0.295492)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_n5kpa"]
@@ -236,6 +245,9 @@ radius = 0.6
 [node name="Player" type="CharacterBody3D" groups=["player"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 script = SubResource("GDScript_cjxmm")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_pxm24")
 
 [node name="CollisionShape" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_1jyd1")
@@ -271,6 +283,7 @@ shape = SubResource("SphereShape3D_htldp")
 [node name="BackPack" parent="CanvasLayer" instance=ExtResource("2_n3hit")]
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+visible = false
 offset_left = 235.0
 offset_top = 176.0
 offset_right = 299.0
