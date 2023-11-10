@@ -36,7 +36,7 @@ func _on_pickup_audio_finished():
 "
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_gfq8b"]
-radius = 0.3
+radius = 0.16
 
 [sub_resource type="Animation" id="Animation_v4pjm"]
 resource_name = "animation"
@@ -89,7 +89,7 @@ pickup_audio = ExtResource("2_twwg1")
 shape = SubResource("SphereShape3D_gfq8b")
 
 [node name="Sprite" type="Sprite3D" parent="."]
-pixel_size = 0.06
+pixel_size = 0.03
 billboard = 1
 alpha_cut = 2
 texture_filter = 0
@@ -108,7 +108,7 @@ script = SubResource("GDScript_dwqoe")
 shape = SubResource("SphereShape3D_2kmpn")
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Area"]
-volume_db = -10.0
+volume_db = -25.0
 bus = &"SFX"
 
 [connection signal="finished" from="Area/AudioStreamPlayer3D" to="." method="_on_pickup_audio_finished"]

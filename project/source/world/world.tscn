@@ -204,7 +204,7 @@ func _ready():
 func _physics_process(delta):
 	if Input.is_action_just_pressed(\"mouse_right\"):
 		var building_tile = local_to_map(player.transform.origin)
-		set_cell_item(Vector3(building_tile.x,player.transform.origin.y+1,building_tile.z),0)
+		set_cell_item(Vector3(building_tile.x+1,player.transform.origin.y+1,building_tile.z),0)
 "
 
 [sub_resource type="Animation" id="Animation_cym8i"]
