@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://cda6lj5n3r3fa"]
+
+[ext_resource type="Texture2D" uid="uid://dpy82uafxeied" path="res://resource/tree/moyu_trunk1.png" id="1_lfecq"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_yifxf"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3jmb6"]
+albedo_texture = ExtResource("1_lfecq")
+uv1_scale = Vector3(2, 2, 2)
+uv2_scale = Vector3(2, 2, 2)
+texture_filter = 0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_i3ssf"]
+
+[node name="BuildingMeshLib" type="Node3D"]
+
+[node name="0" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_yifxf")
+skeleton = NodePath("../0")
+surface_material_override/0 = SubResource("StandardMaterial3D_3jmb6")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="0/StaticBody3D"]
+shape = SubResource("BoxShape3D_i3ssf")
+disabled = true

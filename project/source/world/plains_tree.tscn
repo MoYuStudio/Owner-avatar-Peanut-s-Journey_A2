@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://j675rf0rng85"]
+[gd_scene load_steps=24 format=3 uid="uid://j675rf0rng85"]
 
 [ext_resource type="Texture2D" uid="uid://bc6id70qqb7sl" path="res://resource/tile/plains_tree.png" id="1_5fmrw"]
 [ext_resource type="ArrayMesh" uid="uid://b3126t2of74mi" path="res://resource/tree/plains_tree.obj" id="1_xflmp"]
@@ -30,7 +30,14 @@ point_count = 2
 [sub_resource type="CurveTexture" id="CurveTexture_58vw7"]
 curve = SubResource("Curve_1kcg8")
 
+[sub_resource type="Curve" id="Curve_lsem3"]
+min_value = -200.0
+max_value = 200.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
 [sub_resource type="CurveTexture" id="CurveTexture_7nicj"]
+curve = SubResource("Curve_lsem3")
 
 [sub_resource type="Curve" id="Curve_t0bba"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 0.589474), 0.0, 0.0, 0, 0]
@@ -105,35 +112,6 @@ func collect():
 radius = 1.2
 height = 6.0
 
-[sub_resource type="Animation" id="Animation_72txw"]
-resource_name = "hit_animation"
-length = 0.3
-step = 0.15
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../Sprite:scale")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector3(1, 1, 1), Vector3(0.99, 0.99, 0.99), Vector3(1, 1, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AudioStreamPlayer3D:playing")
-tracks/1/interp = 2
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
-
 [sub_resource type="Animation" id="Animation_n10hb"]
 resource_name = "_animation"
 length = 3.0
@@ -169,6 +147,35 @@ tracks/2/interp = 2
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0.1, 2.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_72txw"]
+resource_name = "hit_animation"
+length = 0.3
+step = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(0.99, 0.99, 0.99), Vector3(1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AudioStreamPlayer3D:playing")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]

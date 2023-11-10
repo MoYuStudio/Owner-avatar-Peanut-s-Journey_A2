@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://dc6up85jkv08n"]
+[gd_scene load_steps=9 format=3 uid="uid://dc6up85jkv08n"]
 
-[ext_resource type="MeshLibrary" uid="uid://oq8tioqnb03g" path="res://resource/mesh_lib/mesh_lib.tres" id="1_x28rg"]
+[ext_resource type="MeshLibrary" uid="uid://gxfaf04ab0sh" path="res://resource/mesh_lib/land_mesh_lib.tres" id="1_byyh6"]
 [ext_resource type="Environment" uid="uid://b3dksqa4bdkqk" path="res://resource/skybox/world_environment.tres" id="2_bjs1r"]
+[ext_resource type="MeshLibrary" uid="uid://cauljs70d2ymr" path="res://resource/mesh_lib/building_mesh_lib.tres" id="2_gcdxf"]
 
 [sub_resource type="GDScript" id="GDScript_ja8f1"]
 script/source = "
@@ -191,6 +192,21 @@ func generate_chunk(chunk_pos):
 			
 "
 
+[sub_resource type="GDScript" id="GDScript_jso8r"]
+script/source = "
+extends GridMap
+
+@onready var player = get_parent().get_parent().get_node(\"Player\")
+
+func _ready():
+	pass
+
+func _physics_process(delta):
+	if Input.is_action_just_pressed(\"mouse_right\"):
+		var building_tile = local_to_map(player.transform.origin)
+		set_cell_item(Vector3(building_tile.x,player.transform.origin.y+1,building_tile.z),0)
+"
+
 [sub_resource type="Animation" id="Animation_cym8i"]
 resource_name = "animation"
 length = 60.0
@@ -252,12 +268,20 @@ _data = {
 [node name="World" type="Node3D"]
 script = SubResource("GDScript_ja8f1")
 
-[node name="GridMap" type="GridMap" parent="."]
-mesh_library = ExtResource("1_x28rg")
+[node name="LandGridMap" type="GridMap" parent="."]
+mesh_library = ExtResource("1_byyh6")
 cell_size = Vector3(1, 1, 1)
 collision_layer = 9
 collision_mask = 9
 script = SubResource("GDScript_l5mj3")
+
+[node name="BuildingGridMap" type="GridMap" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+mesh_library = ExtResource("2_gcdxf")
+cell_size = Vector3(1, 1, 1)
+collision_layer = 9
+collision_mask = 9
+script = SubResource("GDScript_jso8r")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource("2_bjs1r")
