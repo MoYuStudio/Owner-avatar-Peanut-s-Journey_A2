@@ -1,0 +1,162 @@
+[gd_scene load_steps=8 format=3 uid="uid://hhynjb40j0ps"]
+
+[ext_resource type="PackedScene" uid="uid://b3gajvxaevj2" path="res://source/object/player.tscn" id="1_in1l6"]
+[ext_resource type="PackedScene" uid="uid://yrq417s4ovjm" path="res://source/terrain/chunk.tscn" id="1_smitc"]
+[ext_resource type="Environment" uid="uid://b3dksqa4bdkqk" path="res://resource/skybox/world_environment.tres" id="3_bygli"]
+
+[sub_resource type="GDScript" id="GDScript_1pikm"]
+script/source = "
+extends Node3D
+
+@export var chunk_size = 64
+@export var terrain_level = 6
+@export var view_distance = 64
+
+@export var viewer : CharacterBody3D
+@export var chunk_mesh_scene : PackedScene
+
+@export var noise : FastNoiseLite
+
+var viewer_position = Vector2()
+var terrain_chunks = {}
+var chunks_visible = 1
+var last_visible_chunks = []
+
+func _ready():
+	chunks_visible = roundi(view_distance/chunk_size)
+	# set_wireframe()
+	update_visible_chunk()
+	
+func _physics_process(delta):
+	viewer_position.x = viewer.global_position.x
+	viewer_position.y = viewer.global_position.z
+	update_visible_chunk()
+	
+func set_wireframe():
+	RenderingServer.set_debug_generate_wireframes(true)
+	get_viewport().debug_draw = Viewport.DEBUG_DRAW_WIREFRAME
+	
+func update_visible_chunk():
+	for chunk in last_visible_chunks:
+		chunk.set_chunk_visible(false)
+	last_visible_chunks.clear()
+	
+	var current_x = roundi(viewer_position.x/chunk_size)
+	var current_y = roundi(viewer_position.y/chunk_size)
+	
+	for y_offset in range(-chunks_visible, chunks_visible):
+		for x_offset in range(-chunks_visible, chunks_visible):
+			var view_chunk_coord = Vector2(current_x - x_offset, current_y - y_offset)
+			if terrain_chunks.has(view_chunk_coord):
+				terrain_chunks[view_chunk_coord].update_chunk(viewer_position, view_distance)
+				if terrain_chunks[view_chunk_coord].update_lod(viewer_position):
+					terrain_chunks[view_chunk_coord].generate_terrain(noise, view_chunk_coord, chunk_size, true)
+				if terrain_chunks[view_chunk_coord].get_chunk_visible():
+					last_visible_chunks.append(terrain_chunks[view_chunk_coord])
+			else:
+				var chunk : TerrainChunk = chunk_mesh_scene.instantiate()
+				add_child(chunk)
+				
+				chunk.noise_level = terrain_level
+				var pos = view_chunk_coord * chunk_size
+				var world_position = Vector3(pos.x, 0, pos.y)
+				chunk.global_position = world_position
+				chunk.generate_terrain(noise, view_chunk_coord, chunk_size, false)
+				terrain_chunks[view_chunk_coord] = chunk
+"
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_7dnmx"]
+noise_type = 3
+
+[sub_resource type="Animation" id="Animation_cym8i"]
+resource_name = "animation"
+length = 60.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SunLight:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 30.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-3.14159, 0, 0), Vector3(3.14159, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SunLight:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 30.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MoonLight:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(30.1, 60),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-3.14159, 0, 0), Vector3(3.14159, 0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("MoonLight:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(30.1, 60),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_abj8g"]
+_data = {
+"animation": SubResource("Animation_cym8i")
+}
+
+[node name="InifinteTerrain" type="Node3D" node_paths=PackedStringArray("viewer")]
+script = SubResource("GDScript_1pikm")
+viewer = NodePath("Player")
+chunk_mesh_scene = ExtResource("1_smitc")
+noise = SubResource("FastNoiseLite_7dnmx")
+
+[node name="Player" parent="." instance=ExtResource("1_in1l6")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("3_bygli")
+
+[node name="SunLight" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 0.999999, 0, -1, -4.37113e-08, 0, 0, 0)
+light_color = Color(1, 0.92549, 0.745098, 1)
+shadow_enabled = true
+shadow_bias = 0.0
+shadow_normal_bias = 0.0
+shadow_blur = 3.0
+
+[node name="MoonLight" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -1, -2.53518e-06, 0, 2.53518e-06, -1, 0, 0, 0)
+visible = false
+light_color = Color(0.27451, 0.333333, 1, 1)
+light_energy = 0.3
+
+[node name="DirectionalLight" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+visible = false
+light_energy = 0.1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_abj8g")
+}

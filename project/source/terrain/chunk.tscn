@@ -1,21 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://yrq417s4ovjm"]
+[gd_scene load_steps=3 format=3 uid="uid://yrq417s4ovjm"]
 
-[sub_resource type="GDScript" id="GDScript_byeld"]
-script/source = "
-extends MeshInstance3D
-
-class_name TerrainChunk
-
-@export_range(20, 400, 1) var terrain_size := 200
-@export_range(1, 64, 1) var resolution := 64
-@export var noise_level = 6
-
-var chunk_lods = [8,16,32,48]
-var position_coord = Vector2()
-const CENTER_OFFSET = 0
-
-var set_collision = true
-"
+[ext_resource type="Script" path="res://source/terrain/chunk.gd" id="1_dys0n"]
+[ext_resource type="Material" uid="uid://clhdhthgfyk6l" path="res://resource/shader/terrain.tres" id="1_vwl7h"]
 
 [node name="Chunk" type="MeshInstance3D"]
-script = SubResource("GDScript_byeld")
+material_override = ExtResource("1_vwl7h")
+script = ExtResource("1_dys0n")
